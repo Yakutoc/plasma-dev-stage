@@ -90,7 +90,6 @@ import { DrawerContentProps } from '@salutejs/plasma-new-hope/styled-components'
 import { DrawerFooterProps } from '@salutejs/plasma-new-hope/styled-components';
 import { DrawerHeaderProps } from '@salutejs/plasma-new-hope/styled-components';
 import { DrawerProps } from '@salutejs/plasma-new-hope/styled-components';
-import { Dropdown } from '@salutejs/plasma-hope';
 import { DropdownItem } from '@salutejs/plasma-hope';
 import { DropdownItemProps } from '@salutejs/plasma-hope';
 import { DropdownList } from '@salutejs/plasma-hope';
@@ -821,7 +820,7 @@ none: string;
 default: string;
 };
 }> & PopupBaseProps & PanelProps & {
-placement?: "top" | "bottom" | "right" | "left" | undefined;
+placement?: "right" | "top" | "bottom" | "left" | undefined;
 asModal?: boolean | undefined;
 withBlur?: boolean | undefined;
 closeOnEsc?: boolean | undefined;
@@ -860,7 +859,8 @@ export { DrawerHeaderProps }
 
 export { DrawerProps }
 
-export { Dropdown }
+// @public (undocumented)
+export const Dropdown: React_2.ForwardRefExoticComponent<DropdownProps & React_2.RefAttributes<HTMLDivElement>>;
 
 export { DropdownItem }
 export { DropdownItem as DropdownItemType }
@@ -1053,7 +1053,7 @@ s: string;
 };
 }> & HTMLAttributes<HTMLDivElement> & {
 size: "m" | "s" | "l";
-view: "accent" | "default" | "warning" | "positive" | "negative" | "inactive" | "black" | "white";
+view: "accent" | "default" | "black" | "white" | "warning" | "positive" | "negative" | "inactive";
 } & RefAttributes<HTMLDivElement>>;
 
 export { IndicatorProps }
@@ -1237,7 +1237,13 @@ export const Popover: FunctionComponent<PropsType<    {
 view: {
 default: string;
 };
-}> & HTMLAttributes<HTMLDivElement> & CustomPopoverProps & RefAttributes<HTMLDivElement>>;
+}> & ((HTMLAttributes<HTMLDivElement> & CustomPopoverProps & {
+trigger?: "click" | undefined;
+closeOnOverlayClick?: boolean | undefined;
+} & RefAttributes<HTMLDivElement>) | (HTMLAttributes<HTMLDivElement> & CustomPopoverProps & {
+trigger?: "hover" | undefined;
+closeOnBeyondTargetHover?: boolean | undefined;
+} & RefAttributes<HTMLDivElement>))>;
 
 export { PopoverPlacement }
 

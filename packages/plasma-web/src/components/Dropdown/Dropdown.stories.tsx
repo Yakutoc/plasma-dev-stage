@@ -118,7 +118,7 @@ export const Placement: StoryObj = {
         return (
             <Styled25Rem style={{ flexDirection: 'row' }}>
                 <StyledDashedBorder>
-                    <Dropdown id="example-dropdown-bottom" items={items}>
+                    <Dropdown id="example-dropdown-bottom" items={items} placement="bottom">
                         <Button text="Снизу" />
                     </Dropdown>
                 </StyledDashedBorder>

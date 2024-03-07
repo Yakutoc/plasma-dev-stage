@@ -1,11 +1,12 @@
 export {
-    Dropdown,
     DropdownList,
     DropdownItem,
     withAssistiveDropdown,
     DropdownUncontrolled,
     DropdownPopup,
 } from '@salutejs/plasma-hope';
+
+export { Dropdown } from './Dropdown';
 
 export type {
     DropdownItem as DropdownItemType,
