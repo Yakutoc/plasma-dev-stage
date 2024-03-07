@@ -1053,7 +1053,7 @@ s: string;
 };
 }> & HTMLAttributes<HTMLDivElement> & {
 size: "m" | "s" | "l";
-view: "accent" | "default" | "warning" | "positive" | "negative" | "inactive" | "black" | "white";
+view: "accent" | "default" | "warning" | "positive" | "negative" | "black" | "white" | "inactive";
 } & RefAttributes<HTMLDivElement>>;
 
 export { IndicatorProps }
