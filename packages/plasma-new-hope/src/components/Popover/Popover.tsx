@@ -140,6 +140,7 @@ export const popoverRoot = (Root: RootProps<HTMLDivElement, PopoverProps>) =>
 
         const onMouseLeave = useCallback<React.MouseEventHandler>(
             (event) => {
+                console.log(event);
                 if (trigger === 'hover') {
                     onToggle?.(false, event);
                 }
@@ -221,15 +222,12 @@ export const popoverRoot = (Root: RootProps<HTMLDivElement, PopoverProps>) =>
         }, [isOpen, children, forceUpdate]);
 
         return (
-            <StyledWrapper
-                className={classes.wrapper}
-                onMouseLeave={!closeOnBeyondTargetHover ? onMouseLeave : undefined}
-            >
+            <StyledWrapper className={classes.wrapper}>
                 <StyledRoot
                     ref={handleRef}
                     onClick={onClick}
                     onMouseEnter={onMouseEnter}
-                    onMouseLeave={closeOnBeyondTargetHover ? onMouseLeave : undefined}
+                    onMouseLeave={onMouseLeave}
                     onFocus={onFocus}
                     onBlur={onBlur}
                     className={cx(className, classes.target)}
@@ -239,7 +237,13 @@ export const popoverRoot = (Root: RootProps<HTMLDivElement, PopoverProps>) =>
                 {children &&
                     portalRef.current &&
                     ReactDOM.createPortal(
-                        <Root view={view} className={className} {...rest}>
+                        <Root
+                            view={view}
+                            className={className}
+                            {...rest}
+                            onMouseEnter={closeOnBeyondTargetHover ? undefined : onMouseEnter}
+                            onMouseLeave={closeOnBeyondTargetHover ? undefined : onMouseEnter}
+                        >
                             <StyledPopover
                                 {...attributes.popper}
                                 className={classes.root}
