@@ -820,7 +820,7 @@ none: string;
 default: string;
 };
 }> & PopupBaseProps & PanelProps & {
-placement?: "right" | "top" | "bottom" | "left" | undefined;
+placement?: "left" | "right" | "top" | "bottom" | undefined;
 asModal?: boolean | undefined;
 withBlur?: boolean | undefined;
 closeOnEsc?: boolean | undefined;
@@ -849,7 +849,7 @@ export { DrawerFooterProps }
 // @public
 export const DrawerHeader: FunctionComponent<PropsType<Variants> & {
 hasClose?: boolean | undefined;
-closePlacement?: "right" | "left" | undefined;
+closePlacement?: "left" | "right" | undefined;
 actions?: ReactNode;
 onClose?: (() => void) | undefined;
 view?: string | undefined;
