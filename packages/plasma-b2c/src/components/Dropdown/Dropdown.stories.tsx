@@ -61,6 +61,23 @@ const items = [
     },
 ];
 
+export const HeightOverflow = () => {
+    return (
+        <Styled25Rem>
+            <Dropdown
+                id="example-dropdown-hover"
+                items={items}
+                trigger="click"
+                onItemSelect={action('onItemSelect')}
+                listOverflow="scroll"
+                listHeight={20}
+            >
+                <Button text="Наведите" />
+            </Dropdown>
+        </Styled25Rem>
+    );
+};
+
 export const Trigger = () => {
     return (
         <Styled25Rem>
@@ -72,7 +89,7 @@ export const Trigger = () => {
                     placement="bottom"
                     onItemSelect={action('onItemSelect')}
                 >
-                    <Button text="Нажмите" />
+                    <Button text="Нажмите" stretching="filled" />
                 </Dropdown>
             </StyledDashedBorder>
             <StyledDashedBorder>
@@ -80,10 +97,10 @@ export const Trigger = () => {
                     id="example-dropdown-hover"
                     items={items}
                     trigger="hover"
-                    placement="bottom"
+                    placement="top"
                     onItemSelect={action('onItemSelect')}
                 >
-                    <Button text="Наведите" />
+                    <Button text="Наведите" stretching="filled" />
                 </Dropdown>
             </StyledDashedBorder>
         </Styled25Rem>
@@ -104,23 +121,6 @@ export const Styling = () => {
         <Styled240Dropdown id="example-dropdown-styled" items={items} onItemSelect={action('onItemSelect')}>
             <Button text="Нажмите" />
         </Styled240Dropdown>
-    );
-};
-
-export const Placement = () => {
-    return (
-        <Styled25Rem style={{ flexDirection: 'row' }}>
-            <StyledDashedBorder>
-                <Dropdown id="example-dropdown-bottom" items={items} placement="bottom">
-                    <Button text="Снизу" />
-                </Dropdown>
-            </StyledDashedBorder>
-            <StyledDashedBorder>
-                <Dropdown id="example-dropdown-right" items={items} placement="right">
-                    <Button text="Справа" />
-                </Dropdown>
-            </StyledDashedBorder>
-        </Styled25Rem>
     );
 };
 

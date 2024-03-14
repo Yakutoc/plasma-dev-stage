@@ -80,7 +80,7 @@ export const popoverRoot = (Root: RootProps<HTMLDivElement, PopoverProps>) =>
                     name: 'flip',
                     enabled: isAuto,
                     options: {
-                        allowedAutoPlacements: isAutoArray ? (placement as PopoverPlacement[]) : [],
+                        fallbackPlacements: isAutoArray ? (placement as PopoverPlacement[]) : [],
                     },
                 },
                 {
@@ -140,7 +140,6 @@ export const popoverRoot = (Root: RootProps<HTMLDivElement, PopoverProps>) =>
 
         const onMouseLeave = useCallback<React.MouseEventHandler>(
             (event) => {
-                console.log(event);
                 if (trigger === 'hover') {
                     onToggle?.(false, event);
                 }
