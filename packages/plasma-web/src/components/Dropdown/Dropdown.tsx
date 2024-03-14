@@ -1,10 +1,9 @@
-import React, { FC, SyntheticEvent, useState, forwardRef } from 'react';
+import React, { FC, SyntheticEvent, useState, forwardRef, CSSProperties } from 'react';
 import {
     dropdownConfig,
     dropdownItemConfig,
     component,
     mergeConfig,
-    dropdownTokens,
 } from '@salutejs/plasma-new-hope/styled-components';
 import { DropdownProps, DropdownNodeType } from '@salutejs/plasma-hope';
 import styled from 'styled-components';
@@ -16,6 +15,22 @@ const DropdownNewHope = component(mergedConfig);
 
 const mergedItemConfig = mergeConfig(dropdownItemConfig);
 export const DropdownNewHopeItem = component(mergedItemConfig);
+
+const DropdownWrapper = styled.div<{
+    listHeight?: number | CSSProperties['height'];
+    listOverflow?: CSSProperties['overflow'];
+}>`
+    display: inline-block;
+
+    & > .popover-wrapper {
+        display: inline-block;
+    }
+
+    & .popover-root {
+        height: ${({ listHeight }) => (!Number.isNaN(Number(listHeight)) ? `${listHeight}rem` : listHeight)};
+        overflow: ${({ listOverflow }) => listOverflow};
+    }
+`;
 
 const StyledContent = styled.div`
     display: inline-flex;
@@ -76,8 +91,6 @@ const DropdownInner: FC<
     };
 
     return (
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
         <DropdownNewHope
             target={children}
             isOpen={isOpen}
@@ -123,7 +136,7 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>((props, ref) =
     const {
         children,
         trigger,
-        placement,
+        placement = 'bottom',
         disabled,
         closeOnSelect = true,
         onToggle,
@@ -134,7 +147,6 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>((props, ref) =
         items,
         itemRole,
         onHover,
-        style = {},
         ...rest
     } = props;
     const [isOpen, setIsOpen] = useState(false);
@@ -167,43 +179,42 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>((props, ref) =
         }
     };
 
-    if (listHeight) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        style[dropdownTokens.height] = listHeight;
-    }
-
-    if (listOverflow) {
-        style.overflow = 'hidden';
-    }
-
     return (
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        <DropdownNewHope
-            {...rest}
-            ref={ref}
-            target={children}
-            isOpen={isOpen}
-            onToggle={handleToggle}
-            trigger={trigger}
-            placement={placement}
-            offset={[0, 0]}
-            style={style}
-            closeOnOverlayClick
-        >
-            {!disabled &&
-                items.map((item, index) =>
-                    item.items ? (
-                        <DropdownInner
-                            items={item.items}
-                            itemRole={itemRole}
-                            closeOnSelect={closeOnSelect}
-                            onItemClick={onItemClick}
-                            onItemSelect={onItemSelect}
-                            onHover={onHover}
-                            onGlobalClose={() => setIsOpen(false)}
-                        >
+        <DropdownWrapper listHeight={listHeight} listOverflow={listOverflow}>
+            {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+            {/* @ts-ignore */}
+            <DropdownNewHope
+                {...rest}
+                ref={ref}
+                target={children}
+                isOpen={isOpen}
+                onToggle={handleToggle}
+                trigger={trigger}
+                placement={placement}
+                offset={[0, 0]}
+                closeOnOverlayClick
+            >
+                {!disabled &&
+                    items.map((item, index) =>
+                        item.items ? (
+                            <DropdownInner
+                                items={item.items}
+                                itemRole={itemRole}
+                                closeOnSelect={closeOnSelect}
+                                onItemClick={onItemClick}
+                                onItemSelect={onItemSelect}
+                                onHover={onHover}
+                                onGlobalClose={() => setIsOpen(false)}
+                            >
+                                <DropdownItem
+                                    item={item}
+                                    index={index}
+                                    itemRole={itemRole}
+                                    handleOnHover={handleOnHover}
+                                    handleClick={handleClick}
+                                />
+                            </DropdownInner>
+                        ) : (
                             <DropdownItem
                                 item={item}
                                 index={index}
@@ -211,17 +222,9 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>((props, ref) =
                                 handleOnHover={handleOnHover}
                                 handleClick={handleClick}
                             />
-                        </DropdownInner>
-                    ) : (
-                        <DropdownItem
-                            item={item}
-                            index={index}
-                            itemRole={itemRole}
-                            handleOnHover={handleOnHover}
-                            handleClick={handleClick}
-                        />
-                    ),
-                )}
-        </DropdownNewHope>
+                        ),
+                    )}
+            </DropdownNewHope>
+        </DropdownWrapper>
     );
 });

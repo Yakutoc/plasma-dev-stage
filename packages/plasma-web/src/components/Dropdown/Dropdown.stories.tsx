@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import { accent, success, warning, critical } from '@salutejs/plasma-core';
 import type { StoryObj, Meta } from '@storybook/react';
+import { accent, success, warning, critical } from '@salutejs/plasma-core';
 import { IconEye, IconMagicWand, IconAccessibility, IconHeart, IconTrash, IconLocation } from '@salutejs/plasma-icons';
 import { action } from '@storybook/addon-actions';
 import { InSpacingDecorator } from '@salutejs/plasma-sb-utils';
 
 import { Button } from '../Button';
 
-import { Dropdown, DropdownList, DropdownItem, withAssistiveDropdown } from '.';
+import { Dropdown, DropdownList, DropdownItem } from '.';
 import type { DropdownProps } from '.';
 
 const meta: Meta<DropdownProps> = {
@@ -61,37 +61,50 @@ const items = [
     },
 ];
 
-const placements = ['top', 'bottom', 'left', 'right', 'auto', ['left', 'right']];
+export const HeightOverflow = () => {
+    return (
+        <Styled25Rem>
+            <Dropdown
+                id="example-dropdown-hover"
+                items={items}
+                trigger="click"
+                onItemSelect={action('onItemSelect')}
+                listOverflow="scroll"
+                listHeight={20}
+            >
+                <Button text="Наведите" />
+            </Dropdown>
+        </Styled25Rem>
+    );
+};
 
-export const Trigger: StoryObj = {
-    render: () => {
-        return (
-            <Styled25Rem>
-                <StyledDashedBorder style={{ display: 'inline-flex' }}>
-                    <Dropdown
-                        id="example-dropdown-click"
-                        items={items}
-                        trigger="click"
-                        placement="bottom"
-                        onItemSelect={action('onItemSelect')}
-                    >
-                        <Button text="Нажмите" />
-                    </Dropdown>
-                </StyledDashedBorder>
-                <StyledDashedBorder>
-                    <Dropdown
-                        id="example-dropdown-hover"
-                        items={items}
-                        trigger="hover"
-                        placement="bottom"
-                        onItemSelect={action('onItemSelect')}
-                    >
-                        <Button text="Наведите" />
-                    </Dropdown>
-                </StyledDashedBorder>
-            </Styled25Rem>
-        );
-    },
+export const Trigger = () => {
+    return (
+        <Styled25Rem>
+            <StyledDashedBorder style={{ display: 'inline-flex' }}>
+                <Dropdown
+                    id="example-dropdown-click"
+                    items={items}
+                    trigger="click"
+                    placement="bottom"
+                    onItemSelect={action('onItemSelect')}
+                >
+                    <Button text="Нажмите" stretching="filled" />
+                </Dropdown>
+            </StyledDashedBorder>
+            <StyledDashedBorder>
+                <Dropdown
+                    id="example-dropdown-hover"
+                    items={items}
+                    trigger="hover"
+                    placement="top"
+                    onItemSelect={action('onItemSelect')}
+                >
+                    <Button text="Наведите" stretching="filled" />
+                </Dropdown>
+            </StyledDashedBorder>
+        </Styled25Rem>
+    );
 };
 
 const Styled240Dropdown = styled(Dropdown)`
@@ -103,33 +116,12 @@ const Styled240Dropdown = styled(Dropdown)`
     --plasma-popup-nested-margin: calc(var(--plasma-dropdown-padding, 0) * -1) 0 0;
 `;
 
-export const Styling: StoryObj = {
-    render: () => {
-        return (
-            <Styled240Dropdown id="example-dropdown-styled" items={items} onItemSelect={action('onItemSelect')}>
-                <Button text="Нажмите" />
-            </Styled240Dropdown>
-        );
-    },
-};
-
-export const Placement: StoryObj = {
-    render: () => {
-        return (
-            <Styled25Rem style={{ flexDirection: 'row' }}>
-                <StyledDashedBorder>
-                    <Dropdown id="example-dropdown-bottom" items={items} placement="bottom">
-                        <Button text="Снизу" />
-                    </Dropdown>
-                </StyledDashedBorder>
-                <StyledDashedBorder>
-                    <Dropdown id="example-dropdown-right" items={items} placement="right">
-                        <Button text="Справа" />
-                    </Dropdown>
-                </StyledDashedBorder>
-            </Styled25Rem>
-        );
-    },
+export const Styling = () => {
+    return (
+        <Styled240Dropdown id="example-dropdown-styled" items={items} onItemSelect={action('onItemSelect')}>
+            <Button text="Нажмите" />
+        </Styled240Dropdown>
+    );
 };
 
 const StyledDropdown = styled(Dropdown)`
@@ -141,59 +133,36 @@ const StyledBlockDropdown = styled(Dropdown)`
     display: block;
 `;
 
-export const InlineOrBlockWrapper: StoryObj = {
-    render: () => {
-        return (
-            <Styled25Rem>
-                <StyledDashedBorder style={{ display: 'inline-flex' }}>
-                    <StyledDropdown id="example-dropdown-inline" items={items} onItemSelect={action('onItemSelect')}>
-                        <Button text="Inline" />
-                    </StyledDropdown>
-                </StyledDashedBorder>
-                <StyledDashedBorder>
-                    <StyledBlockDropdown
-                        id="example-dropdown-block"
-                        items={items}
-                        onItemSelect={action('onItemSelect')}
-                    >
-                        <Button text="Block" stretch />
-                    </StyledBlockDropdown>
-                </StyledDashedBorder>
-            </Styled25Rem>
-        );
-    },
+export const InlineOrBlockWrapper = () => {
+    return (
+        <Styled25Rem>
+            <StyledDashedBorder style={{ display: 'inline-flex' }}>
+                <StyledDropdown id="example-dropdown-inline" items={items} onItemSelect={action('onItemSelect')}>
+                    <Button text="Inline" />
+                </StyledDropdown>
+            </StyledDashedBorder>
+            <StyledDashedBorder>
+                <StyledBlockDropdown id="example-dropdown-block" items={items} onItemSelect={action('onItemSelect')}>
+                    <Button text="Block" stretch />
+                </StyledBlockDropdown>
+            </StyledDashedBorder>
+        </Styled25Rem>
+    );
 };
 
-export const CustomAssembly: StoryObj = {
-    render: () => {
-        return (
-            <StyledWrapper>
-                <DropdownList>
-                    {items.map(({ items, ...rest }) => (
-                        <DropdownItem key={rest.value} {...rest} />
-                    ))}
-                </DropdownList>
-            </StyledWrapper>
-        );
-    },
+export const CustomAssembly = () => {
+    return (
+        <StyledWrapper>
+            <DropdownList>
+                {items.map(({ items, ...rest }) => (
+                    <DropdownItem key={rest.value} {...rest} />
+                ))}
+            </DropdownList>
+        </StyledWrapper>
+    );
 };
 
-const DropdownButton = withAssistiveDropdown(Button);
-
-export const AccessibilityHOC: StoryObj = {
-    render: () => {
-        return (
-            <DropdownButton
-                id="example-dropdown-assistive"
-                text="Нажмите"
-                items={items}
-                trigger="click"
-                placement="bottom"
-                onItemSelect={action('onItemSelect')}
-            />
-        );
-    },
-};
+const placements = ['top', 'bottom', 'left', 'right', 'auto', ['left', 'right']];
 
 export const Placements: StoryObj<DropdownProps> = {
     args: {

@@ -67,7 +67,13 @@ export const popoverRoot = (Root: RootProps<HTMLDivElement, PopoverProps>) =>
         const isAuto = isAutoArray || (placement as PopoverPlacement).startsWith('auto');
 
         const { styles, attributes, forceUpdate } = usePopper(rootRef.current, popoverRef.current, {
-            placement: isAutoArray ? 'auto' : (placement as PopoverPlacement),
+            // TODO: #1121
+            // eslint-disable-next-line no-nested-ternary
+            placement: isAutoArray
+                ? placement[0]?.endsWith('start')
+                    ? 'auto-start'
+                    : 'auto'
+                : (placement as PopoverPlacement),
             modifiers: [
                 {
                     name: 'preventOverflow',
@@ -80,7 +86,7 @@ export const popoverRoot = (Root: RootProps<HTMLDivElement, PopoverProps>) =>
                     name: 'flip',
                     enabled: isAuto,
                     options: {
-                        fallbackPlacements: isAutoArray ? (placement as PopoverPlacement[]) : [],
+                        allowedAutoPlacements: isAutoArray ? (placement as PopoverPlacement[]) : [],
                     },
                 },
                 {

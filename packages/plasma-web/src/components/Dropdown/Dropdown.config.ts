@@ -1,7 +1,7 @@
 import { css, dropdownTokens } from '@salutejs/plasma-new-hope/styled-components';
 
 const dropdownSizeCommon = `
-    ${dropdownTokens.width}: 12.5rem;
+    ${dropdownTokens.width}: 100%;
     ${dropdownTokens.height}: auto;
     ${dropdownTokens.borderRadius}: 0.5rem;
     ${dropdownTokens.paddingTop}: 0.125rem;
