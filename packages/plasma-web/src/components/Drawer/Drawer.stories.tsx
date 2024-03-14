@@ -200,7 +200,7 @@ export const DrawerDemo: StoryObj<StoryDrawerProps> = {
         asModal: true,
         closePlacement: 'right',
         width: '50vw',
-        height: '100vh',
+        height: '100dvh',
     },
     render: (args) => <StoryDrawerDemo {...args} />,
 };
