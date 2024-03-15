@@ -33,7 +33,7 @@ jobs:
     with:
       ref: refs/pull/${{github.event.pull_request.number}}/merge
       upload_assets: ${{ fromJSON(needs.state.outputs.STATE).HAS_ASSETS }}
-      auto-options: '--no-changelog'
+      auto-options: '--no-changelog --dry-run'
     secrets:
       gh_token: ${{ secrets.GH_TOKEN }}
       npm_registry_token: ${{ secrets.NPM_REGISTRY_TOKEN }}
