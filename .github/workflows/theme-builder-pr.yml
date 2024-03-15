@@ -23,7 +23,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: authorize
     env:
-      NPM_REGISTRY_TOKEN: ${{ secrets.NPM_REGISTRY_TOKEN }}
       PR_NAME: pr-${{ github.event.number }}
     steps:
       - uses: actions/checkout@v4
