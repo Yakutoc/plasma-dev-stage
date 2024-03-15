@@ -43,7 +43,7 @@ jobs:
                 uses: ./.github/actions/prepare-environment
 
             -   name: Lerna bootstrap
-                run: npx lerna bootstrap --scope="@salutejs/plasma-website"
+                run: npx lerna bootstrap --scope="@salutejs/plasma-{website,icons}"
 
             -   name: Prepare directory
                 run: |
