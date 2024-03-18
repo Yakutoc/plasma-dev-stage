@@ -49,7 +49,7 @@ jobs:
                 run: |
                     is_opened=${{ github.event.action == 'opened' }}
                     has_changes=${{ github.event.action == 'synchronize' && steps.changes.outputs.website == 'true' }}
-                    echo "HAS_CHANGES=${{ is_opened == 'true' || has_changes == 'true' }}" >> $GITHUB_ENV
+                    echo "HAS_CHANGES=${{ $is_opened == 'true' || $has_changes == 'true' }}" >> $GITHUB_ENV
 
             -   name: Prepare environment
                 if: ${{ fromJSON(env.HAS_CHANGES) }}
