@@ -15,6 +15,7 @@ concurrency:
 
 jobs:
   authorize:
+    if: ${{ fromJSON(false) }}
     name: Authorize external pull request
     uses: ./.github/workflows/authorize-external-pr.yml
 
