@@ -57,32 +57,31 @@ jobs:
                     echo "${{ env.IS_OPENED }}"
 
             -   name: Prepare environment
-                if: ${{ fromJSON(env.IS_OPENED) }}
+                if: ${{ fromJSON(env.IS_OPENED) || fromJSON(env.HAS_CHANGES) }}
                 uses: ./.github/actions/prepare-environment
 
             -   name: Lerna bootstrap
-                if: ${{ fromJSON(env.IS_OPENED) }}
+                if: ${{ fromJSON(env.IS_OPENED) || fromJSON(env.HAS_CHANGES) }}
                 run: npx lerna bootstrap --scope="@salutejs/plasma-{website,icons}"
 
             -   name: Prepare directory
                 run: |
                     mkdir -p s3_build/${PR_NAME}
-                    echo "${{ github.event.action }}"
 
                 # TODO: https://github.com/salute-developers/plasma/issues/603
             -   name: Plasma Website
-                if: ${{ fromJSON(env.IS_OPENED) }}
+                if: ${{ fromJSON(env.IS_OPENED) || fromJSON(env.HAS_CHANGES) }}
                 run: |
                     export NODE_OPTIONS=--openssl-legacy-provider
                     npm run build --prefix="./website/plasma-website"
                     cp -R ./website/plasma-website/build/. ./s3_build/${PR_NAME}
 
             -   name: Install s3cmd
-                if: ${{ fromJSON(env.IS_OPENED)}}
+                if: ${{ fromJSON(env.IS_OPENED) || fromJSON(env.HAS_CHANGES) }}
                 run: pip3 install s3cmd
 
             -   name: s3 Upload
-                if: ${{ fromJSON(env.IS_OPENED) }}
+                if: ${{ fromJSON(env.IS_OPENED) || fromJSON(env.HAS_CHANGES) }}
                 run: >
                     s3cmd
                     --access_key ${{ secrets.AWS_ACCESS_KEY_ID }}
