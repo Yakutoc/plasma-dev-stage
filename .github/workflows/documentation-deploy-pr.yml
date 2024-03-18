@@ -47,15 +47,16 @@ jobs:
                           - 'website/plasma-website/**'
             -   name: Set env
                 run: |
-                    echo "IS_OPENED=${{ github.event.action === "opened" }}" >> $GITHUB_ENV
-                    echo "HAS_CHANGES=${{ github.event.action === "synchronize" && steps.changes.outputs.website === 'true' }}" >> $GITHUB_ENV
+                    is_opened=${{ github.event.action == "opened" }}
+                    has_changes=${{ github.event.action == "synchronize" && steps.changes.outputs.website == 'true' }}
+                    echo "HAS_CHANGES=${{ is_opened == 'true' || has_changes == 'true' }}" >> $GITHUB_ENV
 
             -   name: Prepare environment
-                if: ${{ env.IS_OPENED || env.HAS_CHANGES }}
+                if: ${{ fromJSON(env.HAS_CHANGES) }}
                 uses: ./.github/actions/prepare-environment
 
             -   name: Lerna bootstrap
-                if: ${{ env.IS_OPENED || env.HAS_CHANGES }}
+                if: ${{ fromJSON(env.HAS_CHANGES) }}
                 run: npx lerna bootstrap --scope="@salutejs/plasma-{website,icons}"
 
             -   name: Prepare directory
@@ -65,18 +66,18 @@ jobs:
 
                 # TODO: https://github.com/salute-developers/plasma/issues/603
             -   name: Plasma Website
-                if: ${{ env.IS_OPENED || env.HAS_CHANGES }}
+                if: ${{ fromJSON(env.HAS_CHANGES) }}
                 run: |
                     export NODE_OPTIONS=--openssl-legacy-provider
                     npm run build --prefix="./website/plasma-website"
                     cp -R ./website/plasma-website/build/. ./s3_build/${PR_NAME}
 
             -   name: Install s3cmd
-                if: ${{ env.IS_OPENED || env.HAS_CHANGES }}
+                if: ${{ fromJSON(env.HAS_CHANGES)}}
                 run: pip3 install s3cmd
 
             -   name: s3 Upload
-                if: ${{ env.IS_OPENED || env.HAS_CHANGES }}
+                if: ${{ fromJSON(env.HAS_CHANGES) }}
                 run: >
                     s3cmd
                     --access_key ${{ secrets.AWS_ACCESS_KEY_ID }}
