@@ -9,11 +9,5 @@ module.exports = () => {
         })
         .join('\n');
 
-    const message = `Documentation preview deployed!
-
-website: ${BASE_URL}/
-${links}
-`;
-
-    return message;
+    return 'Documentation preview deployed!' + '\n\n' + `website:${BASE_URL}/` + '\n' + `${links}`;
 };
