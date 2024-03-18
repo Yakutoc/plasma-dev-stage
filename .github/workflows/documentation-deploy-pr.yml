@@ -45,6 +45,7 @@ jobs:
                     filters: |
                         website:
                           - 'website/plasma-website/**'
+
             -   name: Set env
                 run: |
                     echo "HAS_CHANGES=${{ github.event.action == 'synchronize' && steps.changes.outputs.website == 'true' }}" >> $GITHUB_ENV
