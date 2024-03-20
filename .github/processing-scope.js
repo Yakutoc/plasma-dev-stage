@@ -52,12 +52,17 @@ module.exports = () => {
         item.replace('plasma-', ''),
     );
 
+    console.log(CONFIG);
+    console.log(PACKAGES_CYPRESS_RUN);
+
     /**
      * List packages who has a documentations artifacts: storybook, docusaurus
      * @example
      * ["plasma-web", "caldera", "sdds-serv"]
      */
     const PACKAGES_DOCUMENTATIONS_RUN = PROCESSED_DATA.filter((item) => CONFIG.PACKAGES_DS.includes(item));
+
+    console.log(CONFIG.PACKAGES_DS);
 
     return {
         RAW_DATA: JSON.stringify(rawData),
