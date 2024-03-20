@@ -88,9 +88,9 @@ jobs:
                 with:
                   path: |
                     ${{ fromJSON(steps.state.outputs.result).paths }}
-                  key: node-modules-${{PR_NAME}}-${{ hashFiles('website/plasma-website/package-lock.json') }}
+                  key: node-modules-${{env.PR_NAME}}-${{ hashFiles('website/plasma-website/package-lock.json') }}
                   restore-keys: |
-                      node-modules-${{PR_NAME}}-${{ hashFiles('website/plasma-website/package-lock.json') }}
+                      node-modules-${{env.PR_NAME}}-${{ hashFiles('website/plasma-website/package-lock.json') }}
 
             -   name: Lerna bootstrap
                 if: ${{ steps.node_modules.outputs.cache-hit != 'true' }}
