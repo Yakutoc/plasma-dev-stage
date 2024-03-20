@@ -44,13 +44,13 @@ jobs:
             -   name: Prepare environment
                 uses: ./.github/actions/prepare-environment
 
+
             - name: Get lerna scope
-              id: lerna-scope
+              id: state
               uses: actions/github-script@v7
               env:
                   PROCESSED_DATA: ${{ toJSON(fromJson(needs.state.outputs.STATE).PROCESSED_DATA) }}
               with:
-                  result-encoding: string
                   script: |
                       const { PROCESSED_DATA } = process.env;
 
@@ -75,12 +75,26 @@ jobs:
                         result.push('plasma-new-hope');
                       }
 
-                      console.log('Result =>', result);
+                      const paths = result.map((path) => `${path}/node_modules`).join(' ');
 
-                      return `@salutejs/{${result.join(',')}}`;
+                      return {
+                        scope: `@salutejs/{${result.join(',')}}`,
+                        paths,
+                      };
+
+            -   name: Cache node modules
+                id: node_modules
+                uses: actions/cache@v4
+                with:
+                  path: |
+                    ${{ fromJSON(steps.state.outputs.result).paths }}
+                  key: node-modules-${{PR_NAME}}-${{ hashFiles('website/plasma-website/package-lock.json') }}
+                  restore-keys: |
+                      node-modules-${{PR_NAME}}-${{ hashFiles('website/plasma-website/package-lock.json') }}
 
             -   name: Lerna bootstrap
-                run: npx lerna bootstrap --scope="${{ steps.lerna-scope.outputs.result }}"
+                if: ${{ steps.node_modules.outputs.cache-hit != 'true' }}
+                run: npx lerna bootstrap --scope="${{ fromJSON(steps.state.outputs.result).scope }}"
 
             -   name: Prepare directory
                 run: |
