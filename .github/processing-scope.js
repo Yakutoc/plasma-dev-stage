@@ -52,9 +52,6 @@ module.exports = () => {
         item.replace('plasma-', ''),
     );
 
-    console.log(CONFIG);
-    console.log(PACKAGES_CYPRESS_RUN);
-
     /**
      * List packages who has a documentations artifacts: storybook, docusaurus
      * @example
@@ -71,6 +68,6 @@ module.exports = () => {
         PROCESSED_DATA: JSON.stringify(PROCESSED_DATA),
         HAS_PACKAGES_CYPRESS_RUN: !!PACKAGES_CYPRESS_RUN.length,
         HAS_PACKAGES_DS_CHANGES: !!PACKAGES_DOCUMENTATIONS_RUN.length,
-        HAS_ASSETS: rawData.includes('@salutejs/plasma-tokens-native'),
+        HAS_ASSETS: PROCESSED_DATA.includes('plasma-tokens-native'),
     };
 };
