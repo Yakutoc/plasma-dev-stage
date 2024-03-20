@@ -2,7 +2,7 @@
 // INFO: Изменения в plasma-tokens или plasma-tokens-utils так же повлияют на то что в packagesList окажется plasma-tokens-native
 
 // INFO: Конфигурации для CI
-const CONFIG = require('config-ci.json');
+const CONFIG = require('./config-ci.json');
 
 module.exports = () => {
     const { RAW_DATA } = process.env;
