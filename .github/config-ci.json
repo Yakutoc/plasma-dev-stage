@@ -1,0 +1,13 @@
+{
+    "PACKAGES_CYPRESS": ["@salutejs/plasma-web", "@salutejs/plasma-b2c", "@salutejs/plasma-ui"],
+    "PACKAGES_DS": [
+        "@salutejs/plasma-web",
+        "@salutejs/plasma-b2c",
+        "@salutejs/plasma-ui",
+        "@salutejs/plasma-new-hope",
+        "@salutejs/plasma-asdk",
+        "@salutejs/caldera",
+        "@salutejs/caldera-online",
+        "@salutejs/sdds-serv"
+    ]
+}

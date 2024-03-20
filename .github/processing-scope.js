@@ -1,8 +1,11 @@
 // INFO: HAS_ASSETS - это флаг для управления логикой "@auto-it" плагина upload-assets-extend
 // INFO: Изменения в plasma-tokens или plasma-tokens-utils так же повлияют на то что в packagesList окажется plasma-tokens-native
 
+// INFO: Конфигурации для CI
+const CONFIG = require('config-ci.json');
+
 module.exports = () => {
-    const { RAW_DATA, PACKAGES_CYPRESS, PACKAGES_DS } = process.env;
+    const { RAW_DATA } = process.env;
 
     /**
      * @param RAW_DATA Information about the changed state
@@ -45,16 +48,16 @@ module.exports = () => {
      * @example
      * ["web", "ui", "b2c"]
      */
-    const PACKAGES_CYPRESS_RUN = PROCESSED_DATA.filter((item) =>
-        JSON.parse(PACKAGES_CYPRESS).includes(item),
-    ).map((item) => item.replace('plasma-', ''));
+    const PACKAGES_CYPRESS_RUN = PROCESSED_DATA.filter((item) => CONFIG.PACKAGES_CYPRESS.includes(item)).map((item) =>
+        item.replace('plasma-', ''),
+    );
 
     /**
      * List packages who has a documentations artifacts: storybook, docusaurus
      * @example
      * ["plasma-web", "caldera", "sdds-serv"]
      */
-    const PACKAGES_DOCUMENTATIONS_RUN = PROCESSED_DATA.filter((item) => JSON.parse(PACKAGES_DS).includes(item));
+    const PACKAGES_DOCUMENTATIONS_RUN = PROCESSED_DATA.filter((item) => CONFIG.PACKAGES_DS.includes(item));
 
     return {
         RAW_DATA: JSON.stringify(rawData),
