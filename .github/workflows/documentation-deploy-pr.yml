@@ -1,9 +1,11 @@
-name: Deploy documentations artifacts [PR]
+name: Deploy documentations artefacts [PR]
 
 on:
-    pull_request:
+    pull_request_target:
         branches:
             - dev
+    pull_request:
+        branches:
             - master
 
 concurrency:
@@ -39,25 +41,41 @@ jobs:
                 with:
                     show-progress: false
 
-            -   uses: dorny/paths-filter@v3
-                id: changes
-                with:
-                    filters: |
-                        website:
-                          - 'website/plasma-website/**'
-
-            -   name: Set env
-                run: |
-                    echo "HAS_CHANGES=${{ github.event.action == 'synchronize' && steps.changes.outputs.website == 'true' }}" >> $GITHUB_ENV
-                    echo "IS_OPENED=${{ github.event.action == 'opened' }}" >> $GITHUB_ENV
-
             -   name: Prepare environment
-                if: ${{ fromJSON(env.IS_OPENED) || fromJSON(env.HAS_CHANGES) }}
                 uses: ./.github/actions/prepare-environment
 
+            - name: Get lerna scope
+              id: lerna-scope
+              uses: actions/github-script@v7
+              env:
+                  PROCESSED_DATA: ${{ toJSON(fromJson(needs.state.outputs.STATE).PROCESSED_DATA) }}
+              with:
+                  result-encoding: string
+                  script: |
+                      const { PROCESSED_DATA } = process.env;
+
+                      const requiredPackages = [
+                          'plasma-b2c',
+                          'plasma-tokens-b2c',
+                          'plasma-typo'
+                      ];
+
+                      // INFO: Пока не починили медленный css build for b2c/web
+                      // нужно принудительно ставить и plasma-new-hope
+                      // логика под рефакторинг под использование object
+                      const result = [
+                          ...JSON.parse(PROCESSED_DATA).filter((package) => requiredPackages.includes(package)),
+                          'plasma-new-hope',
+                          'plasma-website',
+                          'plasma-icons',
+                      ];
+
+                      console.log('Result =>', result);
+
+                      return `@salutejs/{${result.join(',')}}`;
+
             -   name: Lerna bootstrap
-                if: ${{ fromJSON(env.IS_OPENED) || fromJSON(env.HAS_CHANGES) }}
-                run: npx lerna bootstrap --scope="@salutejs/plasma-{website,icons}"
+                run: npx lerna bootstrap --scope="${{ steps.lerna-scope.outputs.result }}"
 
             -   name: Prepare directory
                 run: |
@@ -65,18 +83,15 @@ jobs:
 
                 # TODO: https://github.com/salute-developers/plasma/issues/603
             -   name: Plasma Website
-                if: ${{ fromJSON(env.IS_OPENED) || fromJSON(env.HAS_CHANGES) }}
                 run: |
                     export NODE_OPTIONS=--openssl-legacy-provider
                     npm run build --prefix="./website/plasma-website"
                     cp -R ./website/plasma-website/build/. ./s3_build/${PR_NAME}
 
             -   name: Install s3cmd
-                if: ${{ fromJSON(env.IS_OPENED) || fromJSON(env.HAS_CHANGES) }}
                 run: pip3 install s3cmd
 
             -   name: s3 Upload
-                if: ${{ fromJSON(env.IS_OPENED) || fromJSON(env.HAS_CHANGES) }}
                 run: >
                     s3cmd
                     --access_key ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -124,7 +139,7 @@ jobs:
                 with:
                     result-encoding: string
                     script: |
-                        const { PROCESSED_DATA, PACKAGE, HAS_PACKAGE_DOCS } = process.env;
+                        const { PROCESSED_DATA, PACKAGE } = process.env;
 
                         const processedData = JSON.parse(PROCESSED_DATA);
 
@@ -146,6 +161,7 @@ jobs:
 
                         // INFO: Пока не починили медленный css build for b2c/web
                         // нужно принудительно ставить и plasma-new-hope
+                        // TODO: рефакторинг - использовать объект
                         const result = [
                             ...processedData.filter((package) => packages.includes(package)),
                             PACKAGE,
@@ -167,7 +183,7 @@ jobs:
 
                         console.log('Result =>', result);
 
-                        return result.length > 1 ? `@salutejs/{${result.join(',')}}` : `@salutejs/${result[0]}`;
+                        return `@salutejs/{${result.join(',')}}`;
 
             -   name: Lerna bootstrap
                 run: npx lerna bootstrap --scope="${{ steps.lerna-scope.outputs.result }}"
@@ -238,9 +254,9 @@ jobs:
                 with:
                     result-encoding: string
                     script: |
-                        const createSBLinks = require('./.github/create-storybook-links.js');
+                        const createLinks = require('./.github/create-links.js');
 
-                        return createSBLinks();
+                        return createLinks();
 
             -   name: Attach comment
                 uses: marocchino/sticky-pull-request-comment@v2
