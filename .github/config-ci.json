@@ -5,9 +5,6 @@
         "plasma-b2c",
         "plasma-ui",
         "plasma-new-hope",
-        "plasma-asdk",
-        "caldera",
-        "caldera-online",
-        "sdds-serv"
+        "plasma-asdk"
     ]
 }
