@@ -30,7 +30,7 @@ jobs:
         uses: ./.github/actions/prepare-environment
 
       - name: Lerna bootstrap
-        run: npx lerna bootstrap
+        run: npx lerna bootstrap --ignore-scripts
 
       - name: Lint
         run: npm run lint
@@ -48,7 +48,7 @@ jobs:
         uses: ./.github/actions/prepare-environment
 
       - name: Lerna bootstrap
-        run: npx lerna bootstrap --ignore=${{env.LERNA_IGNORE_LIST}}
+        run: npx lerna bootstrap --ignore=${{env.LERNA_IGNORE_LIST}} --ignore-scripts
 
       - name: Unit tests
         run: npm run test
