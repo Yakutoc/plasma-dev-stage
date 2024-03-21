@@ -12,8 +12,8 @@ const pckgJson = require('./package.json');
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const versionsArchived = require('./versionsArchived.json');
 
-const { PR_NAME, VERSION_NAME } = process.env;
-const prefix = VERSION_NAME || !PR_NAME ? '' : `/pr/${PR_NAME}`;
+const { PREFIX, VERSION_NAME } = process.env;
+const prefix = VERSION_NAME || !PREFIX ? '' : `/${PREFIX}`;
 const baseUrl = VERSION_NAME ? `/versions/${VERSION_NAME}/` : `${prefix}/ui/`;
 
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
