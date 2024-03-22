@@ -43,6 +43,8 @@ jobs:
               shuga2704: "shuga2704",
             };
 
+            console.log(context);
+
             const res = await github.rest.repos.listPullRequestsAssociatedWithCommit({
               commit_sha: context.sha,
               owner: context.repo.owner,
