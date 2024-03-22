@@ -42,6 +42,8 @@ jobs:
               shuga2704: "shuga2704",
             };
 
+            console.log(context);
+
             const res = await github.rest.repos.listPullRequestsAssociatedWithCommit({
               commit_sha: context.sha,
               owner: context.repo.owner,
@@ -69,7 +71,7 @@ jobs:
         id: scope
         uses: actions/github-script@v6
         env:
-            RAW_DATA: ${{ toJSON(steps.lerna_ls.outputs.RAW_DATA) }}
+            RAW_DATA: ${{ steps.lerna_ls.outputs.RAW_DATA }}
         with:
           script: |
             const processingScope = require('./.github/processing-scope.js');
