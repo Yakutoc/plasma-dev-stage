@@ -8,6 +8,7 @@ on:
 jobs:
   state:
     name: State
+    if: ${{ github.actor == 'github-merge-queue[bot]' }}
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
@@ -69,7 +70,7 @@ jobs:
         id: scope
         uses: actions/github-script@v6
         env:
-            RAW_DATA: ${{ toJSON(steps.lerna_ls.outputs.RAW_DATA) }}
+            RAW_DATA: ${{ steps.lerna_ls.outputs.RAW_DATA }}
         with:
           script: |
             const processingScope = require('./.github/processing-scope.js');
@@ -80,6 +81,7 @@ jobs:
 
   publish:
     name: Publish RC version
+    if: ${{ github.actor == 'github-merge-queue[bot]' }}
     needs: [ state ]
     uses: ./.github/workflows/publish-common.yml
     with:
