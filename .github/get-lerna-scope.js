@@ -38,7 +38,7 @@ module.exports = () => {
     const packageScope = META[PACKAGE].scope || [];
     const requiredDeps = META[PACKAGE]['required-deps'] || [];
 
-    const deps = [...packageScope, `${PACKAGE}-docs`, 'plasma-icons'];
+    const deps = [...packageScope, `${PACKAGE}-docs`, 'plasma-icons', 'plasma-sb-utils', 'data-themes'];
 
     const computedScope = processedData.filter((dep) => deps.includes(dep));
 
@@ -48,6 +48,7 @@ module.exports = () => {
     if (processedData.includes('plasma-tokens-native')) {
         scope.push('plasma-tokens');
         scope.push('plasma-tokens-utils');
+        scope.push('plasma-tokens-native');
     }
 
     console.log('Result =>', scope);
