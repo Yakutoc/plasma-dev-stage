@@ -9,5 +9,30 @@
         "caldera",
         "caldera-online",
         "sdds-serv"
-    ]
+    ],
+    "meta": {
+        "caldera": ["caldera-online-themes", "plasma-new-hope"],
+        "caldera-online": ["caldera-online-themes", "plasma-new-hope"],
+        "plasma-asdk": ["plasma-tokens", "plasma-tokens-b2b", "plasma-typo", "plasma-themes"],
+        "plasma-b2c": [
+            "plasma-core",
+            "plasma-hope",
+            "plasma-new-hope",
+            "plasma-tokens-b2c",
+            "plasma-tokens-web",
+            "plasma-typo"
+        ],
+        "plasma-new-hope": ["plasma-core"],
+        "plasma-ui": ["plasma-core", "plasma-typo"],
+        "plasma-web": [
+            "plasma-core",
+            "plasma-hope",
+            "plasma-new-hope",
+            "plasma-tokens-b2c",
+            "plasma-tokens-b2b",
+            "plasma-tokens-web",
+            "plasma-typo"
+        ],
+        "sdds-serv": ["sdds-themes", "plasma-new-hope"]
+    }
 }
