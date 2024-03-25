@@ -1,25 +1,18 @@
-const CONFIG = require('./config-ci.json');
+const META = require('./meta');
 
 module.exports = () => {
     const { PROCESSED_DATA, PACKAGE } = process.env;
 
     const processedData = JSON.parse(PROCESSED_DATA);
-    const { meta } = CONFIG;
 
-    const deps = [...(meta[PACKAGE] || []), `${PACKAGE}-docs`];
+    const packageScope = META[PACKAGE].scope || [];
+    const requiredDeps = META[PACKAGE]['required-deps'] || [];
 
-    const scope = [
-        ...processedData.filter((dep) => deps.includes(dep)),
-        PACKAGE,
-        'plasma-core',
-        'plasma-docs-ui',
-        'plasma-icons',
-    ];
+    const deps = [...packageScope, `${PACKAGE}-docs`, 'plasma-icons'];
 
-    // INFO: Пока не починили медленный css build for b2c/web ставим plasma-new-hope
-    if (scope.includes('plasma-b2c') || scope.includes('plasma-web')) {
-        scope.push('plasma-new-hope');
-    }
+    const computedScope = processedData.filter((dep) => deps.includes(dep));
+
+    const scope = [...computedScope, ...requiredDeps, PACKAGE, 'plasma-docs-ui'];
 
     // TODO: Как избавиться от этой зависимости
     if (processedData.includes('plasma-tokens-native')) {
