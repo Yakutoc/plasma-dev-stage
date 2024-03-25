@@ -42,7 +42,7 @@ module.exports = () => {
 
     const computedScope = processedData.filter((dep) => deps.includes(dep));
 
-    const scope = [...computedScope, ...requiredDeps, PACKAGE, 'plasma-docs-ui'];
+    const scope = [...computedScope, ...requiredDeps, PACKAGE, 'plasma-docs-ui', 'plasma-typo'];
 
     // TODO: Как избавиться от этой зависимости
     if (processedData.includes('plasma-tokens-native')) {
