@@ -1,0 +1,22 @@
+name: Update Icons Pack
+
+on:
+    workflow_dispatch:
+
+jobs:
+    icons:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  show-progress: false
+                  fetch-depth: 0
+
+            - name: Create release branch
+              shell: bash
+              run: |
+                  git fetch --all
+                  git branch
+                  git checkout -b release/icons-v1 dev
