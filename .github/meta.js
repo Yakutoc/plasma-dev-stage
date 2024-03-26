@@ -1,4 +1,4 @@
-const commonScope = ['plasma-icons', 'plasma-sb-utils', 'data-themes', 'plasma-typo'];
+const commonScope = ['plasma-icons', 'plasma-sb-utils'];
 
 module.exports = {
     caldera: {
