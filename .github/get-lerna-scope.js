@@ -20,7 +20,11 @@ module.exports = () => {
 
     const computedScope = processedData.filter((dep) => [...packageScope, packageDocs].includes(dep));
 
-    const scope = new Set([...computedScope, ...requiredDeps, PACKAGE, 'plasma-docs-ui']);
+    const scope = new Set([...computedScope, ...requiredDeps, PACKAGE]);
+
+    if (scope.has(packageDocs)) {
+        scope.add('plasma-docs-ui');
+    }
 
     if (scope.has(packageTheme)) {
         scope.add('data-themes');
