@@ -31,14 +31,5 @@ module.exports = () => {
         scope.add('plasma-typo');
     }
 
-    // TODO: Как избавиться от этой зависимости
-    if (processedData.includes('plasma-tokens-native')) {
-        scope.add('plasma-tokens');
-        scope.add('plasma-tokens-utils');
-        scope.add('plasma-tokens-native');
-    }
-
-    console.log('Result =>', Array.from(scope));
-
     return `@salutejs/{${Array.from(scope).join(',')}}`;
 };

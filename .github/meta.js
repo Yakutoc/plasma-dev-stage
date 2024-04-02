@@ -34,7 +34,7 @@ module.exports = {
     },
     'plasma-ui': {
         scope: [...commonScope, 'plasma-core', 'plasma-typo'],
-        'required-deps': ['plasma-icons'],
+        'required-deps': [],
         themes: '',
     },
     'plasma-web': {
