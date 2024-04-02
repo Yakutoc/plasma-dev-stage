@@ -1,9 +1,9 @@
-const commonScope = ['plasma-icons', 'plasma-sb-utils'];
+const commonScope = ['plasma-icons', 'plasma-sb-utils', 'plasma-tokens', 'plasma-tokens-utils'];
 
 module.exports = {
     caldera: {
         scope: [...commonScope, 'caldera-online-themes', 'plasma-new-hope'],
-        'required-deps': [],
+        required: [],
         themes: 'caldera-online-themes',
     },
     'caldera-online': {
@@ -11,8 +11,8 @@ module.exports = {
         themes: 'caldera-online-themes',
     },
     'plasma-asdk': {
-        scope: [...commonScope, 'plasma-tokens', 'plasma-tokens-b2b', 'plasma-typo', 'plasma-themes'],
-        'required-deps': ['plasma-core'],
+        scope: [...commonScope, 'plasma-tokens-b2b', 'plasma-typo', 'plasma-themes'],
+        required: ['plasma-core'],
         themes: 'plasma-themes',
     },
     'plasma-b2c': {
@@ -25,16 +25,16 @@ module.exports = {
             'plasma-tokens-web',
             'plasma-typo',
         ],
-        'required-deps': ['plasma-new-hope'],
+        required: ['plasma-new-hope'],
         themes: '',
     },
     'plasma-new-hope': {
         scope: [...commonScope, 'plasma-core'],
-        'required-deps': [],
+        required: [],
     },
     'plasma-ui': {
         scope: [...commonScope, 'plasma-core', 'plasma-typo'],
-        'required-deps': [],
+        required: ['plasma-icons'],
         themes: '',
     },
     'plasma-web': {
@@ -48,12 +48,12 @@ module.exports = {
             'plasma-tokens-web',
             'plasma-typo',
         ],
-        'required-deps': ['plasma-new-hope'],
+        required: ['plasma-new-hope'],
         themes: '',
     },
     'sdds-serv': {
         scope: [...commonScope, 'sdds-themes', 'plasma-new-hope'],
-        'required-deps': [],
+        required: [],
         themes: 'sdds-themes',
     },
 };

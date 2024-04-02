@@ -13,7 +13,7 @@ module.exports = () => {
     // INFO: Список обязательных пакетов без которых не будет работать сборка
     // INFO: Например для корректной сборки storybook в `plasma-asdk` нужно ставить plasma-core
     // INFO: Это workaround - временно позволяет обойти ошибки в инфре
-    const requiredDeps = META[PACKAGE]['required-deps'] || [];
+    const requiredDeps = META[PACKAGE].required || [];
 
     // INFO: Пакет с документацией, например `plasma-web-docs` или `sdds-serv-docs`
     const packageDocs = `${PACKAGE}-docs`;
