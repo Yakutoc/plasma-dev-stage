@@ -63,9 +63,17 @@ module.exports = () => {
      * @example
      * ["plasma-web", "caldera-online", "sdds-serv"]
      */
-    const PACKAGES_DOCUMENTATIONS_RUN = PROCESSED_DATA.filter(
-        (item) => CONFIG.PACKAGES_DS.includes(item) || item.endsWith('-docs'),
-    );
+    const PACKAGES_DOCUMENTATIONS_RUN = PROCESSED_DATA.reduce((acc, item) => {
+        if (CONFIG.PACKAGES_DS.includes(item)) {
+            acc.push(item);
+        }
+
+        if (CONFIG[item] && !acc.includes(CONFIG[item].package)) {
+            acc.push(item);
+        }
+
+        return acc;
+    }, []);
 
     const HAS_PACKAGES_DS_CHANGES = Boolean(PACKAGES_DOCUMENTATIONS_RUN.length);
 

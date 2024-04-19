@@ -8,5 +8,14 @@
         "plasma-asdk",
         "caldera-online",
         "sdds-serv"
-    ]
+    ],
+    "plasma-web-docs": {
+        "package": "plasma-web"
+    },
+    "sdds-docs": {
+        "package": "sdds-serv"
+    },
+    "plasma-ui-docs": {
+        "package": "plasma-ui"
+    }
 }
