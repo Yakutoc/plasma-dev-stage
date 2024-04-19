@@ -203,7 +203,7 @@ jobs:
 
     attache-comment:
         name: Attached comment
-        needs: [ deploy-website, deploy-artifacts ]
+        needs: [ state, deploy-website, deploy-artifacts ]
         if: ${{ always() && contains(needs.*.result, 'success') }}
         runs-on: ubuntu-latest
         steps:
