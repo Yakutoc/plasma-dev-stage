@@ -68,8 +68,8 @@ module.exports = () => {
             acc.push(item);
         }
 
-        if (CONFIG[item] && !acc.includes(CONFIG[item].package)) {
-            acc.push(item);
+        if (!acc.includes(CONFIG[item].package)) {
+            acc.push(CONFIG[item].package);
         }
 
         return acc;
