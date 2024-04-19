@@ -22,10 +22,10 @@ jobs:
         with:
           show-progress: false
           fetch-depth: 0
-      
+
       - name: Prepare environment
         uses: ./.github/actions/prepare-environment
-      
+
       ## Получаем информацию о pull request который был влит
       ## context.sha - это последний commit в dev ветку
       ## base.sha - это последний commit base branch до влития целевого pull request
@@ -42,21 +42,21 @@ jobs:
               kayman233: "ivakudryavtsev",
               shuga2704: "shuga2704",
             };
-            
+
             const res = await github.rest.repos.listPullRequestsAssociatedWithCommit({
               commit_sha: context.sha,
               owner: context.repo.owner,
               repo: context.repo.repo,
             });
-            
+
             const {
               base: { sha = context.sha },
               title,
               user: { login }
             } = res?.data[0] || {};
-            
+
             return { sha, pr: title, user: teammate[login] || 'alex_czech' };
-      
+
       ## Сохраняем вывод команды lerna ls в формате json array
       - name: Preserve lerna ls state
         id: lerna_ls
@@ -64,7 +64,7 @@ jobs:
           SHA: ${{ fromJSON(steps.pull_request.outputs.result).sha }}
         run: |
           echo "RAW_DATA=$(npx lerna la --json --since=${{ env.SHA }} | jq -c)" >> "$GITHUB_OUTPUT"
-      
+
       ## Высчитываем условие для загрузки assets
       - name: Computed scope state
         id: scope
@@ -73,12 +73,12 @@ jobs:
           RAW_DATA: ${{ steps.lerna_ls.outputs.RAW_DATA }}
         with:
           script: |
-            const processingScope = require('./.github/processing-scope.js');
-            
+            const processingScope = require('./.github/processing-data.js');
+
             const state = processingScope();
-            
+
             return state.HAS_ASSETS ?? false;
-  
+
   publish:
     name: Publish RC version
     needs: [ state ]
@@ -92,7 +92,7 @@ jobs:
     secrets:
       gh_token: ${{ secrets.GH_TOKEN }}
       npm_registry_token: ${{ secrets.NPM_REGISTRY_TOKEN }}
-  
+
   catch:
     name: Handle errors
     runs-on: ubuntu-latest
@@ -110,21 +110,21 @@ jobs:
         with:
           script: |
             const { RUN_ID, FAILED_JOB_NAME } = process.env;
-            
+
             const res = await github.rest.actions.listJobsForWorkflowRun({
               run_id: RUN_ID,
               owner: context.repo.owner,
               repo: context.repo.repo,
             });
-            
+
             const { data: { jobs: jobsList } } = res;
-            
+
             const { html_url, steps: stepsList } = jobsList.find(({ name }) => name === FAILED_JOB_NAME ) || {};
-            
+
             const { name } = stepsList.find(({ conclusion }) => conclusion === "failure" ) || { name: '' };
-            
+
             return { job: html_url, name }
-      
+
       - name: Create message
         env:
           PR: ${{ fromJSON(needs.state.outputs.PR).pr }}
@@ -134,13 +134,13 @@ jobs:
         run: |
           step="**Failure step**: ${{ env.FAILURE_STEP }}"
           message='@${{ env.USER }}\nПосмотри пожалуйста, упала публикация твоего pull request: [${{ env.PR }}](${{ env.JOB }})'
-          
+
           echo "NOTIFICATION="$step\\n\\n$message"" >> $GITHUB_ENV
-      
+
       - name: Create the Mattermost Message
         run: |
           echo "{\"text\":\" ${{ env.NOTIFICATION }}\"}" > mattermost.json
-      
+
       - name: Send notification
         uses: mattermost/action-mattermost-notify@master
         env:

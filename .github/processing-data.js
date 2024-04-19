@@ -37,6 +37,7 @@ module.exports = () => {
             PROCESSED_DATA: [],
             HAS_PACKAGES_CYPRESS_RUN: false,
             HAS_PACKAGES_DS_CHANGES: false,
+            HAS_DEPLOY_WEBSITE: false,
             HAS_ASSETS: false,
         };
     }
@@ -62,7 +63,11 @@ module.exports = () => {
      * @example
      * ["plasma-web", "caldera-online", "sdds-serv"]
      */
-    const PACKAGES_DOCUMENTATIONS_RUN = PROCESSED_DATA.filter((item) => CONFIG.PACKAGES_DS.includes(item));
+    const PACKAGES_DOCUMENTATIONS_RUN = PROCESSED_DATA.filter(
+        (item) => CONFIG.PACKAGES_DS.includes(item) || item.endsWith('-docs'),
+    );
+
+    const HAS_DEPLOY_WEBSITE = PACKAGES_DOCUMENTATIONS_RUN || PROCESSED_DATA.includes('plasma-website');
 
     return {
         RAW_DATA: JSON.stringify(rawData),
@@ -72,5 +77,6 @@ module.exports = () => {
         HAS_PACKAGES_CYPRESS_RUN: Boolean(PACKAGES_CYPRESS_RUN.length),
         HAS_PACKAGES_DS_CHANGES: Boolean(PACKAGES_DOCUMENTATIONS_RUN.length),
         HAS_ASSETS: PROCESSED_DATA.includes('plasma-tokens-native'),
+        HAS_DEPLOY_WEBSITE,
     };
 };

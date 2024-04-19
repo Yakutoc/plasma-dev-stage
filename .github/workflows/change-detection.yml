@@ -48,7 +48,7 @@ jobs:
           RAW_DATA: ${{ steps.lerna-state.outputs.RAW_DATA }}
         with:
           script: |
-            const processingScope = require('./.github/processing-scope.js');
+            const processingScope = require('./.github/processing-data.js');
 
             return processingScope();
 
