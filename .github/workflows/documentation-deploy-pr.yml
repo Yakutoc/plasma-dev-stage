@@ -113,7 +113,8 @@ jobs:
 
     deploy-artifacts:
         name: Deploy artifacts
-        needs: [ state,deploy-website ]
+        needs: [ state, deploy-website ]
+        if: ${{ fromJSON(needs.state.outputs.STATE).HAS_PACKAGES_DS_CHANGES }}
         runs-on: ubuntu-latest
         env:
             PR_NAME: pr-${{ github.event.number }}
@@ -202,7 +203,7 @@ jobs:
 
     attache-comment:
         name: Attached comment
-        needs: [ state, deploy-artifacts ]
+        needs: [ state, deploy-website ]
         runs-on: ubuntu-latest
         steps:
             -   uses: actions/checkout@v4
