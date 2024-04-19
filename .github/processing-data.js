@@ -67,7 +67,9 @@ module.exports = () => {
         (item) => CONFIG.PACKAGES_DS.includes(item) || item.endsWith('-docs'),
     );
 
-    const HAS_DEPLOY_WEBSITE = PACKAGES_DOCUMENTATIONS_RUN || PROCESSED_DATA.includes('plasma-website');
+    const HAS_PACKAGES_DS_CHANGES = Boolean(PACKAGES_DOCUMENTATIONS_RUN.length);
+
+    const HAS_DEPLOY_WEBSITE = HAS_PACKAGES_DS_CHANGES || PROCESSED_DATA.includes('plasma-website');
 
     return {
         RAW_DATA: JSON.stringify(rawData),
@@ -75,8 +77,8 @@ module.exports = () => {
         PACKAGES_CYPRESS_RUN: JSON.stringify(PACKAGES_CYPRESS_RUN),
         PROCESSED_DATA: JSON.stringify(PROCESSED_DATA),
         HAS_PACKAGES_CYPRESS_RUN: Boolean(PACKAGES_CYPRESS_RUN.length),
-        HAS_PACKAGES_DS_CHANGES: Boolean(PACKAGES_DOCUMENTATIONS_RUN.length),
         HAS_ASSETS: PROCESSED_DATA.includes('plasma-tokens-native'),
         HAS_DEPLOY_WEBSITE,
+        HAS_PACKAGES_DS_CHANGES,
     };
 };
