@@ -18,8 +18,10 @@ jobs:
         steps:
             - uses: actions/checkout@v4
               with:
-                  fetch-depth: 0
                   show-progress: false
+
+            - name: Fetch dev branch
+              run: git fetch origin dev
 
             - name: Prepare environment
               uses: ./.github/actions/prepare-environment
