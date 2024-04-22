@@ -64,14 +64,12 @@ module.exports = () => {
      * ["plasma-web", "caldera-online", "sdds-serv"]
      */
     const PACKAGES_DOCUMENTATIONS_RUN = PROCESSED_DATA.reduce((acc, item) => {
-        if (CONFIG.PACKAGES_DS.includes(item)) {
-            acc.push(item);
-        }
+        // INFO: When `lerna la` return only docs package then need get client package
+        // INFO: @example get 'plasma-web-docs' -> 'plasma-web'
+        const packageDS = item.endsWith('-docs') ? item.replace('-docs', '') : item;
 
-        // INFO: Для случая когда изменения были только в пакете с документацией
-        // INFO: и нужно получить пакет, для которого будет произведен deploy
-        if (item.endsWith('-docs') && CONFIG[item]?.package && !acc.includes(CONFIG[item].package)) {
-            acc.push(CONFIG[item].package);
+        if (CONFIG.PACKAGES_DS.includes(packageDS) && !acc.includes(packageDS)) {
+            acc.push(packageDS);
         }
 
         return acc;
