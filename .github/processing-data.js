@@ -68,7 +68,9 @@ module.exports = () => {
             acc.push(item);
         }
 
-        if (!acc.includes(CONFIG[item].package)) {
+        // INFO: Для случая когда изменения были только в пакете с документацией
+        // INFO: и нужно получить пакет, для которого будет произведен deploy
+        if (item.endsWith('-docs') && CONFIG[item]?.package && !acc.includes(CONFIG[item].package)) {
             acc.push(CONFIG[item].package);
         }
 
