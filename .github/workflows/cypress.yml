@@ -18,7 +18,7 @@ jobs:
 
   cypress:
     needs: state
-    if: ${{ fromJSON(needs.state.outputs.STATE).HAS_PACKAGES_CYPRESS_RUN }}
+    if: ${{ !startsWith(github.head_ref, 'release') && fromJSON(needs.state.outputs.STATE).HAS_PACKAGES_CYPRESS_RUN }}
     strategy:
       fail-fast: false
       matrix:
@@ -34,7 +34,7 @@ jobs:
 
   cypress-react-17:
     needs: state
-    if: ${{ fromJSON(needs.state.outputs.STATE).HAS_PACKAGES_CYPRESS_RUN }}
+    if: ${{ !startsWith(github.head_ref, 'release') && fromJSON(needs.state.outputs.STATE).HAS_PACKAGES_CYPRESS_RUN }}
     strategy:
       fail-fast: false
       matrix:
