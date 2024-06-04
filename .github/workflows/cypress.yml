@@ -13,12 +13,13 @@ concurrency:
 
 jobs:
   state:
+    if: ${{ !startsWith(github.head_ref, 'release') }}
     uses: ./.github/workflows/change-detection.yml
     secrets: inherit
 
   cypress:
     needs: state
-    if: ${{ !startsWith(github.head_ref, 'release') && fromJSON(needs.state.outputs.STATE).HAS_PACKAGES_CYPRESS_RUN }}
+    if: ${{ fromJSON(needs.state.outputs.STATE).HAS_PACKAGES_CYPRESS_RUN }}
     strategy:
       fail-fast: false
       matrix:
@@ -34,7 +35,7 @@ jobs:
 
   cypress-react-17:
     needs: state
-    if: ${{ !startsWith(github.head_ref, 'release') && fromJSON(needs.state.outputs.STATE).HAS_PACKAGES_CYPRESS_RUN }}
+    if: ${{ fromJSON(needs.state.outputs.STATE).HAS_PACKAGES_CYPRESS_RUN }}
     strategy:
       fail-fast: false
       matrix:
