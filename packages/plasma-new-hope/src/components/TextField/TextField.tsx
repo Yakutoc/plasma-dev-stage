@@ -1,6 +1,6 @@
 import React, { forwardRef, useEffect, useRef, useState } from 'react';
-import type { ChangeEventHandler } from 'react';
-import { safeUseId } from '@salutejs/plasma-core';
+import type { ChangeEventHandler, KeyboardEvent, ChangeEvent } from 'react';
+import { safeUseId, useForkRef } from '@salutejs/plasma-core';
 import { css } from '@linaria/core';
 
 import type { RootProps } from '../../engines';
@@ -21,10 +21,12 @@ import {
     StyledContentLeft,
     StyledContentRight,
     StyledChips,
+    StyledTextBefore,
+    StyledTextAfter,
 } from './TextField.styles';
 import { classes } from './TextField.tokens';
 import { TextFieldChip } from './ui';
-import { useKeyNavigation } from './hooks/useKeyNavigation';
+import { useKeyNavigation } from './hooks';
 
 export const base = css`
     /* NOTE: Webkit не применяет opacity к inline тегам */
@@ -33,16 +35,20 @@ export const base = css`
 `;
 
 export const textFieldRoot = (Root: RootProps<HTMLDivElement, TextFieldProps>) =>
-    forwardRef<HTMLDivElement, TextFieldProps>(
+    forwardRef<HTMLInputElement, TextFieldProps>(
         (
             {
                 id,
+                className,
+                style,
 
                 // layout
                 contentLeft,
                 contentRight,
                 label,
                 labelPlacement,
+                textBefore,
+                textAfter,
                 placeholder,
                 leftHelper,
                 enumerationType = 'plain',
@@ -60,6 +66,7 @@ export const textFieldRoot = (Root: RootProps<HTMLDivElement, TextFieldProps>) =
                 onChange,
                 onChangeChips,
                 onSearch,
+                onKeyDown,
 
                 ...rest
             },
@@ -67,6 +74,7 @@ export const textFieldRoot = (Root: RootProps<HTMLDivElement, TextFieldProps>) =
         ) => {
             const contentRef = useRef<HTMLDivElement>(null);
             const inputRef = useRef<HTMLInputElement>(null);
+            const inputForkRef = useForkRef(inputRef, ref);
             const chipsRefs = useRef<Array<HTMLButtonElement>>([]);
 
             const controlledRefs = { contentRef, inputRef, chipsRefs };
@@ -128,18 +136,24 @@ export const textFieldRoot = (Root: RootProps<HTMLDivElement, TextFieldProps>) =
                     return;
                 }
 
-                inputRef.current.scrollIntoView({
+                inputRef.current.scrollTo({
+                    top: 0,
+                    left: inputRef.current.offsetLeft,
                     behavior: 'smooth',
-                    block: 'center',
-                    inline: 'center',
                 });
-                inputRef.current.focus({ preventScroll: true });
+
+                inputRef.current.focus();
             };
 
             const getRef = (element: HTMLButtonElement | null, index: number) => {
                 if (element && chipsRefs?.current) {
                     chipsRefs.current[index] = element;
                 }
+            };
+
+            const handleOnKeyDown = (event: ChangeEvent<HTMLInputElement> & KeyboardEvent<HTMLInputElement>) => {
+                handleInputKeydown(event);
+                onKeyDown && onKeyDown(event);
             };
 
             useEffect(() => {
@@ -158,13 +172,14 @@ export const textFieldRoot = (Root: RootProps<HTMLDivElement, TextFieldProps>) =
 
             return (
                 <Root
-                    ref={ref}
                     view={view}
                     size={size}
                     disabled={disabled}
                     readOnly={!disabled && readOnly}
                     labelPlacement={innerLabelPlacementValue}
                     onClick={handleInputFocus}
+                    className={className}
+                    style={style}
                 >
                     {labelInside ||
                         (innerLabelValue && (
@@ -180,6 +195,7 @@ export const textFieldRoot = (Root: RootProps<HTMLDivElement, TextFieldProps>) =
                             onKeyDown={handleContentKeyDown}
                             className={withHasChips}
                         >
+                            {textBefore && <StyledTextBefore>{textBefore}</StyledTextBefore>}
                             {isChipEnumeration && Boolean(chips?.length) && (
                                 <StyledChips>
                                     {chips?.map(({ id: chipId, text }, index) => {
@@ -202,7 +218,7 @@ export const textFieldRoot = (Root: RootProps<HTMLDivElement, TextFieldProps>) =
                             )}
                             <Input
                                 {...rest}
-                                ref={inputRef}
+                                ref={inputForkRef}
                                 id={innerId}
                                 aria-labelledby={labelId}
                                 aria-describedby={helperTextId}
@@ -210,13 +226,14 @@ export const textFieldRoot = (Root: RootProps<HTMLDivElement, TextFieldProps>) =
                                 disabled={disabled}
                                 readOnly={!disabled && readOnly}
                                 onChange={handleChange}
-                                onKeyDown={handleInputKeydown}
+                                onKeyDown={handleOnKeyDown}
                             />
                             {labelInside && (
                                 <Label id={labelId} htmlFor={innerId}>
                                     {innerLabelValue}
                                 </Label>
                             )}
+                            {textAfter && <StyledTextAfter>{textAfter}</StyledTextAfter>}
                         </InputLabelWrapper>
                         {contentRight && <StyledContentRight>{contentRight}</StyledContentRight>}
                     </InputWrapper>

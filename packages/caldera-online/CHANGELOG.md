@@ -1,3 +1,243 @@
+# v0.47.0 (Thu May 30 2024)
+
+### Release Notes
+
+#### Release by 29.05.2024 ([#1222](https://github.com/salute-developers/plasma/pull/1222))
+
+## Components
+
+### Calendar
+
+- добавлен пропс для включения/исключения минимума и максимума диапазона дат
+ 
+feat: add calendar edge dates control (https://github.com/salute-developers/plasma/pull/1203)
+
+### Slider
+
+- добавлен компонент Slider
+ 
+feat(plasma-new-hope): add slider component (https://github.com/salute-developers/plasma/pull/1194)
+
+### Textarea
+
+- изменен `padding` для `label`
+ 
+fix(plasma-*): Fix padding on textarea (https://github.com/salute-developers/plasma/pull/1209)
+
+### Range
+
+- включен в поставку `plasma-{b2c,web} / sdds-serv`
+- написаны тесты и документация
+ 
+feat: Add range component (https://github.com/salute-developers/plasma/pull/1208)
+
+### IconButton
+
+- включен в поставку `sdds-serv`
+- добавлена документация в `sdds-serv-docs`
+ 
+feat(sdds-serv): add icon button (https://github.com/salute-developers/plasma/pull/1214)
+
+### Tabs
+
+- добавлен корректный проброс `className` в `Tab` и `TabItem`
+- поправлена документация для `Tab` и `Segment`
+
+#### ДО:
+
+![image](https://github.com/salute-developers/plasma/assets/40370966/797f897d-95cc-4114-b54a-8629b281b2c7)
+![image](https://github.com/salute-developers/plasma/assets/40370966/8a0e6de3-f6cd-4e7b-b87b-a1a26b5dd4e7)
+
+#### ПОСЛЕ:
+
+![image](https://github.com/salute-developers/plasma/assets/40370966/9dd690cc-e8ed-4623-baa0-52e1f22cf71c)
+![image](https://github.com/salute-developers/plasma/assets/40370966/0c8bb69e-b2d3-4ae9-aed4-2fd4c4b5bd9b)
+ 
+feat(plasma-new-hope): fix tabs styles (https://github.com/salute-developers/plasma/pull/1220)
+
+### Button
+
+- добавлено отображение `value`
+- исправлены внутренние отступы от `contentLeft`, `contentRight`
+- дополнены тесты и документация
+- исправлены тесты, зависящие от `Button: Notification, Pagination, Toast, Toolbar`
+- добавлен токен переопределения цвета `value` в `ButtonGroup`
+ 
+feat: add button value (https://github.com/salute-developers/plasma/pull/1213)
+
+
+## Tokens
+
+### Tokens
+
+- добавлены токены прозрачности для positive, warning, negative цветов
+- добавлены токены с active, hover модификаторами
+ 
+tokens: add surface transparent tokens to sdds (https://github.com/salute-developers/plasma/pull/1206)
+
+
+## Misc
+
+### Checkbox/Radiobox
+
+-  исправлен types компонентов для библиотек `plasma-asdk`, `sdds-serv` и `caldera-online`  
+ 
+Fix checkbox types (https://github.com/salute-developers/plasma/pull/1217)
+
+---
+
+#### 🚀 Enhancement
+
+- Release by 29.05.2024 [#1222](https://github.com/salute-developers/plasma/pull/1222) ([@TitanKuzmich](https://github.com/TitanKuzmich) [@Salute-Eva](https://github.com/Salute-Eva) [@akhdrv](https://github.com/akhdrv) [@Yakutoc](https://github.com/Yakutoc) [@iljs](https://github.com/iljs))
+- feat(caldera-online): update config, stories for Button ([@TitanKuzmich](https://github.com/TitanKuzmich))
+
+#### 🐛 Bug Fix
+
+- Update package-lock.json files ([@Salute-Eva](https://github.com/Salute-Eva))
+- Update versions ([@Salute-Eva](https://github.com/Salute-Eva))
+- docs: regenerate api reports ([@TitanKuzmich](https://github.com/TitanKuzmich))
+- fix(components): fix checkbox types (sdds-serv, caldera-online, plasma-asdk) [#1217](https://github.com/salute-developers/plasma/pull/1217) ([@iljs](https://github.com/iljs))
+- chore: Update package-lock.json files \[skip ci\] ([@Salute-Eva](https://github.com/Salute-Eva))
+
+#### Authors: 5
+
+- [@iljs](https://github.com/iljs)
+- [@Salute-Eva](https://github.com/Salute-Eva)
+- Alex Czech ([@Yakutoc](https://github.com/Yakutoc))
+- Artem Khaydarov ([@akhdrv](https://github.com/akhdrv))
+- Krivonos Aleksandr ([@TitanKuzmich](https://github.com/TitanKuzmich))
+
+---
+
+# v0.40.0 (Thu May 16 2024)
+
+#### 🚀 Enhancement
+
+- Release by 15.05.2024 [#1205](https://github.com/salute-developers/plasma/pull/1205) ([@renovate[bot]](https://github.com/renovate[bot]) [@iljs](https://github.com/iljs) [@Salute-Eva](https://github.com/Salute-Eva) [@Yakutoc](https://github.com/Yakutoc) [@TitanKuzmich](https://github.com/TitanKuzmich) [@shuga2704](https://github.com/shuga2704) [@akhdrv](https://github.com/akhdrv))
+- feat(plasma-asdk,caldera-online,sdds-serv): refactor Checkbox & Radiobox configs [#1176](https://github.com/salute-developers/plasma/pull/1176) ([@TitanKuzmich](https://github.com/TitanKuzmich))
+
+#### 🐛 Bug Fix
+
+- Update package-lock.json files ([@Salute-Eva](https://github.com/Salute-Eva))
+- Update versions ([@Salute-Eva](https://github.com/Salute-Eva))
+- feat(plasma-new-hope, web, b2c): Dropdown refactoring ([@TitanKuzmich](https://github.com/TitanKuzmich))
+- chore: Update package-lock.json files \[skip ci\] ([@Salute-Eva](https://github.com/Salute-Eva))
+
+#### Authors: 7
+
+- [@iljs](https://github.com/iljs)
+- [@renovate[bot]](https://github.com/renovate[bot])
+- [@Salute-Eva](https://github.com/Salute-Eva)
+- Alex Czech ([@Yakutoc](https://github.com/Yakutoc))
+- Artem Khaydarov ([@akhdrv](https://github.com/akhdrv))
+- Dima Shugaev ([@shuga2704](https://github.com/shuga2704))
+- Krivonos Aleksandr ([@TitanKuzmich](https://github.com/TitanKuzmich))
+
+---
+
+# v0.37.0 (Thu Apr 25 2024)
+
+### Release Notes
+
+#### Release by 24.04.2024 ([#1196](https://github.com/salute-developers/plasma/pull/1196))
+
+## Components
+
+### Tooltip
+
+- исправлено позиционирование стрелочки
+- добавлен тест на много-строчный сценарий
+
+#### Before: 
+
+![image](https://github.com/salute-developers/plasma/assets/40370966/230bbda5-2c2f-4628-b5b4-7a7a14ffc2c9)
+
+#### After: 
+
+![image](https://github.com/salute-developers/plasma/assets/40370966/6c142730-0b4b-47de-a64d-1c6ad2c4fc77)
+
+fix(plasma-new-hope): fix tooltip arrow placing (https://github.com/salute-developers/plasma/pull/1171)
+
+### Radiobox
+
+- расширен пример в `stories` с учетом `a11y` возможностей  
+
+plasma-new-hope(radiobox): Improved a11y (https://github.com/salute-developers/plasma/pull/1188)
+
+### Storybook 
+
+- исправлено некорректное поведение свойства `placement`
+- исправлено свойство `enableContentLeft` и `enableContentRight` в TextField
+
+feat(plasma-new-hope, b2c, web, sdds): Fix storybook argTypes (https://github.com/salute-developers/plasma/pull/1182)
+
+### Avatar
+
+- добавлен `aria-label`
+- расширены примеры с доступностью
+
+plasma-new-hope(avatar): Refactoring + a11y (https://github.com/salute-developers/plasma/pull/1180)
+
+### Chip
+
+- удален лишнее свойство `hasClear` из примера в `story` 
+- заменены со старого формата на новый токены в конфигурации (без приставки `--plasma-colors`)
+- добавлена недостающие свойство `view=accent`
+- обновлены `cypress snapshots` 
+
+fix: remove extra chip prop in stories (https://github.com/salute-developers/plasma/pull/1179)
+
+## Colors
+
+- добавлены файлы фирменной палитры в формате `.json`
+- добавлена директория `src` в gitignore, т.к. теперь его содержимое генерируется автоматически на основе `.json`
+
+feat(plasma-color): Add generate color palette from json (https://github.com/salute-developers/plasma/pull/1172)
+
+## Infra
+
+### Audit vulnerabilities
+
+- исправлены все уязвимости в клиентских пакетах (аля `plasma-web`)
+- обновлен до `vite@4.5.3`
+- обновлен `@babel` и его зависимости до latest 
+- заменен `babel-plugin-transform-class-properties` на `@babel/plugin-transform-class-properties` 
+
+### `@salutejs/plasma-sb-utils`
+
+- обновлены `TS` до 4.2.4
+- обновлен `@storybook/react` до 7.6.17
+- исправлены все уязвимости
+- поправлены мелкие ошибки в типах      
+
+plasma-infra(sb-utils): Update dependencies versions (https://github.com/salute-developers/plasma/pull/1178)
+
+---
+
+#### 🚀 Enhancement
+
+- Release by 24.04.2024 [#1196](https://github.com/salute-developers/plasma/pull/1196) ([@Yakutoc](https://github.com/Yakutoc) [@TitanKuzmich](https://github.com/TitanKuzmich) [@Salute-Eva](https://github.com/Salute-Eva) [@neretin-trike](https://github.com/neretin-trike) [@shuga2704](https://github.com/shuga2704))
+- feat(caldera-online): replace primary to default view ([@TitanKuzmich](https://github.com/TitanKuzmich))
+
+#### 🐛 Bug Fix
+
+- Update package-lock.json files ([@Salute-Eva](https://github.com/Salute-Eva))
+- Update versions ([@Salute-Eva](https://github.com/Salute-Eva))
+- fix: audit fix [#1184](https://github.com/salute-developers/plasma/pull/1184) ([@Yakutoc](https://github.com/Yakutoc))
+- chore: update deps ([@Yakutoc](https://github.com/Yakutoc))
+- docs: regenerate api reports ([@TitanKuzmich](https://github.com/TitanKuzmich))
+- chore: Update package-lock.json files \[skip ci\] ([@Salute-Eva](https://github.com/Salute-Eva))
+
+#### Authors: 5
+
+- [@Salute-Eva](https://github.com/Salute-Eva)
+- Alex Czech ([@Yakutoc](https://github.com/Yakutoc))
+- Dima Shugaev ([@shuga2704](https://github.com/shuga2704))
+- Krivonos Aleksandr ([@TitanKuzmich](https://github.com/TitanKuzmich))
+- neretinaa ([@neretin-trike](https://github.com/neretin-trike))
+
+---
+
 # v0.33.0 (Thu Apr 11 2024)
 
 ### Release Notes
