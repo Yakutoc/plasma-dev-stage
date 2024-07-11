@@ -53,7 +53,7 @@ jobs:
         uses: ./.github/actions/prepare-environment
 
       - name: Lerna bootstrap
-        run: npm run ${{ inputs.cmd }} --ignore="@salutejs/*-*-docs" --ignore="@salutejs/perftest-helpers" --ignore="@salutejs/platform-test" --ignore="@salutejs/versionate-docs" --ignore="@salutejs/plasma-docs-ui" --ignore="@salutejs/plasma-theme-builder"
+        run: npm run ${{ inputs.cmd }} -- --ignore="@salutejs/*-*-docs" --ignore="@salutejs/perftest-helpers" --ignore="@salutejs/platform-test" --ignore="@salutejs/versionate-docs" --ignore="@salutejs/plasma-docs-ui" --ignore="@salutejs/plasma-theme-builder"
 
       - name: API Report
         run: npm run api:report
