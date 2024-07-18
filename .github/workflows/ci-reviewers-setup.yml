@@ -52,5 +52,5 @@ jobs:
 
             -   name: Send notification
                 uses: mattermost/action-mattermost-notify@2
-                env:
+                with:
                     MATTERMOST_WEBHOOK_URL: ${{ secrets.WEBHOOKS_NOTIFICATIONS_MM }}
