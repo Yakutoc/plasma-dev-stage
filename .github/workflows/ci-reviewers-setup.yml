@@ -40,17 +40,11 @@ jobs:
                           reviewers: ['neretin-trike']
                         });
 
-            -   name: Create message
-                run: |
-                    message='Pull request: ${{ github.event.pull_request.title }} готов к осмотру'
-
-                    echo "NOTIFICATION="$message"" >> $GITHUB_ENV
-
-            -   name: Create the Mattermost Message
-                run: |
-                    echo "{\"text\":\" ${{ env.NOTIFICATION }}\"}" > mattermost.json
-
             -   name: Send notification
                 uses: mattermost/action-mattermost-notify@master
                 with:
                     MATTERMOST_WEBHOOK_URL: ${{ secrets.WEBHOOKS_NOTIFICATIONS_MM }}
+                    PAYLOAD: |-
+                        {
+                            "text": "Pull request: ${{ github.event.pull_request.title }} готов к осмотру!"
+                        }
