@@ -51,6 +51,6 @@ jobs:
                     echo "{\"text\":\" ${{ env.NOTIFICATION }}\"}" > mattermost.json
 
             -   name: Send notification
-                uses: mattermost/action-mattermost-notify@master
+                uses: mattermost/action-mattermost-notify@2
                 env:
                     MATTERMOST_WEBHOOK_URL: ${{ secrets.WEBHOOKS_NOTIFICATIONS_MM }}
