@@ -17,13 +17,34 @@ jobs:
             -   name: DUMP
                 run: |
                     echo "Pull request #${{ github.event.pull_request.number }} is now ready for review!"
-                    echo "Pull request ${{ toJson(github.event.pull_request) }}"
+                    echo "Pull request ${{ github.event.pull_request.user.login }}"
+
+            -   name: Set review
+                uses: actions/github-script@v7
+                with:
+                    script: |
+                        const teammate = {
+                          Yakutoc: "alex_czech",
+                          'neretin-trike': "aaneretin",
+                          'Yeti-or': "yeti-or",
+                          TitanKuzmich: "aakrivonos",
+                          shuga2704: "shuga2704",
+                          denivladislav: "denivladislav",
+                          iljs: "iljaby",
+                          'vadim-kudr': "vadimkudryavtsev",
+                        };
+
+                        await github.rest.pulls.requestReviewers({
+                          ...context.repo,
+                          pull_number: context.payload.pull_request.number,
+                          reviewers: ['neretin-trike']
+                        });
 
             -   name: Create message
                 run: |
-                    message='Pull request готов к осмотру'
+                    message='Pull request: ${{ github.event.pull_request.title }} готов к осмотру'
 
-                    echo "NOTIFICATION="$message" >> $GITHUB_ENV
+                    echo "NOTIFICATION="$message"" >> $GITHUB_ENV
 
             -   name: Create the Mattermost Message
                 run: |
