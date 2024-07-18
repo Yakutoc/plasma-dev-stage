@@ -1,0 +1,35 @@
+name: PR Ready for Review
+
+on:
+    pull_request:
+        types: [ ready_for_review ]
+        branches:
+            - dev
+
+jobs:
+    review-notification:
+        runs-on: ubuntu-latest
+
+        steps:
+            -   name: Checkout repository
+                uses: actions/checkout@v4
+
+            -   name: DUMP
+                run: |
+                    echo "Pull request #${{ github.event.pull_request.number }} is now ready for review!"
+                    echo "Pull request ${{ toJson(github.event.pull_request) }}"
+
+            -   name: Create message
+                run: |
+                    message='Pull request готов к осмотру'
+
+                    echo "NOTIFICATION="$message" >> $GITHUB_ENV
+
+            -   name: Create the Mattermost Message
+                run: |
+                    echo "{\"text\":\" ${{ env.NOTIFICATION }}\"}" > mattermost.json
+
+            -   name: Send notification
+                uses: mattermost/action-mattermost-notify@master
+                env:
+                    MATTERMOST_WEBHOOK_URL: ${{ secrets.WEBHOOKS_NOTIFICATIONS_MM }}
