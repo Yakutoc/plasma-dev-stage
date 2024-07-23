@@ -1,0 +1,21 @@
+# Централизовано обрабатываем все события связанные с notification
+name: Handle notification event
+
+on:
+    repository_dispatch:
+        types: [notification-event]
+
+jobs:
+  run:
+    name: "Handle notification event"
+    runs-on: ubuntu-latest
+
+    steps:
+        -   name: Send notification
+            uses: mattermost/action-mattermost-notify@master
+            with:
+                MATTERMOST_WEBHOOK_URL: ${{ secrets.WEBHOOKS_NOTIFICATIONS_MM }}
+                PAYLOAD: |-
+                    {
+                        "text": "${{ github.event.client_payload }}"
+                    }

@@ -14,37 +14,28 @@ jobs:
             -   name: Checkout repository
                 uses: actions/checkout@v4
 
-            -   name: DUMP
+            -   name: Get pull request list (first ~15)
                 run: |
-                    echo "Pull request #${{ github.event.pull_request.number }} is now ready for review!"
+                    ## Тут будет action который вернет список первых 15 пр открытых и не черновик
                     echo "Pull request ${{ github.event.pull_request.user.login }}"
+
+            -   name: Get list reviewers
+                run: |
+                    ## Тут будет action который вернет список reviewers
+                    ## фильтр | исключить автора | исключить тех кто имеет больше 4 пр на ревью
 
             -   name: Set review
                 uses: actions/github-script@v7
                 with:
                     script: |
-                        const teammate = {
-                          Yakutoc: "alex_czech",
-                          'neretin-trike': "aaneretin",
-                          'Yeti-or': "yeti-or",
-                          TitanKuzmich: "aakrivonos",
-                          shuga2704: "shuga2704",
-                          denivladislav: "denivladislav",
-                          iljs: "iljaby",
-                          'vadim-kudr': "vadimkudryavtsev",
-                        };
-
                         await github.rest.pulls.requestReviewers({
                           ...context.repo,
                           pull_number: context.payload.pull_request.number,
                           reviewers: ['neretin-trike']
                         });
 
-            -   name: Send notification
-                uses: mattermost/action-mattermost-notify@master
+            -   name: Dispatch event
+                uses: ./.github/actions/dispatch-notification-event
                 with:
-                    MATTERMOST_WEBHOOK_URL: ${{ secrets.WEBHOOKS_NOTIFICATIONS_MM }}
-                    PAYLOAD: |-
-                        {
-                            "text": "Pull request: ${{ github.event.pull_request.title }} готов к осмотру!"
-                        }
+                    payload: "Pull request: ${{ github.event.pull_request.title }} готов к осмотру!"
+                    token: ${{ secrets.GH_TOKEN }}
