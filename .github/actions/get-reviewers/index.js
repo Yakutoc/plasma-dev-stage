@@ -24,7 +24,7 @@ async function run() {
 
         const data = pulls.data
             .filter(({ draft }) => !draft)
-            .flatMap(({ requested_reviewers }) => requested_reviewers.map((user) => user.login));
+            .flatMap(({ requested_reviewers }) => requested_reviewers.map(({ login }) => login));
 
         const data2 = data.reduce((acc, reviewer) => {
             acc.set(reviewer, acc.has(reviewer) ? acc.get(reviewer) + 1 : 1);
@@ -32,10 +32,11 @@ async function run() {
             return acc;
         }, new Map());
 
-        for (const reviewers of data) {
-            console.log(`Reviewers: ${reviewers.join(', ')}`);
-        }
+        // for (const reviewers of data) {
+        //     console.log(`Reviewers: ${reviewers.join(', ')}`);
+        // }
 
+        console.log('DATA => ', data);
         console.log('DATA 2 => ', data2);
 
         // const pullRequestNumber = context.payload.pull_request.number;
