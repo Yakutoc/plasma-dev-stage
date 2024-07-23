@@ -20,6 +20,11 @@ jobs:
                   node-version: '20'
                   cache: npm
 
+            - name: Install dependencies
+              run: |
+                cd .github/actions/get-reviewers
+                npm ci
+
             -   name: Get pull request list (first ~15)
                 run: |
                     ## Тут будет action который вернет список первых 15 пр открытых и не черновик
