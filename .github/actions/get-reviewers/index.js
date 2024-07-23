@@ -15,7 +15,7 @@ async function run() {
         }
 
         // Получение последних 15 pull запросов
-        const pulls = await octokit.pulls.list({
+        const pulls = await octokit.rest.pulls.list({
             owner: 'salute-developers',
             repo: 'plasma',
             per_page: 15,
@@ -29,7 +29,7 @@ async function run() {
 
         // const pullRequestNumber = context.payload.pull_request.number;
 
-        await octokit.pulls.requestReviewers({
+        await octokit.rest.pulls.requestReviewers({
             ...context.repo,
             pull_number: context.payload.pull_request.number,
             reviewers: ['neretin-trike'],
