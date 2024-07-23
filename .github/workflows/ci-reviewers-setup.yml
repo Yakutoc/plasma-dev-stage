@@ -14,6 +14,11 @@ jobs:
             -   name: Checkout repository
                 uses: actions/checkout@v4
 
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '16'
+
             -   name: Get pull request list (first ~15)
                 run: |
                     ## Тут будет action который вернет список первых 15 пр открытых и не черновик
