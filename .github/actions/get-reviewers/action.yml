@@ -1,0 +1,11 @@
+name: Get Reviewers
+
+description: 'WIP'
+
+inputs:
+    github-token:
+        description: The GitHub token used to create an authenticated client.
+        required: true
+runs:
+    using: node16
+    main: 'get-reviewers.js'

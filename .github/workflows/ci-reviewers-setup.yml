@@ -25,14 +25,9 @@ jobs:
                     ## фильтр | исключить автора | исключить тех кто имеет больше 4 пр на ревью
 
             -   name: Set review
-                uses: actions/github-script@v7
+                uses: ./.github/actions/get-reviewers
                 with:
-                    script: |
-                        await github.rest.pulls.requestReviewers({
-                          ...context.repo,
-                          pull_number: context.payload.pull_request.number,
-                          reviewers: ['neretin-trike']
-                        });
+                    github-token: ${{ secrets.GH_TOKEN }}
 
             -   name: Dispatch event
                 uses: ./.github/actions/dispatch-notification-event
