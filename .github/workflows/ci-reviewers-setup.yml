@@ -38,7 +38,7 @@ jobs:
             -   name: Set review
                 uses: ./.github/actions/get-reviewers
                 with:
-                    github-token: ${{ secrets.GH_TOKEN }}
+                    token: ${{ secrets.GH_TOKEN }}
 
             -   name: Dispatch event
                 uses: ./.github/actions/dispatch-notification-event

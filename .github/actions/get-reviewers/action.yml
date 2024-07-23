@@ -3,7 +3,7 @@ name: Get Reviewers
 description: 'WIP'
 
 inputs:
-    github-token:
+    token:
         description: The GitHub token used to create an authenticated client.
         required: true
 runs:
