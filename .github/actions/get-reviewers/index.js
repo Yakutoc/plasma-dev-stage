@@ -19,12 +19,15 @@ async function run() {
             owner: 'salute-developers',
             repo: 'plasma',
             per_page: 15,
+            state: 'open',
         });
 
-        for (const pull of pulls.data) {
-            const reviewers = pull.requested_reviewers.map((user) => user.login);
+        const data = pulls.data
+            .filter(({ draft }) => !draft)
+            .flatMap(({ requested_reviewers }) => requested_reviewers.map((user) => user.login));
 
-            console.log(`Pull Request #${pull.number}: Reviewers: ${reviewers.join(', ')}`);
+        for (const reviewers of data) {
+            console.log(`Reviewers: ${reviewers.join(', ')}`);
         }
 
         // const pullRequestNumber = context.payload.pull_request.number;
