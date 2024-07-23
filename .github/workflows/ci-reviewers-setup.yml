@@ -37,5 +37,5 @@ jobs:
             -   name: Dispatch event
                 uses: ./.github/actions/dispatch-notification-event
                 with:
-                    payload: "Pull request: ${{ github.event.pull_request.title }} готов к осмотру!"
+                    message: "Pull request: ${{ github.event.pull_request.title }} готов к осмотру!"
                     token: ${{ secrets.GH_TOKEN }}

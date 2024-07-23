@@ -17,5 +17,5 @@ jobs:
                 MATTERMOST_WEBHOOK_URL: ${{ secrets.WEBHOOKS_NOTIFICATIONS_MM }}
                 PAYLOAD: |-
                     {
-                        "text": "${{ github.event.client_payload }}"
+                        "text": "${{ github.event.client_payload.message }}"
                     }
