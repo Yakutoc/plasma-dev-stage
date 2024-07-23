@@ -8,4 +8,4 @@ inputs:
         required: true
 runs:
     using: 'node20'
-    main: 'get-reviewers.js'
+    main: 'index.js'
