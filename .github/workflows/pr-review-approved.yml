@@ -19,7 +19,7 @@ jobs:
                 with:
                     script: |
                         const fs = require('fs');
-                        const path = './github/teammates.json';
+                        const path = '.github/teammates.json';
                         const teammates = JSON.parse(fs.readFileSync(path, 'utf8'));
 
                         console.log(teammates);
@@ -32,7 +32,7 @@ jobs:
 
                         const approvals = reviews.filter(({ state }) => state === 'APPROVED').length;
 
-                        return { approved: approvals >= 2, author: teammates[github.event.pull_request.user.login] };
+                        return { approved: approvals >= 2, author: teammates["vadim-kudr"] };
 
             -   name: Send notification
                 if: false
