@@ -11,7 +11,7 @@ jobs:
         env:
             TITLE: ${{ github.event.pull_request.title || 'Title pr' }}
             URL: ${{ github.event.pull_request.html_url || 'https://github.com/salute-developers/plasma/pulls' }}
-            AUTHOR: ${{ github.event.pull_request.user.login || 'alex_czech' }}
+            AUTHOR: ${{ github.event.pull_request.user.login || 'Yakutoc' }}
         steps:
             -   name: Checkout repository
                 uses: actions/checkout@v4
@@ -35,8 +35,12 @@ jobs:
 
                         return { approved: approvals >= 2, author: teammates["${{ env.AUTHOR }}"] };
 
+            -   name: ECHO
+                run: |
+                    echo ${{ fromJSON(steps.state.outputs.result) }}
+
             -   name: Send notification
-                if: ${{ fromJSON(steps.state.outputs.result).approved == 'true' }}
+                if: ${{ steps.state.outputs.result.approved == 'true' }}
                 uses: mattermost/action-mattermost-notify@master
                 with:
                     MATTERMOST_WEBHOOK_URL: ${{ secrets.WEBHOOKS_NOTIFICATIONS_MM }}
@@ -44,4 +48,4 @@ jobs:
                         Code review пройдено ✅
 
                         **PR**: [${{ env.TITLE }}](${{ env.URL }})
-                        **Автор**: @${{ fromJSON(steps.state.outputs.result).author }}
+                        **Автор**: @${{ steps.state.outputs.result.author }}
