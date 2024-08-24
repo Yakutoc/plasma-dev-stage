@@ -35,6 +35,8 @@ jobs:
                 with:
                     MATTERMOST_WEBHOOK_URL: ${{ secrets.WEBHOOKS_NOTIFICATIONS_MM }}
                     TEXT: |
-                        **Название**: "plasma-{web,b2c}: update ModalBase modalOverlayColor token"
-                        **PR**: https://github.com/salute-developers/plasma/pull/1364
+                        Code review пройдено ✅
+
+                        **Название**: plasma-{web,b2c}: update ModalBase modalOverlayColor token
+                        **PR**: [Plasma 1364](https://github.com/salute-developers/plasma/pull/1364)
                         **Автор**: @alex_czech
