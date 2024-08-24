@@ -24,6 +24,8 @@ jobs:
                           pull_number: 1364,
                         });
 
+                        console.log(reviews);
+
                         const approvals = reviews.filter(({ state }) => state === 'APPROVED').length;
 
                         return approvals;
