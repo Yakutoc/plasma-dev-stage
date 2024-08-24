@@ -41,7 +41,7 @@ jobs:
                     echo ${{ fromJSON(steps.state.outputs.result).author }}
 
             -   name: Send notification
-                if: ${{ steps.state.outputs.result.approved == true }}
+                if: ${{ fromJSON(steps.state.outputs.result).approved == 'true' }}
                 uses: mattermost/action-mattermost-notify@master
                 with:
                     MATTERMOST_WEBHOOK_URL: ${{ secrets.WEBHOOKS_NOTIFICATIONS_MM }}
