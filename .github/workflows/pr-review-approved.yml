@@ -28,15 +28,13 @@ jobs:
                         const approvals = reviews.filter(({ state }) => state === 'APPROVED').length;
 
                         return approvals;
-            -   name: ECHO
-                run: |
-                    echo ${{ steps.count_approvals.outputs.result >= '2' }}
-                    echo ${{ steps.count_approvals.outputs.result }}
 
-            -   name: Dispatch event
+            -   name: Send notification
                 if: ${{ steps.count_approvals.outputs.result >= '2' }}
-                uses: ./.github/actions/dispatch-notification-event
+                uses: mattermost/action-mattermost-notify@master
                 with:
-                    #message: "**Название**: ${{ github.event.pull_request.title }}\n **PR**: ${{ github.event.pull_request.html_url }}\n **Автор**: ${{ github.event.pull_request.user.login }}"
-                    message: "**Название**: Прка \n **PR**: link \n **Автор**: @alex_czech "
-                    token: ${{ secrets.GH_TOKEN }}
+                    MATTERMOST_WEBHOOK_URL: ${{ secrets.WEBHOOKS_NOTIFICATIONS_MM }}
+                    TEXT: |
+                        **Название**: "plasma-{web,b2c}: update ModalBase modalOverlayColor token"
+                        **PR**: https://github.com/salute-developers/plasma/pull/1364
+                        **Автор**: @alex_czech
