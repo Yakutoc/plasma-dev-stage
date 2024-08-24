@@ -19,8 +19,8 @@ jobs:
                 with:
                     script: |
                         const { data: reviews } = await github.rest.pulls.listReviews({
-                          owner: salute-developers,
-                          repo: plasma,
+                          owner: 'salute-developers',
+                          repo: 'plasma',
                           pull_number: 1364,
                         });
 
