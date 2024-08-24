@@ -27,12 +27,14 @@ jobs:
 
                         const approvals = reviews.filter(({ state }) => state === 'APPROVED').length;
 
-                        console.log(approvals);
-
                         return approvals;
+            -   name: ECHO
+                run: |
+                    echo ${{ steps.count_approvals.outputs.result >= '2' }}
+                    echo ${{ steps.count_approvals.outputs.result }}
 
             -   name: Dispatch event
-                if: ${{ steps.get_approvals.outputs.result >= '2' }}
+                if: ${{ steps.count_approvals.outputs.result >= '2' }}
                 uses: ./.github/actions/dispatch-notification-event
                 with:
                     #message: "**Название**: ${{ github.event.pull_request.title }}\n **PR**: ${{ github.event.pull_request.html_url }}\n **Автор**: ${{ github.event.pull_request.user.login }}"
