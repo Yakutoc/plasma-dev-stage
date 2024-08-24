@@ -36,7 +36,7 @@ jobs:
                         return { approvals, author: teammates["${{ env.AUTHOR }}"] };
 
             -   name: Send notification
-                if: ${{ steps.state.outputs.result.approvals >= 2 }}
+                if: ${{ fromJSON(steps.state.outputs.result).approvals >= 2 }}
                 uses: mattermost/action-mattermost-notify@master
                 with:
                     MATTERMOST_WEBHOOK_URL: ${{ secrets.WEBHOOKS_NOTIFICATIONS_MM }}
@@ -44,4 +44,4 @@ jobs:
                         Code review пройдено ✅
 
                         **PR**: [${{ env.TITLE }}](${{ env.URL }})
-                        **Автор**: @${{ steps.state.outputs.result.author }}
+                        **Автор**: @${{ fromJSON(steps.state.outputs.result).author }}
