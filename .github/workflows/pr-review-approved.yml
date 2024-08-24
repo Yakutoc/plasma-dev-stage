@@ -32,5 +32,6 @@ jobs:
                 if: ${{ steps.get_approvals.outputs.APPROVALS >= 2 }}
                 uses: ./.github/actions/dispatch-notification-event
                 with:
-                    message: "**Название**: ${{ github.event.pull_request.title }}\n **PR**: ${{ github.event.pull_request.html_url }}\n **Автор**: ${{ github.event.pull_request.user.login }}"
+                    #message: "**Название**: ${{ github.event.pull_request.title }}\n **PR**: ${{ github.event.pull_request.html_url }}\n **Автор**: ${{ github.event.pull_request.user.login }}"
+                    message: "**Название**: Прка \n **PR**: link \n **Автор**: @alex_czech "
                     token: ${{ secrets.GH_TOKEN }}
