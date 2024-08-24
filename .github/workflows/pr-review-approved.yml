@@ -17,8 +17,13 @@ jobs:
                 id: count_approvals
                 uses: actions/github-script@v7
                 with:
-                    result-encoding: string
                     script: |
+                        const fs = require('fs');
+                        const path = './github/teammates.json';
+                        const teammates = JSON.parse(fs.readFileSync(path, 'utf8'));
+
+                        console.log(teammates);
+
                         const { data: reviews } = await github.rest.pulls.listReviews({
                           owner: 'salute-developers',
                           repo: 'plasma',
@@ -27,7 +32,7 @@ jobs:
 
                         const approvals = reviews.filter(({ state }) => state === 'APPROVED').length;
 
-                        return approvals;
+                        return { approved: approvals >= 2, author: };
 
             -   name: Send notification
                 if: ${{ steps.count_approvals.outputs.result >= '2' }}
@@ -37,6 +42,5 @@ jobs:
                     TEXT: |
                         Code review пройдено ✅
 
-                        **Название**: plasma-{web,b2c}: update ModalBase modalOverlayColor token
-                        **PR**: [Plasma 1364](https://github.com/salute-developers/plasma/pull/1364)
-                        **Автор**: @alex_czech
+                        **PR**: [github.event.pull_request.title](github.event.pull_request.html_url)
+                        **Автор**: ${{ github.event.pull_request.user.login }}
