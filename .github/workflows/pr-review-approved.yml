@@ -32,10 +32,10 @@ jobs:
 
                         const approvals = reviews.filter(({ state }) => state === 'APPROVED').length;
 
-                        return { approved: approvals >= 2, author: };
+                        return { approved: approvals >= 2, author: teammates[github.event.pull_request.user.login] };
 
             -   name: Send notification
-                if: ${{ steps.count_approvals.outputs.result >= '2' }}
+                if: false
                 uses: mattermost/action-mattermost-notify@master
                 with:
                     MATTERMOST_WEBHOOK_URL: ${{ secrets.WEBHOOKS_NOTIFICATIONS_MM }}
