@@ -33,15 +33,10 @@ jobs:
 
                         const approvals = reviews.filter(({ state }) => state === 'APPROVED').length;
 
-                        return { approved: approvals >= 2, author: teammates["${{ env.AUTHOR }}"] };
-
-            -   name: ECHO
-                run: |
-                    echo ${{ fromJSON(steps.state.outputs.result).approved }}
-                    echo ${{ fromJSON(steps.state.outputs.result).author }}
+                        return { approvals, author: teammates["${{ env.AUTHOR }}"] };
 
             -   name: Send notification
-                if: ${{ fromJSON(steps.state.outputs.result).approved == 'true' }}
+                if: ${{ steps.state.outputs.result.approvals >= 2 }}
                 uses: mattermost/action-mattermost-notify@master
                 with:
                     MATTERMOST_WEBHOOK_URL: ${{ secrets.WEBHOOKS_NOTIFICATIONS_MM }}
