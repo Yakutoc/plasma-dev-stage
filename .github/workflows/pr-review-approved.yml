@@ -9,9 +9,9 @@ jobs:
     check-approvals:
         runs-on: ubuntu-latest
         env:
-            TITLE: "${{ github.event.pull_request.title || 'Title pr' }}"
+            TITLE: ${{ github.event.pull_request.title || 'Title pr' }}
             URL: ${{ github.event.pull_request.html_url || 'https://github.com/salute-developers/plasma/pulls' }}
-            AUTHOR: "${{ github.event.pull_request.user.login || 'alex_czech' }}"
+            AUTHOR: ${{ github.event.pull_request.user.login || 'alex_czech' }}
         steps:
             -   name: Checkout repository
                 uses: actions/checkout@v4
@@ -33,7 +33,7 @@ jobs:
 
                         const approvals = reviews.filter(({ state }) => state === 'APPROVED').length;
 
-                        return { approved: approvals >= 2, author: teammates[${{ env.AUTHOR }}] };
+                        return { approved: approvals >= 2, author: teammates["${{ env.AUTHOR }}"] };
 
             -   name: Send notification
                 if: ${{ fromJSON(steps.state.outputs.result).approved == 'true' }}
