@@ -37,8 +37,8 @@ jobs:
 
             -   name: ECHO
                 run: |
-                    echo ${{ steps.state.outputs.approved }}
-                    echo ${{ steps.state.outputs.author }}
+                    echo ${{ fromJSON(steps.state.outputs.result).approved }}
+                    echo ${{ fromJSON(steps.state.outputs.result).author }}
 
             -   name: Send notification
                 if: ${{ steps.state.outputs.approved == 'true' }}
