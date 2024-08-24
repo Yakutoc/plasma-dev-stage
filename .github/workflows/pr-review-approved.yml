@@ -33,7 +33,7 @@ jobs:
 
                         const approvals = reviews.filter(({ state }) => state === 'APPROVED').length;
 
-                        return { approved: approvals >= 4, author: teammates["${{ env.AUTHOR }}"] };
+                        return { approved: approvals >= 2, author: teammates["${{ env.AUTHOR }}"] };
 
             -   name: Send notification
                 if: ${{ fromJSON(steps.state.outputs.result).approved }}
