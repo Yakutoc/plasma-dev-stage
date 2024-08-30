@@ -6,25 +6,25 @@ const teammates = require('../../teammates.json');
 
 const getRandomIndex = (arr) => Math.floor(Math.random() * arr.length);
 
-function getRandomReviewers(teammates) {
+const getRandomReviewers = (teammates) => {
     if (!teammates || teammates.length === 0 || teammates.length < 2) {
         return teammates;
     }
 
-    const selectedKeys = [];
+    const keys = [];
 
     for (let i = 0; i < 2; ) {
         const randomIndex = getRandomIndex(teammates);
         const randomKey = teammates[randomIndex];
 
-        if (!selectedKeys.includes(randomKey)) {
-            selectedKeys.push(randomKey);
+        if (!keys.includes(randomKey)) {
+            keys.push(randomKey);
             i++;
         }
     }
 
-    return selectedKeys;
-}
+    return keys;
+};
 
 const reviewersFormatter = (acc, member) => {
     acc.mm_list += `@${teammates[member]} `;
@@ -46,7 +46,7 @@ async function run() {
             return;
         }
 
-        const authorPullRequest = context.payload.pull_request.user.login || 'Yakutoc';
+        const authorPullRequest = context.payload.pull_request.user.login;
 
         // INFO: Собираем все открытые pull request которые готовы к review и где автор не бот
         // INFO: Запись формата `-draft:VALUE` значит исключить по условию
@@ -88,7 +88,9 @@ async function run() {
             return acc;
         }, new Map());
 
-        // INFO: Исключаем из списка автора pull request и тех кто уже назначен на review больше 2 раз
+        // INFO: Исключаем из списка
+        // 1. автора pull request
+        // 2. тех кто уже назначен на review больше 2 раз
         const reviewers = Object.keys(teammates)
             .filter((key) => {
                 return mapReviewersByCount.has(key) ? mapReviewersByCount.get(key) < 2 : true;

@@ -1,4 +1,4 @@
-name: Choose code reviewers for pr
+name: Notification ready for review
 
 on:
     pull_request:

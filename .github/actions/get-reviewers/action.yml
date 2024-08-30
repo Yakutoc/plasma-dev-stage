@@ -1,6 +1,6 @@
-name: Get Reviewers
+name: Get reviewers
 
-description: 'WIP'
+description: 'Выбираем участников review случайным образом'
 
 inputs:
     token:
@@ -10,6 +10,7 @@ inputs:
 outputs:
     reviewers:
         description: "reviewers list"
+
 runs:
     using: 'node20'
     main: 'index.js'
