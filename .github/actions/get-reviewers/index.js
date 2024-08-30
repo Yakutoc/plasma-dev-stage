@@ -95,23 +95,24 @@ async function run() {
             })
             .filter((key) => key !== authorPullRequest);
 
+        const reviewersState = { mm_list: ['@alex_czech'], gh_list: ['Yakutoc'] };
+
         if (!reviewers.length) {
-            return { mm_list: ['@alex_czech'], gh_list: ['Yakutoc'] };
+            core.setOutput('reviewers', reviewersState);
         }
 
         if (reviewers.length <= 2) {
-            return reviewers.reduce(reviewersFormatter, { mm_list: [], gh_list: [] });
+            core.setOutput('reviewers', reviewers.reduce(reviewersFormatter, { mm_list: [], gh_list: [] }));
         }
 
         const randomReviewers = getRandomReviewers(reviewers);
 
+        // core.setOutput('reviewers', randomReviewers.reduce(reviewersFormatter, { mm_list: [], gh_list: [] }));
+
         core.setOutput('reviewers', {
             mm_list: ['@aakrivonos', 'aaneretin'],
-            gh_list: ['neretin-trike', 'TitanKuzmich'],
+            gh_list: ['neretin-trike'],
         });
-
-        // return randomReviewers.reduce(reviewersFormatter, { mm_list: [], gh_list: [] });
-        // return { mm_list: ['@aakrivonos', 'aaneretin'], gh_list: ['neretin-trike', 'TitanKuzmich'] };
     } catch (error) {
         core.setFailed(error.message);
     }
