@@ -105,7 +105,10 @@ async function run() {
 
         const randomReviewers = getRandomReviewers(reviewers);
 
-        return randomReviewers.reduce(reviewersFormatter, { mm_list: [], gh_list: [] });
+        console.log(randomReviewers);
+
+        // return randomReviewers.reduce(reviewersFormatter, { mm_list: [], gh_list: [] });
+        return { mm_list: ['@aakrivonos', 'aaneretin'], gh_list: ['neretin-trike', 'TitanKuzmich'] };
     } catch (error) {
         core.setFailed(error.message);
     }
