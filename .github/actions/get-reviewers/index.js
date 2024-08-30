@@ -107,8 +107,13 @@ async function run() {
 
         console.log(randomReviewers);
 
+        setOutput('reviewers_list', {
+            mm_list: ['@aakrivonos', 'aaneretin'],
+            gh_list: ['neretin-trike', 'TitanKuzmich'],
+        });
+
         // return randomReviewers.reduce(reviewersFormatter, { mm_list: [], gh_list: [] });
-        return { mm_list: ['@aakrivonos', 'aaneretin'], gh_list: ['neretin-trike', 'TitanKuzmich'] };
+        // return { mm_list: ['@aakrivonos', 'aaneretin'], gh_list: ['neretin-trike', 'TitanKuzmich'] };
     } catch (error) {
         core.setFailed(error.message);
     }
