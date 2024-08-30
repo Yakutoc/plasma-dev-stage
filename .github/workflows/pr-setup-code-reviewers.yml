@@ -37,10 +37,12 @@ jobs:
             -   name: Set reviewers
                 uses: actions/github-script@v7
                 env:
-                    REVIEWERS_LIST: ${{ steps.reviewers_list.outputs.result }}
+                    REVIEWERS_LIST: ${{ fromJSON(steps.reviewers_list.outputs.result) }}
                 with:
                     script: |
                         const reviewers = JSON.parse(process.env.REVIEWERS_LIST);
+
+                        console.log(reviewers);
 
                         await octokit.rest.pulls.requestReviewers({
                             ...context.repo,
