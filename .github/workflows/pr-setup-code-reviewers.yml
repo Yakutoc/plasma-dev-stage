@@ -41,7 +41,6 @@ jobs:
                 with:
                     script: |
                         const reviewers = JSON.parse(process.env.REVIEWERS_LIST);
-
                         console.log(reviewers);
 
                         await github.rest.pulls.requestReviewers({
