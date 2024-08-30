@@ -36,12 +36,16 @@ jobs:
 
             -   name: Set reviewers
                 uses: actions/github-script@v7
+                env:
+                    REVIEWERS_LIST: ${{ steps.reviewers_list.outputs.result }}
                 with:
                     script: |
+                        const reviewers = JSON.parse(process.env.REVIEWERS_LIST);
+
                         await octokit.rest.pulls.requestReviewers({
                             ...context.repo,
                             pull_number: context.payload.pull_request.number,
-                            reviewers: ${{ fromJSON(steps.reviewers_list.outputs.result).gh_list }}
+                            reviewers: reviewers.gh_list
                         });
 
             -   name: Send notification
