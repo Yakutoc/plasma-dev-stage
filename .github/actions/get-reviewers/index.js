@@ -107,7 +107,7 @@ async function run() {
 
         console.log(randomReviewers);
 
-        setOutput('reviewers_list', {
+        core.setOutput('reviewers_list', {
             mm_list: ['@aakrivonos', 'aaneretin'],
             gh_list: ['neretin-trike', 'TitanKuzmich'],
         });
