@@ -107,7 +107,6 @@ async function run() {
 
         const randomReviewers = getRandomReviewers(reviewers);
 
-        // INFO:
         // core.setOutput('reviewers', randomReviewers.reduce(reviewersFormatter, { mm_list: '', gh_list: [] }));
 
         core.setOutput('reviewers', {
