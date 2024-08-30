@@ -6,8 +6,9 @@ inputs:
     token:
         description: The GitHub token used to create an authenticated client.
         required: true
+
 outputs:
-    reviewers_list:
+    reviewers:
         description: "reviewers list"
 runs:
     using: 'node20'

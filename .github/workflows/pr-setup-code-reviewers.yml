@@ -7,7 +7,7 @@ on:
             - dev
 
 jobs:
-    review-notification:
+    notification-review:
         runs-on: ubuntu-latest
         env:
             TITLE: ${{ github.event.pull_request.title }}
@@ -29,21 +29,15 @@ jobs:
                     npm ci
 
             -   name: Computed reviewers state
-                id: reviewers_list
+                id: reviewers
                 uses: ./.github/actions/get-reviewers
                 with:
                     token: ${{ secrets.GH_TOKEN }}
 
-            - name: Echo
-              run: |
-                  echo ${{ fromJSON(steps.reviewers_list.outputs).reviewers_list }}
-                  echo ${{ fromJSON(steps.reviewers_list.outputs.reviewers_list).gh_list }}
-                  echo ${{ fromJSON(steps.reviewers_list.outputs.reviewers_list).mm_list }}
-
             -   name: Set reviewers
                 uses: actions/github-script@v7
                 env:
-                    REVIEWERS_LIST: ${{ steps.reviewers_list.outputs.reviewers_list }}
+                    REVIEWERS_LIST: ${{ steps.reviewers.outputs.reviewers }}
                 with:
                     script: |
                         const reviewers = JSON.parse(process.env.REVIEWERS_LIST);
@@ -65,4 +59,4 @@ jobs:
 
                         **PR**: [${{ env.TITLE }}](${{ env.URL }})
                         **Author**: @${{ env.AUTHOR }}
-                        **Reviewers**: ${{ fromJSON(steps.reviewers_list.outputs.result).mm_list  }}
+                        **Reviewers**: ${{ fromJSON(steps.reviewers.outputs.reviewers).mm_list  }}
