@@ -27,7 +27,7 @@ function getRandomReviewers(teammates) {
 }
 
 const reviewersFormatter = (acc, member) => {
-    acc.mm_list.push(`@${teammates[member]}`);
+    acc.mm_list += `@${teammates[member]} `;
     acc.gh_list.push(member);
 
     return acc;
@@ -95,22 +95,22 @@ async function run() {
             })
             .filter((key) => key !== authorPullRequest);
 
-        const reviewersState = { mm_list: ['@alex_czech'], gh_list: ['Yakutoc'] };
+        const reviewersState = { mm_list: '@alex_czech', gh_list: ['Yakutoc'] };
 
         if (!reviewers.length) {
-            core.setOutput('reviewers', reviewersState);
+            // core.setOutput('reviewers', reviewersState);
         }
 
         if (reviewers.length <= 2) {
-            core.setOutput('reviewers', reviewers.reduce(reviewersFormatter, { mm_list: [], gh_list: [] }));
+            core.setOutput('reviewers', reviewers.reduce(reviewersFormatter, { mm_list: '', gh_list: [] }));
         }
 
         const randomReviewers = getRandomReviewers(reviewers);
 
-        // core.setOutput('reviewers', randomReviewers.reduce(reviewersFormatter, { mm_list: [], gh_list: [] }));
+        // core.setOutput('reviewers', randomReviewers.reduce(reviewersFormatter, { mm_list: '', gh_list: [] }));
 
         core.setOutput('reviewers', {
-            mm_list: ['@aakrivonos', 'aaneretin'],
+            mm_list: ['@aakrivonos', '@aaneretin'].join(','),
             gh_list: ['neretin-trike'],
         });
     } catch (error) {

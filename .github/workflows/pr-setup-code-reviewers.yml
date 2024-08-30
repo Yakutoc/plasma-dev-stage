@@ -57,5 +57,4 @@ jobs:
                         👮🏻‍♂️ Вас ожидают на code review
 
                         **PR**: [${{ env.TITLE }}](${{ env.URL }})
-                        **Author**: @${{ env.AUTHOR }}
                         **Reviewers**: ${{ fromJSON(steps.reviewers.outputs.reviewers).mm_list  }}
