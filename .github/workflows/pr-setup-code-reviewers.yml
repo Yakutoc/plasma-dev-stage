@@ -1,0 +1,56 @@
+name: Choose code reviewers for pr
+
+on:
+    pull_request:
+        types: [ ready_for_review ]
+        branches:
+            - dev
+
+jobs:
+    review-notification:
+        runs-on: ubuntu-latest
+        env:
+            TITLE: ${{ github.event.pull_request.title }}
+            URL: ${{ github.event.pull_request.html_url }}
+            AUTHOR: ${{ github.event.pull_request.user.login }}
+        steps:
+            -   name: Checkout repository
+                uses: actions/checkout@v4
+
+            -   name: Setup Node.js
+                uses: actions/setup-node@v4
+                with:
+                    node-version: '20'
+                    cache: npm
+
+            -   name: Install dependencies
+                run: |
+                    cd .github/actions/get-reviewers
+                    npm ci
+
+            -   name: Computed reviewers state
+                id: reviewers_list
+                uses: ./.github/actions/get-reviewers
+                with:
+                    token: ${{ secrets.GH_TOKEN }}
+
+            -   name: Set reviewers
+                uses: actions/github-script@v7
+                with:
+                    script: |
+                        await octokit.rest.pulls.requestReviewers({
+                            ...context.repo,
+                            pull_number: context.payload.pull_request.number,
+                            reviewers: ${{ fromJSON(steps.reviewers_list.outputs.result).gh_list }}
+                        });
+
+            -   name: Send notification
+                uses: mattermost/action-mattermost-notify@master
+                with:
+                    MATTERMOST_WEBHOOK_URL: ${{ secrets.WEBHOOKS_NOTIFICATIONS_MM }}
+                    TEXT: |
+                        👮🏻‍♂️ Вас ожидают на code review
+
+                        **PR**: [${{ env.TITLE }}](${{ env.URL }})
+                        **Author**: @${{ env.AUTHOR }}
+                        **Reviewers**: ${{ fromJSON(steps.reviewers_list.outputs.result).mm_list  }}
