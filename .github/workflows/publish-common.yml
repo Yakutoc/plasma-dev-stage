@@ -32,7 +32,7 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.gh_token }}
       NPM_REGISTRY_TOKEN: ${{ secrets.npm_registry_token }}
-      IGNORE_LIST: '@salutejs/{*-docs,perftest-helpers,platform-test,versionate-docs,plasma-docs-ui,plasma-cy-utils,plasma-sb-utils,plasma-website}'
+      IGNORE_LIST: '@salutejs/{*-docs,perftest-helpers,platform-test,versionate-docs,plasma-website}'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
