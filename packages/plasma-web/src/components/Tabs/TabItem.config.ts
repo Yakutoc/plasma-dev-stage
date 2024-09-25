@@ -8,112 +8,113 @@ export const config = {
     variations: {
         view: {
             clear: css`
-                ${tabsTokens.itemColor}: var(--plasma-colors-secondary);
+                ${tabsTokens.itemColor}: var(--text-secondary);
                 ${tabsTokens.itemBackgroundColor}: transparent;
-                ${tabsTokens.itemColorHover}: var(--plasma-colors-primary);
+                ${tabsTokens.itemColorHover}: var(--text-secondary-hover);
+                ${tabsTokens.itemColorActive}: var(--text-secondary-active);
                 ${tabsTokens.itemBackgroundColorHover}: transparent;
-                ${tabsTokens.itemSelectedColor}: var(--plasma-colors-primary);
+                ${tabsTokens.itemSelectedColor}: var(--text-primary);
                 ${tabsTokens.itemSelectedBackgroundColor}: transparent;
-                ${tabsTokens.itemSelectedColorHover}: var(--plasma-colors-primary);
+                ${tabsTokens.itemSelectedColorHover}: var(--text-primary);
                 ${tabsTokens.itemSelectedBackgroundColorHover}: transparent;
                 ${tabsTokens.itemBackgroundTransition}: background-color 0.3s ease-in-out;
 
                 ${tabsTokens.itemPaddingClear}: 0;
                 ${tabsTokens.itemContentPaddingClear}: 0;
 
-                ${tabsTokens.outlineFocusColor}: var(--plasma-colors-button-focused);
+                ${tabsTokens.outlineFocusColor}: var(--surface-accent);
 
                 ${tabsTokens.itemSelectedDividerHeight}: 0rem;
-                ${tabsTokens.itemSelectedDividerColor}: var(--plasma-colors-primary);
-                ${tabsTokens.itemSelectedDividerColorHover}: var(--plasma-colors-primary);
+                ${tabsTokens.itemSelectedDividerColor}: var(--text-primary);
+                ${tabsTokens.itemSelectedDividerColorHover}: var(--text-primary);
 
-                ${tabsTokens.additionalContentColor}: var(--plasma-colors-tertiary);
-                ${tabsTokens.additionalContentHoverColor}: var(--plasma-colors-secondary);
-                ${tabsTokens.additionalContentSelectedColor}: var(--plasma-colors-secondary);
-                ${tabsTokens.additionalContentSelectedHoverColor}: var(--plasma-colors-secondary);
+                ${tabsTokens.additionalContentColor}: var(--text-tertiary);
+                ${tabsTokens.additionalContentHoverColor}: var(--text-secondary);
+                ${tabsTokens.additionalContentSelectedColor}: var(--text-secondary);
+                ${tabsTokens.additionalContentSelectedHoverColor}: var(--text-secondary);
             `,
             secondary: css`
-                ${tabsTokens.itemColor}: var(--plasma-colors-primary);
+                ${tabsTokens.itemColor}: var(--text-primary);
                 ${tabsTokens.itemBackgroundColor}: transparent;
-                ${tabsTokens.itemColorHover}: var(--plasma-colors-primary);
+                ${tabsTokens.itemColorHover}: var(--text-secondary-hover);
+                ${tabsTokens.itemColorActive}: var(--text-secondary-active);
                 ${tabsTokens.itemBackgroundColorHover}: transparent;
-                ${tabsTokens.itemSelectedColor}: var(--plasma-colors-primary);
-                ${tabsTokens.itemSelectedBackgroundColor}: var(--plasma-colors-surface-card);
-                ${tabsTokens.itemSelectedColorHover}: var(--plasma-colors-primary);
-                ${tabsTokens.itemSelectedBackgroundColorHover}: var(--plasma-colors-surface-card);
+                ${tabsTokens.itemSelectedColor}: var(--text-primary);
+                ${tabsTokens.itemSelectedBackgroundColor}: var(--surface-solid-card);
+                ${tabsTokens.itemSelectedColorHover}: var(--text-primary);
+                ${tabsTokens.itemSelectedBackgroundColorHover}: var(--surface-solid-card);
                 ${tabsTokens.itemBackgroundTransition}: background-color 0.3s ease-in-out;
 
                 ${tabsTokens.itemMarginLeftFilled}: 0.125rem;
 
-                ${tabsTokens.outlineFocusColor}: var(--plasma-colors-button-focused);
+                ${tabsTokens.outlineFocusColor}: var(--surface-accent);
 
                 ${tabsTokens.itemSelectedDividerHeight}: 0rem;
-                ${tabsTokens.itemSelectedDividerColor}: var(--plasma-colors-primary);
-                ${tabsTokens.itemSelectedDividerColorHover}: var(--plasma-colors-primary);
-                ${tabsTokens.itemSelectedDividerColorHover}: var(--plasma-colors-primary);
+                ${tabsTokens.itemSelectedDividerColor}: var(--text-primary);
+                ${tabsTokens.itemSelectedDividerColorHover}: var(--text-primary);
 
-                ${tabsTokens.additionalContentColor}: var(--plasma-colors-secondary);
-                ${tabsTokens.additionalContentHoverColor}: var(--plasma-colors-secondary);
-                ${tabsTokens.additionalContentSelectedColor}: var(--plasma-colors-secondary);
-                ${tabsTokens.additionalContentSelectedHoverColor}: var(--plasma-colors-secondary);
+                ${tabsTokens.additionalContentColor}: var(--text-secondary);
+                ${tabsTokens.additionalContentHoverColor}: var(--text-secondary);
+                ${tabsTokens.additionalContentSelectedColor}: var(--text-secondary);
+                ${tabsTokens.additionalContentSelectedHoverColor}: var(--text-secondary);
             `,
             divider: css`
-                ${tabsTokens.itemColor}: var(--plasma-colors-secondary);
+                ${tabsTokens.itemColor}: var(--text-secondary);
                 ${tabsTokens.itemBackgroundColor}: transparent;
-                ${tabsTokens.itemColorHover}: var(--plasma-colors-primary);
+                ${tabsTokens.itemColorHover}: var(--text-secondary-hover);
+                ${tabsTokens.itemColorActive}: var(--text-secondary-active);
                 ${tabsTokens.itemBackgroundColorHover}: transparent;
-                ${tabsTokens.itemSelectedColor}: var(--plasma-colors-primary);
+                ${tabsTokens.itemSelectedColor}: var(--text-primary);
                 ${tabsTokens.itemSelectedBackgroundColor}: transparent;
-                ${tabsTokens.itemSelectedColorHover}: var(--plasma-colors-primary);
+                ${tabsTokens.itemSelectedColorHover}: var(--text-primary);
                 ${tabsTokens.itemSelectedBackgroundColorHover}: transparent;
                 ${tabsTokens.itemBackgroundTransition}: background-color 0.3s ease-in-out;
 
                 ${tabsTokens.itemPaddingClear}: 0;
                 ${tabsTokens.itemContentPaddingClear}: 0;
 
-                ${tabsTokens.outlineFocusColor}: var(--plasma-colors-button-focused);
+                ${tabsTokens.outlineFocusColor}: var(--surface-accent);
 
                 ${tabsTokens.itemSelectedDividerHeight}: 0.125rem;
-                ${tabsTokens.itemSelectedDividerColor}: var(--plasma-colors-primary);
-                ${tabsTokens.itemSelectedDividerColorHover}: var(--plasma-colors-primary);
-                ${tabsTokens.itemSelectedDividerColorHover}: var(--plasma-colors-primary);
+                ${tabsTokens.itemSelectedDividerColor}: var(--text-primary);
+                ${tabsTokens.itemSelectedDividerColorHover}: var(--text-primary);
 
-                ${tabsTokens.additionalContentColor}: var(--plasma-colors-tertiary);
-                ${tabsTokens.additionalContentHoverColor}: var(--plasma-colors-secondary);
-                ${tabsTokens.additionalContentSelectedColor}: var(--plasma-colors-secondary);
-                ${tabsTokens.additionalContentSelectedHoverColor}: var(--plasma-colors-secondary);
+                ${tabsTokens.additionalContentColor}: var(--text-tertiary);
+                ${tabsTokens.additionalContentHoverColor}: var(--text-secondary);
+                ${tabsTokens.additionalContentSelectedColor}: var(--text-secondary);
+                ${tabsTokens.additionalContentSelectedHoverColor}: var(--text-secondary);
             `,
             default: css`
-                ${tabsTokens.itemColor}: var(--plasma-colors-primary);
+                ${tabsTokens.itemColor}: var(--text-primary);
                 ${tabsTokens.itemBackgroundColor}: transparent;
-                ${tabsTokens.itemColorHover}: var(--plasma-colors-primary);
+                ${tabsTokens.itemColorHover}: var(--text-secondary-hover);
+                ${tabsTokens.itemColorActive}: var(--text-secondary-active);
                 ${tabsTokens.itemBackgroundColorHover}: transparent;
-                ${tabsTokens.itemSelectedColor}: var(--plasma-colors-inverse);
+                ${tabsTokens.itemSelectedColor}: var(--inverse-text-primary);
                 ${tabsTokens.itemSelectedBackgroundColor}: var(--surface-solid-default);
-                ${tabsTokens.itemSelectedColorHover}: var(--plasma-colors-inverse);
+                ${tabsTokens.itemSelectedColorHover}: var(--inverse-text-primary);
                 ${tabsTokens.itemSelectedBackgroundColorHover}: var(--surface-solid-default);
                 ${tabsTokens.itemBackgroundTransition}: background-color 0.3s ease-in-out;
 
                 ${tabsTokens.itemMarginLeftFilled}: 0.125rem;
 
-                ${tabsTokens.outlineFocusColor}: var(--plasma-colors-button-focused);
+                ${tabsTokens.outlineFocusColor}: var(--surface-accent);
 
                 ${tabsTokens.itemSelectedDividerHeight}: 0rem;
-                ${tabsTokens.itemSelectedDividerColor}: var(--plasma-colors-primary);
-                ${tabsTokens.itemSelectedDividerColorHover}: var(--plasma-colors-primary);
-                ${tabsTokens.itemSelectedDividerColorHover}: var(--plasma-colors-primary);
+                ${tabsTokens.itemSelectedDividerColor}: var(--text-primary);
+                ${tabsTokens.itemSelectedDividerColorHover}: var(--text-primary);
 
-                ${tabsTokens.additionalContentColor}: var(--plasma-colors-secondary);
-                ${tabsTokens.additionalContentHoverColor}: var(--plasma-colors-secondary);
-                ${tabsTokens.additionalContentSelectedColor}: var(--plasma-colors-white-secondary);
-                ${tabsTokens.additionalContentSelectedHoverColor}: var(--plasma-colors-white-secondary);
+                ${tabsTokens.additionalContentColor}: var(--text-secondary);
+                ${tabsTokens.additionalContentHoverColor}: var(--text-secondary);
+                ${tabsTokens.additionalContentSelectedColor}: var(--inverse-text-secondary);
+                ${tabsTokens.additionalContentSelectedHoverColor}: var(--inverse-text-secondary);
             `,
         },
         size: {
             xs: css`
                 ${tabsTokens.itemBorderRadius}: 0.375rem;
                 ${tabsTokens.itemWidth}: auto;
-                ${tabsTokens.itemHeight}: 1.5rem;
+                ${tabsTokens.itemHeight}: 2rem;
                 ${tabsTokens.itemPadding}: 0 0.5rem;
                 ${tabsTokens.itemPaddingPilled}: 0 0.375rem;
                 ${tabsTokens.itemMarginLeft}: 1.75rem;
@@ -130,7 +131,7 @@ export const config = {
             s: css`
                 ${tabsTokens.itemBorderRadius}: 0.5rem;
                 ${tabsTokens.itemWidth}: auto;
-                ${tabsTokens.itemHeight}: 2rem;
+                ${tabsTokens.itemHeight}: 2.5rem;
                 ${tabsTokens.itemPadding}: 0 0.625rem;
                 ${tabsTokens.itemPaddingPilled}: 0 0.5rem;
                 ${tabsTokens.itemMarginLeft}: 1.75rem;
@@ -147,11 +148,11 @@ export const config = {
             m: css`
                 ${tabsTokens.itemBorderRadius}: 0.625rem;
                 ${tabsTokens.itemWidth}: auto;
-                ${tabsTokens.itemHeight}: 2.5rem;
+                ${tabsTokens.itemHeight}: 3rem;
                 ${tabsTokens.itemPadding}: 0 0.625rem;
                 ${tabsTokens.itemPaddingPilled}: 0 0.5rem;
                 ${tabsTokens.itemMarginLeft}: 1.75rem;
-                ${tabsTokens.itemContentGap}: 0.5rem;
+                ${tabsTokens.itemContentGap}: 0.375rem;
                 ${tabsTokens.itemContentPadding}: 0.125rem;
 
                 ${tabsTokens.fontFamily}: var(--plasma-typo-body-m-font-family);
@@ -164,7 +165,7 @@ export const config = {
             l: css`
                 ${tabsTokens.itemBorderRadius}: 0.75rem;
                 ${tabsTokens.itemWidth}: auto;
-                ${tabsTokens.itemHeight}: 3rem;
+                ${tabsTokens.itemHeight}: 3.5rem;
                 ${tabsTokens.itemPadding}: 0 0.875rem;
                 ${tabsTokens.itemPaddingPilled}: 0 0.75rem;
                 ${tabsTokens.itemMarginLeft}: 1.75rem;

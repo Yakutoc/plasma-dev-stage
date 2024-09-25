@@ -1,3 +1,351 @@
+# v1.42.0 (Thu Sep 05 2024)
+
+### Release Notes
+
+#### Release by 04.09.2024 ([#1420](https://github.com/salute-developers/plasma/pull/1420))
+
+## Components
+
+### Switch
+
+- токены для `Switch` приведены в соответствие с макетами
+- добавлено состояние `hover`
+- удален `skip test` для свойства `pressed` (это свойство deprecated). Вместо него добавлен тест `onMouseDown` с событием `realMouseDown`
+- в тест `OnClick` добавлен `realClick`
+
+ 
+plasma-*, sdds-*: Fix `Switch` tokens (https://github.com/salute-developers/plasma/pull/1388)
+
+### DatePicker
+
+- добавлена поддержка русского и английского языка
+- добавлено форматирование даты 
+
+ 
+plasma-(*): Add format and lang in Datepicker (https://github.com/salute-developers/plasma/pull/1404)
+
+### ModalBase
+
+- обновлен токен `modalOverlayColor` в `plasma-{web, b2c}`
+
+ 
+plasma-{web,b2c}: update ModalBase modalOverlayColor token (https://github.com/salute-developers/plasma/pull/1364)
+
+### TextFieldGroup
+
+- добавлен новый компонент для `plasma-{web, b2c}, sdds-{serv, dfa}`
+- написаны тесты и документация
+
+ 
+feat(plasma-*,sdds-*): component textfield group (https://github.com/salute-developers/plasma/pull/1405)
+
+### TextArea/TextField
+
+- добавлены новые свойства: `required`, `requiredPlacement, optional`
+- обновлены screenshots и документация
+
+ 
+feat(plasma-*, sdds-*): Add required variation to TextArea/TextField (https://github.com/salute-developers/plasma/pull/1352)
+
+### Combobox
+
+- добавлен в поставку для `plasma-{web, b2c},  sdds-*`
+- реализована вложенность (на основе [Floating UI](https://floating-ui.com/))
+- добавлено новое свойство `closeAfterSelect` в `Combobox` и `Select`.
+- поправлен отступ в компоненте `Select` в варианте `textfield-like`.
+
+ 
+plasma-*, sdds-*: Combobox v2 (https://github.com/salute-developers/plasma/pull/1406)
+
+### SDDS FIN PORTAL
+
+- опубликован новый пакет `@salutejs/sdds-finportal`
+
+
+ 
+sdds-finportal: Add new package FinPortal (https://github.com/salute-developers/plasma/pull/1417)
+
+
+## Icons
+
+### Update icons list
+
+**FilterOff**
+<img width="48"  src="https://github.com/user-attachments/assets/b254cc01-da2e-474a-879e-9ddf2a9e8bbc" />
+
+**MessageNew**
+<img width="64" src="https://github.com/user-attachments/assets/07c725e5-2164-4631-9778-7c2070cc9a12" />
+
+**Poop**
+<img width="128" src="https://github.com/user-attachments/assets/37c32fdd-36d1-4cd0-a4c9-ac9e0f4fb8b0" />
+
+**Blank**
+<img width="551" src="https://github.com/user-attachments/assets/7cf57627-eb40-493f-ada6-bf23c96fc3d8" />
+
+**WindowMaximize/Minimize**
+<img width="211"  src="https://github.com/user-attachments/assets/73543cd4-b357-4ce3-9737-f1a4f49930dc" />
+
+**Logos**
+<img width="86" src="https://github.com/user-attachments/assets/a6e015ab-3df3-4c01-8f88-48aa786e0399" />
+
+
+
+ 
+feat(plasma-icons): Update icons sets (https://github.com/salute-developers/plasma/pull/1414)
+
+
+## Tokens
+
+### Add Brightness Tokens
+
+- Добавлены новые токены `-brightness` в `theme-builder`
+- Во все темы добавлены новый токены для высветления: `combobox`, `dropdown`, `notification`, `toast`, `toolbar` и `tooltip` 
+- Исправлен компонент `Comobox` и обновлены тесты
+- Изменен workfkow cypress
+
+ 
+plasma-(*): Add Brightness Tokens (https://github.com/salute-developers/plasma/pull/1361)
+
+
+## Misc
+
+### Tests
+-   изменены тесты plasma-b2c компонентов ButtonGroup и IconButton
+
+ 
+test(plasma-b2c): update tests for ButtonGroup and IconButton (https://github.com/salute-developers/plasma/pull/1407)
+
+---
+
+#### 🚀 Enhancement
+
+- Release by 04.09.2024 [#1420](https://github.com/salute-developers/plasma/pull/1420) ([@denivladislav](https://github.com/denivladislav) [@Salute-Eva](https://github.com/Salute-Eva) [@Yakutoc](https://github.com/Yakutoc) [@TitanKuzmich](https://github.com/TitanKuzmich) [@IgorYar](https://github.com/IgorYar) [@iljs](https://github.com/iljs) [@neretin-trike](https://github.com/neretin-trike) VAnaKudryavtsev@sberbank.ru [@shuga2704](https://github.com/shuga2704))
+- feat(tokens): update screenshoots and add themes ([@iljs](https://github.com/iljs))
+
+#### 🐛 Bug Fix
+
+- Merge remote-tracking branch 'origin/dev' into release_2024-09-04 ([@Yakutoc](https://github.com/Yakutoc))
+- Update package-lock.json files ([@Salute-Eva](https://github.com/Salute-Eva))
+- Update versions ([@Salute-Eva](https://github.com/Salute-Eva))
+
+#### Authors: 10
+
+- [@iljs](https://github.com/iljs)
+- [@Salute-Eva](https://github.com/Salute-Eva)
+- Alexander Lobyntsev ([@Yakutoc](https://github.com/Yakutoc))
+- Dima Shugaev ([@shuga2704](https://github.com/shuga2704))
+- Igor Yaroslavtsev ([@IgorYar](https://github.com/IgorYar))
+- Krivonos Aleksandr ([@TitanKuzmich](https://github.com/TitanKuzmich))
+- neretinaa ([@neretin-trike](https://github.com/neretin-trike))
+- Vladislav Denisov  ([@denivladislav](https://github.com/denivladislav))
+- Кудрявцев Вадим Анатольевич (vanakudryavtsev@sberbank.ru)
+- Кудрявцев Вадим Анатольевич (VAnaKudryavtsev@sberbank.ru)
+
+---
+
+# v1.41.0 (Thu Jul 11 2024)
+
+### Release Notes
+
+#### Release by 11.07.2024 ([#1296](https://github.com/salute-developers/plasma/pull/1296))
+
+## Components
+
+### DatePicker
+
+- добавлен новый компонент DatePicker
+- написаны тесты и документация
+- проведен рефакторинг стилей и токенов календаря
+- исправлен отступ от первой иконки в Range
+ 
+feat(plasma-new-hope): add DatePicker component (https://github.com/salute-developers/plasma/pull/1224)
+
+### Portal
+
+- компонент добавлен в `plasma-new-hope`, портирован в `plasma-{web, b2c}`, `caldera`, `sdds`
+- добавлены тесты и документация
+- компонент внедрён в `Popover` и `Popup`
+- исправлено имя теста для `Popover`
+
+ 
+plasma-*: Add `Portal` component (https://github.com/salute-developers/plasma/pull/1272)
+
+### Sheet
+
+- убран из примеров в `stories` лишний горизонтальный скролл 
+- добавлена недостающая документация в `caldera-online` 
+
+**Before**:
+
+<img width="1726" alt="scrollBefore" src="https://github.com/salute-developers/plasma/assets/71961494/f37919f8-df31-427e-aff9-34228cb920b6" />
+
+**After**:
+
+<img width="1725" alt="scrollAfter" src="https://github.com/salute-developers/plasma/assets/71961494/6c3ae1df-e3cc-42d0-ae54-6b11fba55690" />
+
+ 
+plasma-*: Fix `Sheet` scroll (https://github.com/salute-developers/plasma/pull/1273)
+
+### Dropdown
+
+- добавлено новое свойство `portal`
+
+ 
+feat(plasma-new-hope): Added prop portal into Dropdown component (https://github.com/salute-developers/plasma/pull/1260)
+
+### SDDS DFA
+
+* добавлена тема `sdds_dfa` в библиотеку вертикалей `@salutejs/sdds-themes`
+* добавлена библиотека `@salutejs/sdds-dfa`
+* поправлены компоненты `Header`, `Skeleton`, `Accordion` 
+
+feat(sdds-dfa): Add `sdds-dfa` components library (https://github.com/salute-developers/plasma/pull/1293)
+
+### SDDS-SERV
+
+- добавлена поддержка пакета `@emotion`
+
+sdds-serv: Add support `@emotion` package (https://github.com/salute-developers/plasma/pull/1281)
+
+
+## Icons
+
+### Website: Icons page
+
+- новый UI для блока поиск
+- исправлен вывод набора иконок 
+- исправлено `isDeprecate` на `isDeprecated`
+
+plasma-website: New UI search block (https://github.com/salute-developers/plasma/pull/1270)
+
+### iOS
+
+- исправлена генерация иконок под iOS
+
+**Before:**
+
+<img width="248" src="https://github.com/salute-developers/plasma/assets/2895992/e93abb36-8a51-4451-aab3-3107959a8904" />
+
+**After:**
+
+<img width="248" src="https://github.com/salute-developers/plasma/assets/2895992/8415a3b2-3f6e-46fb-9a3e-767f0317aa30" />
+
+plasma-icons: Rewrite generate icons for iOS (https://github.com/salute-developers/plasma/pull/1283)
+
+### Opacity
+
+- удалено **ненужное** свойство `opacity` в наборе старых иконок
+
+plasma-icons: Delete unnecessary prop opacity (https://github.com/salute-developers/plasma/pull/1282)
+
+
+## Infra
+
+### Required checks
+
+- реорганизовали обязательные проверки (стало меньше и быстрее) 
+
+ 
+plasma-infra: Simplify required checks (https://github.com/salute-developers/plasma/pull/1278)
+
+### Scaffold
+
+- скрипт для генерации компонентов вынесен в отдельную команду
+
+plasma-infra(scaffold): Extend script for update/sync component list  (https://github.com/salute-developers/plasma/pull/1275)
+
+### Support emotion engine
+
+- добавлена поддержка пакета `@emotion` для библиотеки `plasma-new-hope`
+
+feat(plasma-new-hope): add emotion support (https://github.com/salute-developers/plasma/pull/1276)
+
+## Tokens
+
+* добавлены методы генерации токенов для web приложений на основе новой json структуры.
+* перегенированы темы для всех вертикалей: `sdds`, `plasma`, `flamingo` и `caldera-online` на основе json файлов из [данного репозитория](https://github.com/salute-developers/theme-converter/tree/main/themes).
+* удалены старые json темы из пакета `@salutejs/data-themes`.
+* переименован пакет `@salutejs/data-themes` в `@salutejs/core-themes` и обновлены все зависимости
+
+ 
+feat(data-themes): Add new token generators for web via new json scheme and update themes (https://github.com/salute-developers/plasma/pull/1274)
+
+
+## Docs
+
+### Storybook link
+
+- убрана ссылка/кнопка на storybook из документации для `plasma-{web,ui}`
+
+**Before:**
+
+<img width="1944" src="https://github.com/salute-developers/plasma/assets/2895992/458182dc-07eb-4954-9b06-a2f0eabc867f" />
+
+**After:**
+
+<img width="1944" src="https://github.com/salute-developers/plasma/assets/2895992/ea812456-7644-4194-8188-88a085b416f6" />
+
+ 
+plasma-docs: hide short links for storybook (https://github.com/salute-developers/plasma/pull/1286)
+
+### SDDS-DFA/SERVE
+
+* добавлен шаблон документации для компонент `Accordion`
+* добавлена документация для пакета `sdds-dfa`
+* исправлена документация для `Popover`
+
+ 
+feat: Add `sdds-dfa-docs` (https://github.com/salute-developers/plasma/pull/1295)
+
+
+## Misc
+
+### TextField
+
+- добавлены токены цвета и размера textBefore/After
+- исправлен line-height у иконок
+
+ 
+feat: add textfield textBefore/After tokens (https://github.com/salute-developers/plasma/pull/1253)
+
+### Website: colors palette 
+
+- добавлена страница с цветовой палитрой
+
+**Страница выбора цвета**
+
+![Выбор цвета](https://github.com/salute-developers/plasma/assets/38344415/6527ea89-7727-4a4e-b435-35436e74b788)
+
+**Страница выбора оттенка**
+
+![Выбор оттенка](https://github.com/salute-developers/plasma/assets/38344415/632a842e-4922-42a4-bfe7-79081f6ea2e0)
+ 
+plasma-website: add page colors (https://github.com/salute-developers/plasma/pull/1266)
+
+---
+
+#### 🚀 Enhancement
+
+- Release by 11.07.2024 [#1296](https://github.com/salute-developers/plasma/pull/1296) ([@Yakutoc](https://github.com/Yakutoc) [@TitanKuzmich](https://github.com/TitanKuzmich) [@Salute-Eva](https://github.com/Salute-Eva) [@denivladislav](https://github.com/denivladislav) [@Yeti-or](https://github.com/Yeti-or) [@shuga2704](https://github.com/shuga2704) [@neretin-trike](https://github.com/neretin-trike) [@iljs](https://github.com/iljs))
+
+#### 🐛 Bug Fix
+
+- Update package-lock.json files ([@Salute-Eva](https://github.com/Salute-Eva))
+- Update versions ([@Salute-Eva](https://github.com/Salute-Eva))
+
+#### Authors: 8
+
+- [@iljs](https://github.com/iljs)
+- [@Salute-Eva](https://github.com/Salute-Eva)
+- Alexander Lobyntsev ([@Yakutoc](https://github.com/Yakutoc))
+- Dima Shugaev ([@shuga2704](https://github.com/shuga2704))
+- Krivonos Aleksandr ([@TitanKuzmich](https://github.com/TitanKuzmich))
+- neretinaa ([@neretin-trike](https://github.com/neretin-trike))
+- Vasiliy ([@Yeti-or](https://github.com/Yeti-or))
+- Vladislav Denisov ([@denivladislav](https://github.com/denivladislav))
+
+---
+
 # v1.40.0 (Thu Apr 25 2024)
 
 ### Release Notes

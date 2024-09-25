@@ -37,17 +37,27 @@ jobs:
         run: |
           npm run build --prefix="./website/plasma-web-docs"
           cp -R ./website/plasma-web-docs/build ./s3_build/web
+          
+      - name: Plasma B2C Docs
+        run: |
+          npm run build --prefix="./website/plasma-b2c-docs"
+          cp -R ./website/plasma-b2c-docs/build ./s3_build/b2c
 
       - name: SDDS SERV Docs
         run: |
           npm run build --prefix="./website/sdds-serv-docs"
           cp -R ./website/sdds-serv-docs/build ./s3_build/sdds-serv
 
-      - name: CALDERA-ONLINE Docs
+      - name: SDDS CS Docs
         run: |
-          npm run build --prefix="./website/caldera-online-docs"
-          cp -R ./website/caldera-online-docs/build ./s3_build/caldera-online
-          
+          npm run build --prefix="./website/sdds-cs-docs"
+          cp -R ./website/sdds-cs-docs/build ./s3_build/sdds-cs
+
+      - name: SDDS DFA Docs
+        run: |
+          npm run build --prefix="./website/sdds-dfa-docs"
+          cp -R ./website/sdds-dfa-docs/build ./s3_build/sdds-dfa
+ 
       - name: Plasma UI Storybook
         run: |
           npm run storybook:build --prefix="./packages/plasma-ui"
@@ -73,15 +83,15 @@ jobs:
           npm run storybook:build --prefix="./packages/plasma-new-hope"
           cp -R ./packages/plasma-new-hope/build-sb ./s3_build/new-hope-storybook
         
-      - name: Plasma "Caldera-online" Storybook
-        run: |
-          npm run storybook:build --prefix="./packages/caldera-online"
-          cp -R ./packages/caldera-online/build-sb ./s3_build/caldera-online-storybook
-      
       - name: Plasma "SDDS SERV" Storybook
         run: |
           npm run storybook:build --prefix="./packages/sdds-serv"
           cp -R ./packages/sdds-serv/build-sb ./s3_build/sdds-serv-storybook
+
+      - name: Plasma "SDDS CS" Storybook
+        run: |
+          npm run storybook:build --prefix="./packages/sdds-cs"
+          cp -R ./packages/sdds-cs/build-sb ./s3_build/sdds-cs-storybook
 
       - name: Plasma "SDDS DFA" Storybook
         run: |

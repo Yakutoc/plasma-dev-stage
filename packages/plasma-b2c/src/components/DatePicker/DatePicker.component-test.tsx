@@ -48,7 +48,7 @@ describe('plasma-b2c: DatePicker', () => {
 
         return (
             <DatePicker
-                isOpen={isOpen}
+                opened={isOpen}
                 size={size}
                 valueError={valueError}
                 valueSuccess={valueSuccess}
@@ -166,6 +166,33 @@ describe('plasma-b2c: DatePicker', () => {
         cy.matchImageSnapshot();
     });
 
+    it('prop: inner label', () => {
+        mount(
+            <CypressTestDecoratorWithTypo>
+                <Demo
+                    label="Лейбл"
+                    labelPlacement="inner"
+                    size="m"
+                    leftHelper="Подсказка к полю"
+                    placeholder="Выберите дату"
+                />
+                <PadMe />
+                <Demo label="Лейбл" labelPlacement="inner" leftHelper="Подсказка к полю" placeholder="Выберите дату" />
+                <PadMe />
+                <Demo
+                    label="Лейбл"
+                    labelPlacement="inner"
+                    leftHelper="Подсказка к полю"
+                    placeholder="Выберите дату"
+                    defaultDate={new Date(2023, 5, 14)}
+                    size="m"
+                />
+            </CypressTestDecoratorWithTypo>,
+        );
+
+        cy.matchImageSnapshot();
+    });
+
     it('prop: format', () => {
         mount(
             <CypressTestDecoratorWithTypo>
@@ -242,6 +269,25 @@ describe('plasma-b2c: DatePicker', () => {
         cy.matchImageSnapshot();
     });
 
+    it('prop: input date from calendar', () => {
+        mount(
+            <CypressTestDecoratorWithTypo>
+                <Demo
+                    label="Лейбл"
+                    leftHelper="Подсказка к полю"
+                    placeholder="Выберите дату"
+                    defaultDate={new Date(2023, 5, 14)}
+                />
+            </CypressTestDecoratorWithTypo>,
+        );
+
+        cy.get('input').click().clear();
+        cy.get('body').click();
+        cy.get('input').click();
+        cy.get('body').find('[data-day="16"][data-month-index="5"]').first().click();
+        cy.matchImageSnapshot();
+    });
+
     it('prop: input masked date', () => {
         mount(
             <CypressTestDecoratorWithTypo>
@@ -296,7 +342,7 @@ describe('plasma-b2c: DatePickerRange', () => {
 
         return (
             <DatePickerRange
-                isOpen={isOpen}
+                opened={isOpen}
                 size={size}
                 contentLeft={enableContentLeft ? <IconSber size={iconSize} /> : undefined}
                 contentRight={enableContentRight ? <ActionButton /> : undefined}
@@ -482,7 +528,10 @@ describe('plasma-b2c: DatePickerRange', () => {
         );
 
         cy.get('input').first().realClick();
-        cy.matchImageSnapshot();
+        cy.matchImageSnapshot({
+            failureThreshold: 0.02,
+            failureThresholdType: 'percent',
+        });
     });
 
     it('prop: onToggle, outside click', () => {

@@ -7,6 +7,7 @@ export const classes = {
     accordionItemShowBody: 'accordion-item-show-body',
     accordionPlusAnimationElement: 'accordion-plus-animation-element',
     accordionDisabled: 'accordion-disabled',
+    accordionItemBody: 'accordion-item-body',
 };
 
 export const tokens = {
@@ -19,9 +20,12 @@ export const tokens = {
     accordionItemPadding: '--plasma-accordion-item-padding',
     accordionItemPaddingVertical: '--plasma-accordion-item-padding-vertical',
     accordionItemPaddingHorizontal: '--plasma-accordion-item-padding-horizontal',
+    accordionItemPaddingHorizontalLeft: '--plasma-accordion-item-padding-horizontal-left',
     accordionItemGap: '--plasma-accordion-item-gap',
     accordionItemFocus: '--plasma-accordion-item-focus',
+    accordionItemBorder: '--plasma-accordion-item-border',
     accordionItemBorderBottom: '--plasma-accordion-item-border-bottom',
+    accordionItemIconColor: '--plasma-accordion-item-color-icon',
 
     accordionItemTitleColor: '--plasma-accordion-item-title-color',
     accordionItemTitleFontFamily: '--plasma-accordion-item-title-font-family',

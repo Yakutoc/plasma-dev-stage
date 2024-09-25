@@ -1,7 +1,7 @@
 import React, { forwardRef, useRef, useContext, useEffect, useCallback } from 'react';
 import { useForkRef } from '@salutejs/plasma-core';
 
-import { ComponentConfig, RootProps } from '../../../../engines';
+import { RootProps } from '../../../../engines';
 import { classes } from '../../tokens';
 import { cx } from '../../../../utils';
 import { TabsContext } from '../../TabsContext';
@@ -30,6 +30,7 @@ export const tabItemRoot = (Root: RootProps<HTMLDivElement, TabItemProps>) =>
             itemIndex,
             tabIndex,
             className,
+            onClick,
             ...rest
         } = props;
 
@@ -84,6 +85,16 @@ export const tabItemRoot = (Root: RootProps<HTMLDivElement, TabItemProps>) =>
             [refs, innerRef, onIndexChange, disabled],
         );
 
+        const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+            event.currentTarget.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+
+            if (!onClick) {
+                return;
+            }
+
+            onClick(event);
+        };
+
         return (
             <Root
                 ref={ref}
@@ -95,6 +106,7 @@ export const tabItemRoot = (Root: RootProps<HTMLDivElement, TabItemProps>) =>
                 onFocus={onItemFocus}
                 tabIndex={hasKeyNavigation ? navigationTabIndex : tabIndex}
                 className={cx(pilledClass, selectedClass, animatedClass, className)}
+                onClick={handleClick}
                 {...rest}
             >
                 <>
@@ -106,7 +118,7 @@ export const tabItemRoot = (Root: RootProps<HTMLDivElement, TabItemProps>) =>
         );
     });
 
-export const tabItemConfig: ComponentConfig = {
+export const tabItemConfig = {
     name: 'TabItem',
     tag: 'button',
     layout: tabItemRoot,

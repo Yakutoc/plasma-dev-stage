@@ -6,10 +6,16 @@ import { addFocus } from '../../../../mixins';
 
 export const StyledAccordionItem = styled.div`
     background: var(${tokens.accordionItemBackground});
+    border: var(${tokens.accordionItemBorder});
     border-bottom: var(${tokens.accordionItemBorderBottom});
 
     &:last-child {
-        border-bottom: none;
+        border-bottom: var(${tokens.accordionItemBorder});
+    }
+
+    &.${classes.accordionDisabled} {
+        opacity: 0.4;
+        cursor: not-allowed;
     }
 `;
 
@@ -24,11 +30,6 @@ export const StyledAccordionHeader = styled.button`
     background: none;
     box-sizing: border-box;
     cursor: pointer;
-
-    &.${classes.accordionDisabled} {
-        opacity: 0.4;
-        cursor: not-allowed;
-    }
 
     &:focus {
         outline: none;
@@ -78,6 +79,7 @@ export const StyledAccordionTitle = styled.div`
     font-style: var(${tokens.accordionItemTitleFontStyle});
     letter-spacing: var(${tokens.accordionItemTitleLetterSpacing});
     line-height: var(${tokens.accordionItemTitleLineHeight});
+    text-align: left;
 `;
 
 export const StyledAccordionBodyAnimate = styled.div`
@@ -107,19 +109,20 @@ export const StyledAccordionBody = styled.div`
     line-height: var(${tokens.accordionItemTextLineHeight});
     overflow: hidden;
     padding-right: var(${tokens.accordionItemPaddingHorizontal});
-    padding-left: var(${tokens.accordionItemPaddingHorizontal});
+    padding-left: var(${tokens.accordionItemPaddingHorizontalLeft});
+    text-align: left;
 `;
 
 export const StyledArrow = styled(IconChevronDownFill)`
     pointer-events: none;
     user-select: none;
-    color: var(${tokens.accordionItemTextColor});
+    color: var(${tokens.accordionItemIconColor});
 `;
 
 export const StyledMinus = styled(IconMinus)`
     pointer-events: none;
     user-select: none;
-    color: var(${tokens.accordionItemTextColor});
+    color: var(${tokens.accordionItemIconColor});
     display: flex;
     align-items: center;
     position: absolute;

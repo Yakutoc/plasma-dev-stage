@@ -5,11 +5,43 @@ import { textFieldConfig, component, mergeConfig } from '@salutejs/plasma-new-ho
 import { config } from './TextField.config';
 
 const mergedConfig = mergeConfig(textFieldConfig, config);
-const TextFieldComponent = component(mergedConfig);
+export const TextFieldComponent = component(mergedConfig);
 
 type newHopeTextFieldProps = React.ComponentProps<typeof TextFieldComponent>;
-export type CustomTextFieldProps = TextFieldProps &
-    Pick<newHopeTextFieldProps, 'enumerationType' | 'chips' | 'onChangeChips'>;
+
+type RequiredProps = {
+    /**
+     * Задает выравнивание индикатора обязательности поля
+     * @default right
+     */
+    requiredPlacement?: 'left' | 'right';
+} & (
+    | {
+          /**
+           * Флаг обязательности поля
+           */
+          required: true;
+          /**
+           * Флаг необязательности поля
+           */
+          optional?: never | false;
+      }
+    | {
+          /**
+           * Флаг необязательности поля
+           */
+          optional?: true;
+          /**
+           * Флаг обязательности поля
+           */
+          required?: never | false;
+      }
+);
+
+export type CustomTextFieldProps = (TextFieldProps &
+    Pick<newHopeTextFieldProps, 'enumerationType' | 'chips' | 'onChangeChips'>) &
+    RequiredProps;
+
 const statusToView: Record<NonNullable<TextFieldProps['status']>, NonNullable<newHopeTextFieldProps['view']>> = {
     success: 'positive',
     warning: 'warning',

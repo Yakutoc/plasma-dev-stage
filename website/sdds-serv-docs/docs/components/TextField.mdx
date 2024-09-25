@@ -25,13 +25,13 @@ export function App() {
                 placeholder="Положение иконки"
                 defaultValue="Слева"
                 size="m"
-                contentLeft={<IconDownload />}
+                contentLeft={<IconDownload color="inherit" />}
             />
             <TextField
                 placeholder="Положение иконки"
                 defaultValue="Справа"
                 size="m"
-                contentRight={<IconDownload />}
+                contentRight={<IconDownload color="inherit" />}
             />
         </div>
     );
@@ -145,7 +145,7 @@ export function App() {
 ```
 
 ### Режим ввода
-С помощью свойства `enumarationType` можно вводить элементы как теги. 
+С помощью свойства `enumerationType` можно вводить элементы как теги.
 По нажатию Enter, после ввода нужного текста, он преобразуется в Chip:
 
 ```tsx live

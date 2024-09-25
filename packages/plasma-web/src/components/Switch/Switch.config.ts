@@ -34,9 +34,11 @@ export const config = {
         },
         view: {
             default: css`
-                ${switchTokens.trackBackgroundColorOn}: var(--plasma-colors-accent);
-                ${switchTokens.trackBackgroundColorOff}: var(--plasma-colors-tertiary);
-                ${switchTokens.thumbBackgroundColor}: var(--plasma-colors-white);
+                ${switchTokens.trackBackgroundColorOn}: var(--surface-accent);
+                ${switchTokens.trackBackgroundColorOnHover}: var(--surface-accent-hover);
+                ${switchTokens.trackBackgroundColorOff}: var(--surface-transparent-tertiary);
+                ${switchTokens.trackBackgroundColorOffHover}: var(--surface-transparent-tertiary-hover);
+                ${switchTokens.thumbBackgroundColor}: var(--on-dark-surface-solid-default);
                 ${switchTokens.thumbBoxShadow}: 0 1px 1px rgba(0, 0, 0, 0.11);
             `,
         },
@@ -56,7 +58,7 @@ export const config = {
         },
         focused: {
             true: css`
-                ${switchTokens.trackFocusColor}: var(--plasma-colors-button-focused);
+                ${switchTokens.trackFocusColor}: var(--surface-accent);
             `,
         },
     },

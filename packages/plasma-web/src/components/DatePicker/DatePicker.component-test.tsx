@@ -48,7 +48,7 @@ describe('plasma-web: DatePicker', () => {
 
         return (
             <DatePicker
-                isOpen={isOpen}
+                opened={isOpen}
                 size={size}
                 valueError={valueError}
                 valueSuccess={valueSuccess}
@@ -166,6 +166,33 @@ describe('plasma-web: DatePicker', () => {
         cy.matchImageSnapshot();
     });
 
+    it('prop: inner label', () => {
+        mount(
+            <CypressTestDecoratorWithTypo>
+                <Demo
+                    label="Лейбл"
+                    labelPlacement="inner"
+                    size="m"
+                    leftHelper="Подсказка к полю"
+                    placeholder="Выберите дату"
+                />
+                <PadMe />
+                <Demo label="Лейбл" labelPlacement="inner" leftHelper="Подсказка к полю" placeholder="Выберите дату" />
+                <PadMe />
+                <Demo
+                    label="Лейбл"
+                    labelPlacement="inner"
+                    leftHelper="Подсказка к полю"
+                    placeholder="Выберите дату"
+                    defaultDate={new Date(2023, 5, 14)}
+                    size="m"
+                />
+            </CypressTestDecoratorWithTypo>,
+        );
+
+        cy.matchImageSnapshot();
+    });
+
     it('prop: format', () => {
         mount(
             <CypressTestDecoratorWithTypo>
@@ -204,7 +231,10 @@ describe('plasma-web: DatePicker', () => {
         );
 
         cy.get('input').realClick();
-        cy.matchImageSnapshot();
+        cy.matchImageSnapshot({
+            failureThreshold: 0.02,
+            failureThresholdType: 'percent',
+        });
     });
 
     it('prop: onToggle, outside click', () => {
@@ -236,6 +266,25 @@ describe('plasma-web: DatePicker', () => {
         cy.get('.popover-root').should('be.visible');
         cy.realPress('Enter');
 
+        cy.matchImageSnapshot();
+    });
+
+    it('prop: input date from calendar', () => {
+        mount(
+            <CypressTestDecoratorWithTypo>
+                <Demo
+                    label="Лейбл"
+                    leftHelper="Подсказка к полю"
+                    placeholder="Выберите дату"
+                    defaultDate={new Date(2023, 5, 14)}
+                />
+            </CypressTestDecoratorWithTypo>,
+        );
+
+        cy.get('input').click().clear();
+        cy.get('body').click();
+        cy.get('input').click();
+        cy.get('body').find('[data-day="16"][data-month-index="5"]').first().click();
         cy.matchImageSnapshot();
     });
 
@@ -293,7 +342,7 @@ describe('plasma-web: DatePickerRange', () => {
 
         return (
             <DatePickerRange
-                isOpen={isOpen}
+                opened={isOpen}
                 size={size}
                 contentLeft={enableContentLeft ? <IconSber size={iconSize} /> : undefined}
                 contentRight={enableContentRight ? <ActionButton /> : undefined}

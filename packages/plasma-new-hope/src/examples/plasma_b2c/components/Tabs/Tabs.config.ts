@@ -6,35 +6,34 @@ export const config = {
     defaults: {
         view: 'filled',
         size: 'xs',
-        disabled: 'false',
     },
     variations: {
         view: {
             clear: css`
                 ${tabsTokens.arrowColor}: var(--text-secondary);
-                ${tabsTokens.tabsBackgroundColor}: tranparent;
-                ${tabsTokens.outlineFocusColor}: var(--plasma-colors-button-focused);
+                ${tabsTokens.tabsBackgroundColor}: transparent;
+                ${tabsTokens.outlineFocusColor}: var(--surface-accent);
 
                 ${tabsTokens.tabsDividerHeight}: 0rem;
-                ${tabsTokens.tabsDividerColor}: tranparent;
+                ${tabsTokens.tabsDividerColor}: transparent;
                 ${tabsTokens.tabsDividerBorderRadius}: 0rem;
             `,
             filled: css`
                 ${tabsTokens.arrowColor}: var(--text-secondary);
                 ${tabsTokens.tabsBackgroundColor}: var(--surface-transparent-primary);
-                ${tabsTokens.outlineFocusColor}: var(--plasma-colors-button-focused);
+                ${tabsTokens.outlineFocusColor}: var(--surface-accent);
 
                 ${tabsTokens.tabsDividerHeight}: 0rem;
-                ${tabsTokens.tabsDividerColor}: tranparent;
+                ${tabsTokens.tabsDividerColor}: transparent;
                 ${tabsTokens.tabsDividerBorderRadius}: 0rem;
             `,
             divider: css`
                 ${tabsTokens.arrowColor}: var(--text-secondary);
-                ${tabsTokens.tabsBackgroundColor}: tranparent;
-                ${tabsTokens.outlineFocusColor}: var(--plasma-colors-button-focused);
+                ${tabsTokens.tabsBackgroundColor}: transparent;
+                ${tabsTokens.outlineFocusColor}: var(--surface-accent);
 
                 ${tabsTokens.tabsDividerHeight}: 0.0625rem;
-                ${tabsTokens.tabsDividerColor}: var(--surface-transparent-secondary);
+                ${tabsTokens.tabsDividerColor}: var(--surface-transparent-tertiary);
                 ${tabsTokens.tabsDividerBorderRadius}: 0.0625rem;
             `,
         },

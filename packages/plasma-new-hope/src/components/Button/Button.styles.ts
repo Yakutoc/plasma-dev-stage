@@ -14,9 +14,9 @@ const Spinner = component(mergedConfig);
 export const ButtonText = styled.span`
     min-width: 4ch;
     flex-shrink: 2;
-    
+
     ${applyEllipsis()}
-    
+
 
     &.${String(classes.contentRelaxed)} {
         text-align: start;
@@ -56,11 +56,13 @@ export const StyledSpinner = styled(Spinner)`
 export const StyledContentLeft = styled.div`
     display: flex;
     margin: var(${tokens.buttonLeftContentMargin});
+    align-self: var(${tokens.buttonLeftContentAlignSelf});
 `;
 
 export const StyledContentRight = styled.div`
     display: flex;
     margin: var(${tokens.buttonRightContentMargin});
+    align-self: var(${tokens.buttonRightContentAlignSelf});
 `;
 
 export const base = css`
@@ -79,7 +81,7 @@ export const base = css`
         text-decoration: none;
     }
 
-    /* NOTE: 
+    /* NOTE:
         --plasma_computed-btn-br-radius is defined in Button.tsx
     */
     --plasma_private-btn-br: var(--plasma_computed-btn-br);
@@ -108,7 +110,7 @@ export const baseContent = `
         text-decoration: none;
     }
 
-    /* NOTE: 
+    /* NOTE:
         --plasma_computed-btn-br-radius is defined in Button.tsx
     */
     --plasma_private-btn-br: var(--plasma_computed-btn-br);

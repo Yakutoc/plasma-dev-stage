@@ -29,7 +29,7 @@ jobs:
       - uses: ./.github/actions/prepare-environment
 
       - name: Set default scope
-        run: echo "SCOPE={b2c,web,core,hope,new-hope,icons,typo,tokens,tokens-b2c,tokens-utils,tokens-native,cy-utils,ui}" >> $GITHUB_ENV
+        run: echo "SCOPE={b2c,web,core,hope,new-hope,icons,typo,tokens,tokens-b2c,tokens-b2b,tokens-web,tokens-utils,cy-utils,ui}" >> $GITHUB_ENV
 
       - name: Install React 17
         if:  ${{ inputs.with-react-17 }}
@@ -47,7 +47,8 @@ jobs:
 
       - name: Save artifacts
         if: ${{ failure() || inputs.with-artifacts }}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
-          name: Test Artifacts
+          name: Test_Artifacts_${{ inputs.scope }}_
           path: /home/runner/work/plasma/plasma/cypress
+          overwrite: true

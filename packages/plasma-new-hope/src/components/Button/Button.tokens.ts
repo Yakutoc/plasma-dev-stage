@@ -6,6 +6,7 @@ export const classes = {
     contentRelaxed: 'button-content-relaxed',
     buttonSquare: 'button-square',
     buttonItem: 'button-item',
+    buttonLoading: 'button-loading',
 };
 
 export const tokens = {
@@ -16,6 +17,7 @@ export const tokens = {
     buttonBackgroundColorHover: '--plasma-button-background-color-hover',
     buttonColorActive: '--plasma-button-color-active',
     buttonBackgroundColorActive: '--plasma-button-background-color-active',
+    buttonLoadingBackgroundColor: '--plasma-button-loading-background-color',
 
     buttonScaleHover: '--plasma-button-scale-hover',
     buttonScaleActive: '---plasma-button-scale-active',
@@ -33,7 +35,9 @@ export const tokens = {
     buttonLineHeight: '--plasma-button-line-height',
 
     buttonLeftContentMargin: '--plasma-button-left-content-margin',
+    buttonLeftContentAlignSelf: '--plasma-button-left-content-align-self',
     buttonRightContentMargin: '--plasma-button-right-content-margin',
+    buttonRightContentAlignSelf: '--plasma-button-right-content-align-self',
     buttonValueMargin: '--plasma-button-value-margin',
 
     buttonDisabledOpacity: '--plasma-button-disabled-opacity',

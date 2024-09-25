@@ -3,22 +3,21 @@ id: datepicker
 title: DatePicker
 ---
 
-import { PropsTable, Description, StorybookLink } from '@site/src/components';
+import { PropsTable, Description } from '@site/src/components';
 
 # DatePicker
 <Description name="DatePicker" />
 <PropsTable name="DatePicker" exclude={['css']} />
-<StorybookLink name="DatePicker" />
 
 ## Использование
 Компонент `DatePicker` представляет собой поле ввода даты с выпадающим календарем.
 
-Размер `DatePicker` задаётся с помощью свойства `size`. 
-Возможные значения свойтсва: `"l"`, `"m"`, `"s"`, `"xs"`.
+Размер `DatePicker` задаётся с помощью свойства `size`.
+Возможные значения свойства: `"l"`, `"m"`, `"s"`, `"xs"`.
 
 ```tsx live
-import React, {useState} from 'react';
-import { DatePicker, IconButton } from '@salutejs/plasma-web';
+import React from 'react';
+import { DatePicker } from '@salutejs/plasma-web';
 import { IconDone } from '@salutejs/plasma-icons';
 
 export function App() {
@@ -37,13 +36,25 @@ export function App() {
 ```
 
 ### Формат даты
-Формат даты задается с помощью свойства `format`. 
-При выборе даты в календаре или вводе даты через поле ввода, дата будет приводиться к заданному формату. 
-Свойство `maskWithFormat` позволяет маскировать ввод:
+Формат даты задается с помощью свойства `format`.
+| Обозначение | Отображение                           | Описание                         |
+|-------------|---------------------------------------|----------------------------------|
+| DD          | 01-31                                 | Дни месяца, 2 цифры              |
+| D           | 1-31                                  | Дни месяца                       |
+| MMMM        | January...December / январь...декабрь | Месяц года, полное название      |
+| MMM         | Jan...Dec / янв.-дек.                 | Месяц года, сокращенное название |
+| MM          | 01-12                                 | Месяц года, 2 цифры              |
+| M           | 1-12                                  | Месяц года                       |
+| YYYY        | 2024                                  | Год из 4 цифр                    |
+| YY          | 24                                    | Год из 2 цифр                    |
+| Q           | 1-4                                   | Квартал                          |
+
+При выборе даты в календаре или вводе даты через поле ввода, дата будет приводиться к заданному формату.
+Свойство `maskWithFormat` позволяет маскировать ввод, кроме случаев когда месяц имеет формат полной записи MMMM:
 
 ```tsx live
-import React, {useState} from 'react';
-import { DatePicker, IconButton } from '@salutejs/plasma-web';
+import React from 'react';
+import { DatePicker } from '@salutejs/plasma-web';
 import { IconDone } from '@salutejs/plasma-icons';
 
 export function App() {
@@ -62,13 +73,45 @@ export function App() {
 }
 ```
 
+### Язык даты
+Язык даты задается с помощью свойства `lang`.
+
+| Обозначение | Отображение | Описание            |
+|-------------|-------------|---------------------|
+| ru          | June        | Английский Язык     |
+| en          | июнь        | Русский язык        |
+
+По умолчанию используется `ru`
+
+```tsx live
+import React from 'react';
+import { DatePicker } from '@salutejs/plasma-web';
+import { IconDone } from '@salutejs/plasma-icons';
+
+export function App() {
+    return (
+        <div style={{ height: "450px" }}>
+            <DatePicker
+                label="Лейбл"
+                leftHelper="Подсказка к полю"
+                placeholder="Введите дату"
+                format="DD MMMM YYYY"
+                lang="en"
+                maskWithFormat
+                contentRight={<IconDone size="s" />}
+            />
+        </div>
+    );
+}
+```
+
 ### Валидация и индикация успешного ввода даты.
 За индикацию ошибки или успешного ввода отвечают `valueError`, `valueSuccess`.
 В данном примере валидация происходит при нажатии клавиши `Enter` после ввода значений:
 
 ```tsx live
 import React, {useState} from 'react';
-import { DatePicker, IconButton } from '@salutejs/plasma-web';
+import { DatePicker } from '@salutejs/plasma-web';
 import { IconDone } from '@salutejs/plasma-icons';
 
 export function App() {
@@ -92,7 +135,7 @@ export function App() {
     return (
         <div style={{ height: "450px" }}>
             <DatePicker
-                isOpen={isOpen}
+                opened={isOpen}
                 label="Лейбл"
                 leftHelper="Подсказка к полю"
                 placeholder="Введите дату"
@@ -121,7 +164,7 @@ export function App() {
 Календарь может быть одиночным или двойным. За это отвечает свойство `isDoubleCalendar`.
 
 ```tsx live
-import React, {useState} from 'react';
+import React from 'react';
 import { DatePickerRange, IconButton } from '@salutejs/plasma-web';
 import { IconDone } from '@salutejs/plasma-icons';
 

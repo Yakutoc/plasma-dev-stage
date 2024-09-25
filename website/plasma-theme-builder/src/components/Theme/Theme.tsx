@@ -128,6 +128,36 @@ export const Theme = ({
         [themeData, onThemeDataChange],
     );
 
+    const updateTokenEnabled = useCallback(
+        (
+            themeData: ThemeType,
+            themeMode: ThemeMode,
+            section: string,
+            subsection: string,
+            key: string,
+            enabled?: boolean,
+        ) => {
+            if (!themeData) {
+                return;
+            }
+
+            themeData[themeMode][section][subsection][key].enabled = enabled;
+
+            if (themeData[themeMode][section][subsection][`${key}Active`]) {
+                themeData[themeMode][section][subsection][`${key}Active`].enabled = enabled;
+            }
+
+            if (themeData[themeMode][section][subsection][`${key}Hover`]) {
+                themeData[themeMode][section][subsection][`${key}Hover`].enabled = enabled;
+            }
+
+            if (themeData[themeMode][section][subsection][`${key}Brightness`]) {
+                themeData[themeMode][section][subsection][`${key}Brightness`].enabled = enabled;
+            }
+        },
+        [],
+    );
+
     const onTokenEnabled = useCallback(
         (data: InputData) => {
             if (!themeData) {
@@ -137,12 +167,12 @@ export const Theme = ({
             const theme = { ...themeData };
             const { section, subsection, name, enabled } = data;
 
-            theme.dark[section.value][subsection.value][name.value].enabled = enabled?.value;
-            theme.light[section.value][subsection.value][name.value].enabled = enabled?.value;
+            updateTokenEnabled(theme, 'dark', section.value, subsection.value, name.value, enabled?.value);
+            updateTokenEnabled(theme, 'light', section.value, subsection.value, name.value, enabled?.value);
 
             onThemeDataChange(theme);
         },
-        [themeData, onThemeDataChange],
+        [themeData, updateTokenEnabled, onThemeDataChange],
     );
 
     const onTokensSubsectionEnabled = useCallback(
@@ -157,13 +187,13 @@ export const Theme = ({
             const tokenKeys = Object.keys(themeData.dark[section.value][subsection.value]);
 
             tokenKeys.forEach((key) => {
-                themeData.dark[section.value][subsection.value][key].enabled = enabled?.value;
-                themeData.light[section.value][subsection.value][key].enabled = enabled?.value;
+                updateTokenEnabled(theme, 'dark', section.value, subsection.value, key, enabled?.value);
+                updateTokenEnabled(theme, 'light', section.value, subsection.value, key, enabled?.value);
             });
 
             onThemeDataChange(theme);
         },
-        [themeData, onThemeDataChange],
+        [themeData, updateTokenEnabled, onThemeDataChange],
     );
 
     const onTokensSectionEnabled = useCallback(
@@ -181,14 +211,14 @@ export const Theme = ({
                 const tokenKeys = Object.keys(themeData.dark[section.value][subsection]);
 
                 tokenKeys.forEach((key) => {
-                    themeData.dark[section.value][subsection][key].enabled = enabled?.value;
-                    themeData.light[section.value][subsection][key].enabled = enabled?.value;
+                    updateTokenEnabled(theme, 'dark', section.value, subsection, key, enabled?.value);
+                    updateTokenEnabled(theme, 'light', section.value, subsection, key, enabled?.value);
                 });
             });
 
             onThemeDataChange(theme);
         },
-        [themeData, onThemeDataChange],
+        [themeData, updateTokenEnabled, onThemeDataChange],
     );
 
     const onCreateTheme = useCallback(() => {
@@ -233,7 +263,7 @@ export const Theme = ({
                     <TokenForm
                         themeMode={themeMode}
                         defaultThemeData={defaultData}
-                        isOpen={isFormTokenOpen}
+                        opened={isFormTokenOpen}
                         inputData={inputData}
                         themeData={themeData}
                         onTokenFormShow={onTokenFormShow}
@@ -250,7 +280,7 @@ export const Theme = ({
                     />
                 </ThemeControls>
                 <AddTokenSection
-                    isOpen={isAddTokenSectionOpen}
+                    opened={isAddTokenSectionOpen}
                     themeData={themeData}
                     onAddTokenSectionShow={onAddTokenSectionShow}
                     onThemeDataChange={onThemeDataChange}

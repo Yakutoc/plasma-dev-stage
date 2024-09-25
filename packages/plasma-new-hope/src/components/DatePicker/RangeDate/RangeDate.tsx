@@ -15,6 +15,7 @@ import { formatCalendarValue, formatInputValue, getDateFormatDelimiter } from '.
 import { useDatePicker } from '../hooks/useDatePicker';
 import type { RangeInputRefs } from '../../Range/Range.types';
 import { classes } from '../DatePicker.tokens';
+import { useKeyNavigation } from '../hooks/useKeyboardNavigation';
 
 import type { DatePickerRangeProps } from './RangeDate.types';
 import { base as sizeCSS } from './variations/_size/base';
@@ -25,7 +26,7 @@ import { LeftHelper, StyledLabel, StyledRange, base } from './RangeDate.styles';
 import { RangeDatePopover } from './RangeDatePopover/RangeDatePopover';
 
 export const datePickerRangeRoot = (
-    Root: RootProps<HTMLDivElement, Omit<DatePickerRangeProps, 'isOpen' | 'defaultValue' | 'onChangeValue'>>,
+    Root: RootProps<HTMLDivElement, Omit<DatePickerRangeProps, 'opened' | 'defaultValue' | 'onChangeValue'>>,
 ) =>
     forwardRef<RangeInputRefs, DatePickerRangeProps>(
         (
@@ -33,7 +34,7 @@ export const datePickerRangeRoot = (
                 className,
 
                 isDoubleCalendar = false,
-                isOpen = false,
+                opened = false,
 
                 label,
                 leftHelper,
@@ -65,12 +66,19 @@ export const datePickerRangeRoot = (
                 secondTextfieldTextAfter,
 
                 format = 'DD.MM.YYYY',
+                lang = 'ru',
                 maskWithFormat,
                 min,
                 max,
                 includeEdgeDates = false,
                 eventList,
                 disabledList,
+                eventMonthList,
+                disabledMonthList,
+                eventQuarterList,
+                disabledQuarterList,
+                eventYearList,
+                disabledYearList,
                 type = 'Days',
 
                 placement = ['top', 'bottom'],
@@ -104,15 +112,21 @@ export const datePickerRangeRoot = (
             const [secondInputRef, setSecondInputRef] = useState<MutableRefObject<HTMLInputElement | null> | undefined>(
                 rangeRef?.current?.secondTextField(),
             );
-            const [isInnerOpen, setIsInnerOpen] = useState(isOpen);
+            const [isInnerOpen, setIsInnerOpen] = useState(opened);
 
-            const [calendarFirstValue, setCalendarFirstValue] = useState(formatCalendarValue(defaultFirstDate, format));
-            const [inputFirstValue, setInputFirstValue] = useState(formatInputValue(defaultFirstDate, format));
+            const [calendarFirstValue, setCalendarFirstValue] = useState(
+                formatCalendarValue(defaultFirstDate, format, lang),
+            );
+            const [inputFirstValue, setInputFirstValue] = useState(
+                formatInputValue({ value: defaultFirstDate, format, lang }),
+            );
 
             const [calendarSecondValue, setCalendarSecondValue] = useState(
-                formatCalendarValue(defaultSecondDate, format),
+                formatCalendarValue(defaultSecondDate, format, lang),
             );
-            const [inputSecondValue, setInputSecondValue] = useState(formatInputValue(defaultSecondDate, format));
+            const [inputSecondValue, setInputSecondValue] = useState(
+                formatInputValue({ value: defaultSecondDate, format, lang }),
+            );
 
             const dateFormatDelimiter = useCallback(() => getDateFormatDelimiter(format), [format]);
 
@@ -126,6 +140,7 @@ export const datePickerRangeRoot = (
                 setIsInnerOpen,
                 dateFormatDelimiter,
                 format,
+                lang,
                 disabled,
                 readOnly,
                 maskWithFormat,
@@ -146,6 +161,7 @@ export const datePickerRangeRoot = (
                 setIsInnerOpen,
                 dateFormatDelimiter,
                 format,
+                lang,
                 disabled,
                 readOnly,
                 maskWithFormat,
@@ -173,6 +189,11 @@ export const datePickerRangeRoot = (
 
                 setIsInnerOpen(isCalendarOpen);
             };
+
+            const { onKeyDown } = useKeyNavigation({
+                isCalendarOpen: isInnerOpen,
+                onToggle: handleToggle,
+            });
 
             const RangeComponent = (
                 <>
@@ -221,6 +242,7 @@ export const datePickerRangeRoot = (
                         onFocusSecondTextfield={onFocusSecondTextfield}
                         onBlurFirstTextfield={onBlurFirstTextfield}
                         onBlurSecondTextfield={onBlurSecondTextfield}
+                        onKeyDown={onKeyDown}
                     />
                 </>
             );
@@ -229,6 +251,28 @@ export const datePickerRangeRoot = (
                 setFirstInputRef(rangeRef.current?.firstTextField());
                 setSecondInputRef(rangeRef.current?.secondTextField());
             }, [rangeRef.current]);
+
+            useEffect(() => {
+                setIsInnerOpen((prevOpen) => prevOpen !== opened && opened);
+            }, [opened]);
+
+            useEffect(() => {
+                setCalendarFirstValue(formatCalendarValue(defaultFirstDate, format, lang));
+                setInputFirstValue(formatInputValue({ value: defaultFirstDate, format, lang }));
+            }, [defaultFirstDate]);
+
+            useEffect(() => {
+                setCalendarSecondValue(formatCalendarValue(defaultSecondDate, format, lang));
+                setInputSecondValue(formatInputValue({ value: defaultSecondDate, format, lang }));
+            }, [defaultSecondDate]);
+
+            useEffect(() => {
+                setCalendarFirstValue(formatCalendarValue(defaultFirstDate, format, lang));
+                setInputFirstValue(formatInputValue({ value: defaultFirstDate, format, lang }));
+
+                setCalendarSecondValue(formatCalendarValue(defaultSecondDate, format, lang));
+                setInputSecondValue(formatInputValue({ value: defaultSecondDate, format, lang }));
+            }, [format, lang]);
 
             return (
                 <Root
@@ -244,10 +288,16 @@ export const datePickerRangeRoot = (
                     <RangeDatePopover
                         calendarValue={[calendarFirstValue, calendarSecondValue]}
                         target={RangeComponent}
-                        isOpen={isOpen || isInnerOpen}
+                        opened={isInnerOpen}
                         includeEdgeDates={includeEdgeDates}
                         eventList={eventList}
                         disabledList={disabledList}
+                        eventMonthList={eventMonthList}
+                        disabledMonthList={disabledMonthList}
+                        eventQuarterList={eventQuarterList}
+                        disabledQuarterList={disabledQuarterList}
+                        eventYearList={eventYearList}
+                        disabledYearList={disabledYearList}
                         min={min}
                         max={max}
                         placement={placement}
@@ -257,13 +307,13 @@ export const datePickerRangeRoot = (
                         type={type}
                         onToggle={handleToggle}
                         isDoubleCalendar={isDoubleCalendar}
-                        onChangeStartOfRange={(firstDate) => {
-                            handleCommitFirstDate(firstDate, false, true);
+                        onChangeStartOfRange={(firstDate, dateInfo) => {
+                            handleCommitFirstDate(firstDate, false, true, dateInfo);
                             handleCommitSecondDate('');
                         }}
-                        onChangeValue={([firstDate, secondDate]) => {
-                            firstDate && handleCommitFirstDate(firstDate, false, true);
-                            secondDate && handleCommitSecondDate(secondDate, false, true);
+                        onChangeValue={([firstDate, secondDate], dateInfo) => {
+                            firstDate && handleCommitFirstDate(firstDate, false, true, dateInfo);
+                            secondDate && handleCommitSecondDate(secondDate, false, true, dateInfo);
                             if (firstDate && secondDate && !firstValueError && !secondValueError) {
                                 setIsInnerOpen(false);
                             }

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import type { StoryObj, Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { IconPlaceholder, InSpacingDecorator, disableProps } from '@salutejs/plasma-sb-utils';
+import { InSpacingDecorator, disableProps } from '@salutejs/plasma-sb-utils';
+import { IconBellFill } from '@salutejs/plasma-icons';
 
 import { TextField, TextFieldView } from '.';
 import type { TextFieldProps } from '.';
@@ -32,7 +33,6 @@ const propsToDisable = [
     'value',
     'checked',
     'minLength',
-    'required',
     'caption',
     'values',
     'enumerationType',
@@ -44,6 +44,24 @@ const meta: Meta<TextFieldProps> = {
     component: TextField,
     decorators: [InSpacingDecorator],
     argTypes: {
+        requiredPlacement: {
+            options: ['left', 'right'],
+            control: {
+                type: 'select',
+            },
+        },
+        required: {
+            control: {
+                type: 'boolean',
+            },
+            if: { arg: 'optional', truthy: false },
+        },
+        optional: {
+            control: {
+                type: 'boolean',
+            },
+            if: { arg: 'required', truthy: false },
+        },
         status: {
             options: statuses,
             control: {
@@ -77,7 +95,7 @@ const meta: Meta<TextFieldProps> = {
 
 export default meta;
 
-type StorePropsDefault = Omit<
+type StoryPropsDefault = Omit<
     TextFieldProps,
     | 'helperBlock'
     | 'contentLeft'
@@ -92,37 +110,51 @@ type StorePropsDefault = Omit<
     | 'checked'
     | 'maxLength'
     | 'minLength'
-    | 'required'
 > & {
     enableContentLeft: boolean;
     enableContentRight: boolean;
 };
 
-const StoryDemo = ({ enableContentLeft, enableContentRight, status, ...rest }: StorePropsDefault) => {
+const StoryDemo = ({ enableContentLeft, enableContentRight, status, ...rest }: StoryPropsDefault) => {
     const [value, setValue] = useState('Значение поля');
 
     const iconSize = rest.size === 'xs' ? 'xs' : 's';
 
     return (
-        <TextField
-            {...rest}
-            value={value}
-            contentLeft={enableContentLeft ? <IconPlaceholder size={iconSize} /> : undefined}
-            contentRight={enableContentRight ? <IconPlaceholder size={iconSize} /> : undefined}
-            status={status || undefined}
-            onChange={(e) => {
-                setValue(e.target.value);
-                onChange(e);
-            }}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            onSearch={onSearch}
-            onChangeChips={onChipsChange}
-        />
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+            <TextField
+                {...rest}
+                value={value}
+                contentLeft={enableContentLeft ? <IconBellFill color="inherit" size={iconSize} /> : undefined}
+                contentRight={enableContentRight ? <IconBellFill color="inherit" size={iconSize} /> : undefined}
+                status={status || undefined}
+                onChange={(e) => {
+                    setValue(e.target.value);
+                    onChange(e);
+                }}
+                onFocus={onFocus}
+                onBlur={onBlur}
+                onSearch={onSearch}
+                onChangeChips={onChipsChange}
+            />
+
+            <TextField
+                {...rest}
+                label="Uncontrolled TextField"
+                defaultValue="Дефолтное значение"
+                contentLeft={enableContentLeft ? <IconBellFill color="inherit" size={iconSize} /> : undefined}
+                contentRight={enableContentRight ? <IconBellFill color="inherit" size={iconSize} /> : undefined}
+                status={status || undefined}
+                onFocus={onFocus}
+                onBlur={onBlur}
+                onSearch={onSearch}
+                onChangeChips={onChipsChange}
+            />
+        </div>
     );
 };
 
-export const Default: StoryObj<StorePropsDefault> = {
+export const Default: StoryObj<StoryPropsDefault> = {
     args: {
         id: 'example-text-field',
         size: 'l',
@@ -136,11 +168,14 @@ export const Default: StoryObj<StorePropsDefault> = {
         readOnly: false,
         enableContentLeft: true,
         enableContentRight: true,
+        required: false,
+        requiredPlacement: 'right',
+        optional: false,
     },
     render: (args) => <StoryDemo {...args} />,
 };
 
-export const Chips: StoryObj<StorePropsDefault> = {
+export const Chips: StoryObj<StoryPropsDefault> = {
     args: {
         ...Default.args,
         enumerationType: 'chip',

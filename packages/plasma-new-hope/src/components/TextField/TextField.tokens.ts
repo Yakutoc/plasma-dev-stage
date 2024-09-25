@@ -1,10 +1,12 @@
 export const classes = {
     hasChips: 'has-chips',
+    hasValue: 'has-value',
     hasEmptyContentLeft: 'has-empty-content-left',
     hasEmptyContentRight: 'has-empty-content-right',
     innerLabelPlacement: 'label-placement-inner',
     outerLabelPlacement: 'label-placement-outer',
     hideLabel: 'hide-label',
+    textFieldGroupItem: 'text-field-group-item',
 };
 
 export const tokens = {
@@ -27,6 +29,7 @@ export const tokens = {
     /** Цвет каретки */
     caretColor: '--plasma-textfield__caret-color',
     placeholderColor: '--plasma-textfield__placeholder-color',
+    optionalColor: '--plasma-textfield__optional-color',
 
     height: '--plasma-textfield-height',
     borderWidth: '--plasma-textfield-border-width',
@@ -36,7 +39,7 @@ export const tokens = {
     padding: '--plasma-textfield-padding',
     paddingWithChips: '--plasma-textfield-padding-with-chips',
 
-    /* Токены для инпута */
+    /* Токены для input */
     leftContentMargin: '--plasma-textfield__left-content-margin',
     rightContentMargin: '--plasma-textfield__right-content-margin',
 
@@ -46,6 +49,15 @@ export const tokens = {
     fontWeight: '--plasma-textfield-font-weight',
     letterSpacing: '--plasma-textfield-letter-spacing',
     lineHeight: '--plasma-textfield-line-height',
+
+    /* Tokens for content slot */
+    contentSlotColor: '--plasma-textfield-content-slot-color',
+    contentSlotColorHover: '--plasma-textfield-content-slot-color-hover',
+    contentSlotColorActive: '--plasma-textfield-content-slot-color-active',
+
+    contentSlotRightColor: '--plasma-textfield-content-right-slot-color',
+    contentSlotRightColorHover: '--plasma-textfield-content-right-slot-color-hover',
+    contentSlotRightColorActive: '--plasma-textfield-content-right-slot-color-active',
 
     /** Токены лейбла */
     labelColor: '--plasma-textfield__label-color',
@@ -126,4 +138,12 @@ export const tokens = {
     chipOpacityReadonly: '--plasma-textfield__chip-opacity-readonly',
 
     focusColor: '--plasma-textfield-focus-color',
+
+    indicatorColor: '--plasma-textfield__indicator-color',
+    indicatorSizeInner: '--plasma-textfield__indicator-size-inner',
+    indicatorSizeOuter: '--plasma-textfield__indicator-size-outer',
+    indicatorLabelPlacementInner: '--plasma-textfield__indicator-placement-inner',
+    indicatorLabelPlacementOuter: '--plasma-textfield__indicator-placement-outer',
+    indicatorLabelPlacementInnerRight: '--plasma-textfield__indicator-placement-inner-right',
+    indicatorLabelPlacementOuterRight: '--plasma-textfield__indicator-placement-outer-right',
 };

@@ -1,10 +1,11 @@
 import React, { forwardRef, useCallback, useMemo } from 'react';
-import { useFocusTrap, useForkRef, safeUseId } from '@salutejs/plasma-core';
+import { useForkRef, safeUseId } from '@salutejs/plasma-core';
 
 import { RootProps, component } from '../../engines';
 import { popupConfig, usePopupContext } from '../Popup';
 import { Overlay } from '../Overlay';
 import { DEFAULT_Z_INDEX } from '../Popup/utils';
+import { useFocusTrap } from '../../hooks';
 
 import { classes, tokens } from './Modal.tokens';
 import { ModalProps } from './Modal.types';
@@ -37,12 +38,14 @@ export const modalRoot = (Root: RootProps<HTMLDivElement, ModalProps>) =>
                 popupInfo,
                 children,
                 view,
+                opened,
                 isOpen,
                 ...rest
             },
             outerRootRef,
         ) => {
-            const trapRef = useFocusTrap(true, initialFocusRef, focusAfterRef);
+            const innerIsOpen = Boolean(isOpen || opened);
+            const trapRef = useFocusTrap(true, initialFocusRef, focusAfterRef, true);
             const popupController = usePopupContext();
 
             const innerRef = useForkRef<HTMLDivElement>(trapRef, outerRootRef);
@@ -53,7 +56,15 @@ export const modalRoot = (Root: RootProps<HTMLDivElement, ModalProps>) =>
                 ? `var(${tokens.modalOverlayWithBlurColor})`
                 : `var(${tokens.modalOverlayColor})`;
 
-            const { modalInfo } = useModal({ id: innerId, isOpen, closeOnEsc, onEscKeyDown, onClose, popupInfo });
+            const { modalInfo } = useModal({
+                id: innerId,
+                isOpen: innerIsOpen,
+                closeOnEsc,
+                onEscKeyDown,
+                onClose,
+                popupInfo,
+            });
+
             const transparent = useMemo(() => getIdLastModal(popupController.items) !== innerId, [
                 innerId,
                 popupController.items,
@@ -76,7 +87,7 @@ export const modalRoot = (Root: RootProps<HTMLDivElement, ModalProps>) =>
             return (
                 <Popup
                     id={innerId}
-                    isOpen={isOpen}
+                    opened={innerIsOpen}
                     ref={innerRef}
                     popupInfo={modalInfo}
                     withAnimation={withAnimation}

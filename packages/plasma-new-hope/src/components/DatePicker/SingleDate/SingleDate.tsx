@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useRef, useState } from 'react';
+import React, { forwardRef, useCallback, useEffect, useRef, useState } from 'react';
 
 import type { RootProps } from '../../../engines';
 import { cx, getPlacements } from '../../../utils';
@@ -6,6 +6,7 @@ import { formatCalendarValue, formatInputValue, getDateFormatDelimiter } from '.
 import { useDatePicker } from '../hooks/useDatePicker';
 import { classes } from '../DatePicker.tokens';
 import { StyledCalendar } from '../DatePickerBase.styles';
+import { useKeyNavigation } from '../hooks/useKeyboardNavigation';
 
 import type { DatePickerProps } from './SingleDate.types';
 import { base as sizeCSS } from './variations/_size/base';
@@ -15,15 +16,16 @@ import { base as readOnlyCSS } from './variations/_readonly/base';
 import { LeftHelper, StyledInput, StyledLabel, StyledPopover, base } from './SingleDate.styles';
 
 export const datePickerRoot = (
-    Root: RootProps<HTMLDivElement, Omit<DatePickerProps, 'isOpen' | 'defaultValue' | 'onChangeValue'>>,
+    Root: RootProps<HTMLDivElement, Omit<DatePickerProps, 'opened' | 'defaultValue' | 'onChangeValue'>>,
 ) =>
     forwardRef<HTMLInputElement, DatePickerProps>(
         (
             {
                 className,
-                isOpen = false,
+                opened = false,
 
                 label,
+                labelPlacement = 'outer',
                 placeholder,
                 leftHelper,
                 contentLeft,
@@ -39,12 +41,19 @@ export const datePickerRoot = (
                 valueError,
                 valueSuccess,
                 format = 'DD.MM.YYYY',
+                lang = 'ru',
                 maskWithFormat,
                 min,
                 max,
                 includeEdgeDates = false,
                 eventList,
                 disabledList,
+                eventMonthList,
+                disabledMonthList,
+                eventQuarterList,
+                disabledQuarterList,
+                eventYearList,
+                disabledYearList,
                 type = 'Days',
 
                 placement = ['top', 'bottom'],
@@ -62,10 +71,12 @@ export const datePickerRoot = (
             ref,
         ) => {
             const inputRef = useRef<HTMLInputElement | null>(null);
-            const [isInnerOpen, setIsInnerOpen] = useState(isOpen);
+            const [isInnerOpen, setIsInnerOpen] = useState(opened);
 
-            const [calendarValue, setCalendarValue] = useState(formatCalendarValue(defaultDate, format));
-            const [inputValue, setInputValue] = useState(formatInputValue(defaultDate, format));
+            const [calendarValue, setCalendarValue] = useState(formatCalendarValue(defaultDate, format, lang));
+            const [inputValue, setInputValue] = useState(formatInputValue({ value: defaultDate, format, lang }));
+
+            const innerLabelPlacement = labelPlacement === 'inner';
 
             const dateFormatDelimiter = useCallback(() => getDateFormatDelimiter(format), [format]);
 
@@ -82,6 +93,7 @@ export const datePickerRoot = (
                 setIsInnerOpen,
                 dateFormatDelimiter,
                 format,
+                lang,
                 disabled,
                 readOnly,
                 maskWithFormat,
@@ -93,11 +105,17 @@ export const datePickerRoot = (
                 onCommitDate,
             });
 
+            const { onKeyDown } = useKeyNavigation({
+                isCalendarOpen: isInnerOpen,
+                onToggle: handleToggle,
+            });
+
             const DatePickerInput = (
                 <StyledInput
                     ref={inputRef}
                     className={cx(datePickerErrorClass, datePickerSuccessClass)}
                     value={inputValue}
+                    size={size}
                     readOnly={readOnly}
                     disabled={disabled}
                     placeholder={placeholder}
@@ -109,8 +127,24 @@ export const datePickerRoot = (
                     onSearch={(date) => handleCommitDate(date, true, false)}
                     onFocus={onFocus}
                     onBlur={onBlur}
+                    onKeyDown={onKeyDown}
+                    {...(innerLabelPlacement && { label, labelPlacement })}
                 />
             );
+
+            useEffect(() => {
+                setIsInnerOpen((prevOpen) => prevOpen !== opened && opened);
+            }, [opened]);
+
+            useEffect(() => {
+                setCalendarValue(formatCalendarValue(defaultDate, format, lang));
+                setInputValue(formatInputValue({ value: defaultDate, format, lang }));
+            }, [defaultDate]);
+
+            useEffect(() => {
+                setCalendarValue(formatCalendarValue(defaultDate, format, lang));
+                setInputValue(formatInputValue({ value: defaultDate, format, lang }));
+            }, [format, lang]);
 
             return (
                 <Root
@@ -122,9 +156,9 @@ export const datePickerRoot = (
                     ref={ref}
                     {...rest}
                 >
-                    {label && <StyledLabel>{label}</StyledLabel>}
+                    {!innerLabelPlacement && label && <StyledLabel>{label}</StyledLabel>}
                     <StyledPopover
-                        isOpen={isOpen || isInnerOpen}
+                        opened={isInnerOpen}
                         usePortal={false}
                         onToggle={handleToggle}
                         offset={offset}
@@ -141,11 +175,17 @@ export const datePickerRoot = (
                             type={type}
                             eventList={eventList}
                             disabledList={disabledList}
+                            eventMonthList={eventMonthList}
+                            disabledMonthList={disabledMonthList}
+                            eventQuarterList={eventQuarterList}
+                            disabledQuarterList={disabledQuarterList}
+                            eventYearList={eventYearList}
+                            disabledYearList={disabledYearList}
                             min={min}
                             max={max}
                             includeEdgeDates={includeEdgeDates}
                             isRange={false}
-                            onChangeValue={(date) => handleCommitDate(date, false, true)}
+                            onChangeValue={(date, dateInfo) => handleCommitDate(date, false, true, dateInfo)}
                         />
                     </StyledPopover>
                     {leftHelper && <LeftHelper>{leftHelper}</LeftHelper>}

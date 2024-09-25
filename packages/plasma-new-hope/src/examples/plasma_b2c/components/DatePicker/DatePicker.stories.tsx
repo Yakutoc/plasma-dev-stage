@@ -1,4 +1,4 @@
-import React, { ComponentProps, useRef, useState } from 'react';
+import React, { ComponentProps, useEffect, useRef, useState } from 'react';
 import type { StoryObj, Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { IconPlaceholder } from '@salutejs/plasma-sb-utils';
@@ -19,6 +19,7 @@ const onChangeSecondValue = action('onChangeSecondValue');
 const sizes = ['l', 'm', 's', 'xs'];
 const views = ['default'];
 const dividers = ['none', 'dash', 'icon'];
+const labelPlacements = ['outer', 'inner'];
 
 const meta: Meta = {
     title: 'plasma_b2c/DatePicker',
@@ -46,6 +47,12 @@ const meta: Meta = {
                 type: 'date',
             },
         },
+        lang: {
+            options: ['ru', 'en'],
+            control: {
+                type: 'inline-radio',
+            },
+        },
     },
 };
 
@@ -62,6 +69,8 @@ const StoryDefault = ({
     valueError,
     valueSuccess,
     size,
+    lang,
+    format,
     ...rest
 }: StoryPropsDefault) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -70,7 +79,7 @@ const StoryDefault = ({
 
     return (
         <DatePicker
-            isOpen={isOpen}
+            opened={isOpen}
             size={size}
             valueError={valueError}
             valueSuccess={valueSuccess}
@@ -82,6 +91,8 @@ const StoryDefault = ({
             onChangeValue={(e, currentValue) => {
                 onChangeValue(e, currentValue);
             }}
+            lang={lang}
+            format={format}
             onCommitDate={() => setIsOpen(false)}
             {...rest}
         />
@@ -95,6 +106,18 @@ export const Default: StoryObj<StoryPropsDefault> = {
                 type: 'date',
             },
         },
+        labelPlacement: {
+            options: labelPlacements,
+            control: {
+                type: 'inline-radio',
+            },
+        },
+        format: {
+            options: ['DD.MM.YYYY', 'DD MMMM YYYY'],
+            control: {
+                type: 'select',
+            },
+        },
     },
     args: {
         label: 'Лейбл',
@@ -102,6 +125,7 @@ export const Default: StoryObj<StoryPropsDefault> = {
         placeholder: '30.05.2024',
         size: 'l',
         view: 'default',
+        labelPlacement: 'outer',
         defaultDate: new Date(2024, 5, 14),
         min: new Date(2024, 1, 1),
         max: new Date(2024, 12, 29),
@@ -113,6 +137,8 @@ export const Default: StoryObj<StoryPropsDefault> = {
         enableContentRight: true,
         valueError: false,
         valueSuccess: false,
+        lang: 'ru',
+        format: 'DD.MM.YYYY',
     },
     render: (args) => <StoryDefault {...args} />,
 };
@@ -170,7 +196,7 @@ const StoryRange = ({
         <DatePickerRange
             size={size}
             ref={rangeRef}
-            isOpen={isOpen}
+            opened={isOpen}
             firstValueError={firstValueError}
             firstValueSuccess={firstValueSuccess}
             secondValueError={secondValueError}
@@ -222,6 +248,12 @@ export const Range: StoryObj<StoryPropsRange> = {
                 type: 'inline-radio',
             },
         },
+        format: {
+            options: ['DD.MM.YYYY', 'DD MMMM YYYY'],
+            control: {
+                type: 'select',
+            },
+        },
     },
     args: {
         label: 'Лейбл',
@@ -248,10 +280,98 @@ export const Range: StoryObj<StoryPropsRange> = {
         enableSecondTextfieldContentLeft: false,
         enableSecondTextfieldContentRight: false,
 
+        lang: 'ru',
+        format: 'DD.MM.YYYY',
+
         firstValueError: false,
         firstValueSuccess: false,
         secondValueError: false,
         secondValueSuccess: false,
     },
     render: (args) => <StoryRange {...args} />,
+};
+
+const StoryDeferred = ({
+    enableContentLeft,
+    enableContentRight,
+    valueError,
+    valueSuccess,
+    size,
+    ...rest
+}: StoryPropsDefault) => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const [defVal, setDefVal] = useState<Date | undefined>(undefined);
+
+    const iconSize = size === 'xs' ? 'xs' : 's';
+
+    useEffect(() => {
+        setTimeout(() => {
+            setDefVal(new Date(2024, 5, 14));
+        }, 5000);
+    }, []);
+
+    return (
+        <>
+            <h3>Асинхронная установка даты по умолчанию</h3>
+            <DatePicker
+                defaultDate={defVal}
+                opened={isOpen}
+                size={size}
+                valueError={valueError}
+                valueSuccess={valueSuccess}
+                contentLeft={enableContentLeft ? <IconPlaceholder size={iconSize} /> : undefined}
+                contentRight={enableContentRight ? <IconPlaceholder size={iconSize} /> : undefined}
+                onBlur={onBlur}
+                onFocus={onFocus}
+                onToggle={(is) => setIsOpen(is)}
+                onChangeValue={(e, currentValue) => {
+                    onChangeValue(e, currentValue);
+                }}
+                onCommitDate={() => setIsOpen(false)}
+                {...rest}
+            />
+        </>
+    );
+};
+
+export const Deferred: StoryObj<StoryPropsDefault> = {
+    argTypes: {
+        defaultDate: {
+            control: {
+                type: 'date',
+            },
+        },
+        labelPlacement: {
+            options: labelPlacements,
+            control: {
+                type: 'inline-radio',
+            },
+        },
+        format: {
+            options: ['DD.MM.YYYY', 'DD MMMM YYYY'],
+            control: {
+                type: 'select',
+            },
+        },
+    },
+    args: {
+        label: 'Лейбл',
+        leftHelper: 'Подсказка к полю',
+        placeholder: '30.05.2024',
+        size: 'l',
+        view: 'default',
+        labelPlacement: 'outer',
+        min: new Date(2024, 1, 1),
+        max: new Date(2024, 12, 29),
+        maskWithFormat: false,
+        disabled: false,
+        readOnly: false,
+        textBefore: '',
+        enableContentLeft: true,
+        enableContentRight: true,
+        valueError: false,
+        valueSuccess: false,
+    },
+    render: (args) => <StoryDeferred {...args} />,
 };

@@ -16,9 +16,12 @@ export const config = {
                 ${accordionTokens.accordionItemBackground}: var(--surface-solid-card);
                 ${accordionTokens.accordionItemTitleColor}: var(--text-primary);
                 ${accordionTokens.accordionItemTextColor}: var(--text-primary);
+                ${accordionTokens.accordionItemIconColor}: var(--text-primary);
                 ${accordionTokens.accordionItemFocus}: var(--surface-accent);
                 ${accordionTokens.accordionBackground}: var(--surface-clear);
+                ${accordionTokens.accordionItemBorder}: none;
                 ${accordionTokens.accordionItemBorderBottom}: 0;
+                ${accordionTokens.accordionItemPaddingHorizontalLeft}: var(${accordionTokens.accordionItemPaddingHorizontal});
             `,
             clear: css`
                 ${accordionTokens.accordionGap}: 0.125rem;
@@ -27,10 +30,13 @@ export const config = {
                 ${accordionTokens.accordionItemBackground}: var(--surface-clear);
                 ${accordionTokens.accordionItemTitleColor}: var(--text-primary);
                 ${accordionTokens.accordionItemTextColor}: var(--text-primary);
+                ${accordionTokens.accordionItemIconColor}: var(--text-primary);
                 ${accordionTokens.accordionItemFocus}: var(--surface-accent);
                 ${accordionTokens.accordionItemBorderRadius}: 0rem !important;
                 ${accordionTokens.accordionBackground}: var(--surface-clear);
+                ${accordionTokens.accordionItemBorder}: none;
                 ${accordionTokens.accordionItemBorderBottom}: 0.125rem solid var(--surface-solid-tertiary);
+                ${accordionTokens.accordionItemPaddingHorizontalLeft}: 0;
             `,
         },
         size: {

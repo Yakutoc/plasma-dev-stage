@@ -1,4 +1,6 @@
-import type { MutableRefObject, InputHTMLAttributes, KeyboardEvent, ChangeEvent } from 'react';
+import type { MutableRefObject, KeyboardEvent, ChangeEvent } from 'react';
+
+import type { InputHTMLAttributes } from '../../types';
 
 export type TextFieldPrimitiveValue = string | number | boolean;
 
@@ -49,6 +51,35 @@ type TextFieldChipProps =
           onChangeChips?: (value: Array<TextFieldPrimitiveValue>) => void;
       };
 
+type RequiredProps = {
+    /**
+     * Задает выравнивание индикатора обязательности поля
+     * @default right
+     */
+    requiredPlacement?: 'left' | 'right';
+} & (
+    | {
+          /**
+           * Флаг обязательности поля
+           */
+          required: true;
+          /**
+           * Флаг необязательности поля
+           */
+          optional?: never | false;
+      }
+    | {
+          /**
+           * Флаг необязательности поля
+           */
+          optional?: true;
+          /**
+           * Флаг обязательности поля
+           */
+          required?: never | false;
+      }
+);
+
 export type TextFieldPropsBase = {
     /**
      * Метка-подпись к элементу
@@ -82,7 +113,8 @@ export type TextFieldPropsBase = {
      * Callback по нажатию Enter
      */
     onSearch?: (value: string, event?: KeyboardEvent<HTMLInputElement>) => void;
-} & TextFieldChipProps;
+} & RequiredProps &
+    TextFieldChipProps;
 
 export type TextFieldProps = {
     /**
@@ -102,7 +134,7 @@ export type TextFieldProps = {
      */
     disabled?: boolean;
 } & TextFieldPropsBase &
-    Omit<InputHTMLAttributes<HTMLInputElement>, 'size'>;
+    Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'required'>;
 
 export interface ControlledRefs {
     chipsRefs: MutableRefObject<Array<HTMLButtonElement>>;

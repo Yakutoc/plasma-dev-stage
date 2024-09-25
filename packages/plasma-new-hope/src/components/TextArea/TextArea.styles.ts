@@ -2,17 +2,24 @@ import { styled } from '@linaria/react';
 
 import { applyEllipsis } from '../../mixins';
 
-import { tokens } from './TextArea.tokens';
+import { classes, tokens } from './TextArea.tokens';
 
 export const StyledLabel = styled.div`
+    position: relative;
+    display: inline-flex;
     margin-bottom: var(${tokens.labelMarginBottom});
 
-    font-family: var(${tokens.inputFontFamily});
-    font-size: var(${tokens.inputFontSize});
-    font-style: var(${tokens.inputFontStyle});
-    font-weight: var(${tokens.inputFontWeight});
-    letter-spacing: var(${tokens.inputLetterSpacing});
-    line-height: var(${tokens.inputLineHeight});
+    color: var(${tokens.labelOuterColor}, var(${tokens.inputColor}));
+    font-family: var(${tokens.labelOuterFontFamily}, var(${tokens.inputFontFamily}));
+    font-size: var(${tokens.labelOuterFontSize}, var(${tokens.inputFontSize}));
+    font-style: var(${tokens.labelOuterFontStyle}, var(${tokens.inputFontStyle}));
+    font-weight: var(${tokens.labelOuterFontWeight}, var(${tokens.inputFontWeight}));
+    letter-spacing: var(${tokens.labelOuterLetterSpacing}, var(${tokens.inputLetterSpacing}));
+    line-height: var(${tokens.labelOuterLineHeight}, var(${tokens.inputLineHeight}));
+`;
+
+export const StyledOptionalText = styled.span`
+    color: var(${tokens.optionalColor});
 `;
 
 export const StyledTextAreaWrapper = styled.div<{
@@ -34,6 +41,8 @@ export const StyledContent = styled.div`
     align-items: center;
     bottom: 0;
     z-index: 1;
+
+    color: var(${tokens.rightContentColor}, var(${tokens.inputColor}));
 
     top: var(${tokens.rightContentTop});
     right: var(${tokens.rightContentRight});
@@ -201,4 +210,31 @@ export const StyledPlaceholder = styled.label<{
     font-weight: var(${tokens.inputFontWeight});
     letter-spacing: var(${tokens.inputLetterSpacing});
     line-height: var(${tokens.inputLineHeight});
+`;
+
+export const StyledIndicator = styled.div`
+    position: absolute;
+    border-radius: 50%;
+
+    background-color: var(${tokens.indicatorColor});
+
+    &.${classes.outerLabelPlacement} {
+        width: var(${tokens.indicatorSizeOuter});
+        height: var(${tokens.indicatorSizeOuter});
+        inset: var(${tokens.indicatorLabelPlacementOuter});
+
+        &.align-right {
+            inset: var(${tokens.indicatorLabelPlacementOuterRight});
+        }
+    }
+
+    &.${classes.innerLabelPlacement} {
+        width: var(${tokens.indicatorSizeInner});
+        height: var(${tokens.indicatorSizeInner});
+        inset: var(${tokens.indicatorLabelPlacementInner});
+
+        &.align-right {
+            inset: var(${tokens.indicatorLabelPlacementInnerRight});
+        }
+    }
 `;

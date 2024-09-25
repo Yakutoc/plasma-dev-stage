@@ -113,6 +113,11 @@ export const iconSectionsSet = {
         zoomMinusOutline: 'ZoomMinusOutline',
         zoomPlusFill: 'ZoomPlusFill',
         zoomPlusOutline: 'ZoomPlusOutline',
+        loginFill: 'LoginFill',
+        logoutFill: 'LogoutFill',
+        windowMaximize: 'WindowMaximize',
+        windowMinimize: 'WindowMinimize',
+        filterOff: 'FilterOff',
     },
     Animal: {
         animalFill: 'AnimalFill',
@@ -255,6 +260,8 @@ export const iconSectionsSet = {
         swapVert: 'SwapVert',
         swapVertCircFill: 'SwapVertCircFill',
         swapVertCircOutline: 'SwapVertCircOutline',
+        doubleDisclosureDown: 'DoubleDisclosureDown',
+        doubleDisclosureUp: 'DoubleDisclosureUp',
     },
     Data: {
         chartDistributionFill: 'ChartDistributionFill',
@@ -533,6 +540,8 @@ export const iconSectionsSet = {
         washerOutline: 'WasherOutline',
         waveLine: 'WaveLine',
         scribbleDiagonal: 'ScribbleDiagonal',
+        poopFill: 'PoopFill',
+        poopOutline: 'PoopOutline',
     },
     Toggle: {
         bellDashFill: 'BellDashFill',
@@ -655,6 +664,18 @@ export const iconSectionsSet = {
         ticketOutline: 'TicketOutline',
         fileErrorFill: 'FileErrorFill',
         fileErrorOutline: 'FileErrorOutline',
+        blankCsvFill: 'BlankCsvFill',
+        blankCsvOutline: 'BlankCsvOutline',
+        blankDocFill: 'BlankDocFill',
+        blankDocOutline: 'BlankDocOutline',
+        blankTxtFill: 'BlankTxtFill',
+        blankTxtOutline: 'BlankTxtOutline',
+        blankXlsFill: 'BlankXlsFill',
+        blankXlsOutline: 'BlankXlsOutline',
+        blankJpgFill: 'BlankJpgFill',
+        blankJpgOutline: 'BlankJpgOutline',
+        blankPngFill: 'BlankPngFill',
+        blankPngOutline: 'BlankPngOutline',
     },
     Instruments: {
         boxFill: 'BoxFill',
@@ -787,6 +808,10 @@ export const iconSectionsSet = {
         postcardOutline: 'PostcardOutline',
         sendFill: 'SendFill',
         sendOutline: 'SendOutline',
+        messageDraftFill: 'MessageDraftFill',
+        messageDraftOutline: 'MessageDraftOutline',
+        messageNewFill: 'MessageNewFill',
+        messageNewOutline: 'MessageNewOutline',
     },
     Media: {
         cameraDashFill: 'CameraDashFill',
@@ -889,6 +914,8 @@ export const iconSectionsSet = {
         volumeLevel1Outline: 'VolumeLevel1Outline',
         volumeLevel2Fill: 'VolumeLevel2Fill',
         volumeLevel2Outline: 'VolumeLevel2Outline',
+        cameraVideoAddFill: 'CameraVideoAddFill',
+        cameraVideoAddOutline: 'CameraVideoAddOutline',
     },
     Navigation: {
         arrowsMove: 'ArrowsMove',
@@ -1007,6 +1034,8 @@ export const iconSectionsSet = {
         sberboomMiniErrorOutline: 'SberboomMiniErrorOutline',
         sberboomMiniFill: 'SberboomMiniFill',
         sberboomMiniOutline: 'SberboomMiniOutline',
+        pcMouseFill: 'PcMouseFill',
+        pcMouseOutline: 'PcMouseOutline',
     },
     Senses: {
         handActionFill: 'HandActionFill',
@@ -1028,6 +1057,8 @@ export const iconSectionsSet = {
         saluteOutline: 'SaluteOutline',
         sber: 'Sber',
         visa: 'Visa',
+        linkedin: 'Linkedin',
+        whatsapp: 'Whatsapp',
     },
     Status: {
         attentionCircleFill: 'AttentionCircleFill',
@@ -1063,6 +1094,7 @@ export const iconSectionsSet = {
         plusSquareOutline: 'PlusSquareOutline',
         verificationFill: 'VerificationFill',
         verificationOutline: 'VerificationOutline',
+        attention: 'Attention',
     },
     Weather: {
         beachUmbrellaFill: 'BeachUmbrellaFill',
@@ -1074,5 +1106,13 @@ export const iconSectionsSet = {
         umbrellaOutline: 'UmbrellaOutline',
         weatherFill: 'WeatherFill',
         weatherOutline: 'WeatherOutline',
+    },
+    Table: {
+        rowHeightFill: 'RowHeightFill',
+        rowHeightMaxFill: 'RowHeightMaxFill',
+        rowHeightMaxOutline: 'RowHeightMaxOutline',
+        rowHeightMinFill: 'RowHeightMinFill',
+        rowHeightMinOutline: 'RowHeightMinOutline',
+        rowHeightOutline: 'RowHeightOutline',
     },
 };

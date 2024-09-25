@@ -166,6 +166,16 @@ describe('plasma-web: TextField', () => {
         cy.matchImageSnapshot();
     });
 
+    it('_defaultValue', () => {
+        mount(
+            <CypressTestDecoratorWithTypo>
+                <TextField size="m" defaultValue="Default value" placeholder="Placeholder" helperText="Helper text" />
+            </CypressTestDecoratorWithTypo>,
+        );
+
+        cy.matchImageSnapshot();
+    });
+
     it('content: with label', () => {
         mount(
             <CypressTestDecoratorWithTypo>
@@ -289,6 +299,40 @@ describe('plasma-web: TextField', () => {
         );
 
         cy.matchImageSnapshot();
+    });
+
+    describe('_required', () => {
+        const sizes = ['xs', 's', 'm', 'l'];
+
+        const cases = [
+            { required: true, labelPlacement: 'outer' },
+            { required: true, requiredPlacement: 'right', labelPlacement: 'outer' },
+            { required: true, labelPlacement: 'inner' },
+            { required: true, requiredPlacement: 'right', labelPlacement: 'inner' },
+        ];
+
+        sizes.forEach((size) => {
+            it(`_size:${size}`, () => {
+                mount(
+                    <CypressTestDecoratorWithTypo>
+                        {cases.map((props) => (
+                            <div style={{ margin: '0 1rem' }}>
+                                <TextField
+                                    value="Value"
+                                    placeholder="Placeholder"
+                                    label="Title"
+                                    size={size}
+                                    {...props}
+                                />
+                                <SpaceMe />
+                            </div>
+                        ))}
+                    </CypressTestDecoratorWithTypo>,
+                );
+
+                cy.matchImageSnapshot();
+            });
+        });
     });
 });
 

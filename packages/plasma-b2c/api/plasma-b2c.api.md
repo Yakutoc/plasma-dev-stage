@@ -35,12 +35,17 @@ import { AudioPlayerProps } from '@salutejs/plasma-hope';
 import { AvatarGroupProps } from '@salutejs/plasma-new-hope/styled-components';
 import { AvatarProps } from '@salutejs/plasma-new-hope/styled-components';
 import { BadgeProps } from '@salutejs/plasma-new-hope/styled-components';
+import { BaseAttachProps } from '@salutejs/plasma-new-hope/types/components/Attach/Attach.types';
 import { BaseboxProps } from '@salutejs/plasma-new-hope/styled-components';
 import { BaseCallbackChangeInstance } from '@salutejs/plasma-new-hope/types/components/Range/Range.types';
 import { BaseCallbackKeyboardInstance } from '@salutejs/plasma-new-hope/types/components/Range/Range.types';
+import { BaseProps } from '@salutejs/plasma-new-hope/types/components/Autocomplete/Autocomplete.types';
+import { BasicProps } from '@salutejs/plasma-new-hope/types/components/Combobox/ComboboxNew/Combobox.types';
 import { BlurProps } from '@salutejs/plasma-core';
 import { blurs } from '@salutejs/plasma-core';
 import { BoldProps } from '@salutejs/plasma-new-hope/types/components/Typography/Typography.types';
+import { BreadcrumbsItem } from '@salutejs/plasma-new-hope/types/components/Breadcrumbs/Breadcrumbs.types';
+import { BreadcrumbsProps } from '@salutejs/plasma-new-hope/styled-components';
 import { Breakpoint } from '@salutejs/plasma-hope';
 import { BreakWordProps } from '@salutejs/plasma-core';
 import { ButtonBase } from '@salutejs/plasma-new-hope/styled-components';
@@ -49,6 +54,7 @@ import { ButtonHTMLAttributes } from 'react';
 import { ButtonProps } from '@salutejs/plasma-new-hope/styled-components';
 import { Calendar as Calendar_2 } from '@salutejs/plasma-new-hope/types/components/Calendar/Calendar.types';
 import { CalendarBaseProps } from '@salutejs/plasma-new-hope/styled-components';
+import { CalendarConfigProps } from '@salutejs/plasma-new-hope/types/components/Calendar/Calendar.types';
 import { CalendarDoubleProps } from '@salutejs/plasma-new-hope/styled-components';
 import { CalendarProps } from '@salutejs/plasma-new-hope/styled-components';
 import { CalendarRange } from '@salutejs/plasma-new-hope/types/components/Calendar/Calendar.types';
@@ -84,19 +90,21 @@ import { ColCount } from '@salutejs/plasma-new-hope/styled-components';
 import { ColOffsetProps } from '@salutejs/plasma-new-hope/styled-components';
 import { ColProps } from '@salutejs/plasma-new-hope/styled-components';
 import { ColSizeProps } from '@salutejs/plasma-new-hope/styled-components';
-import { ComboboxPrimitiveValue } from '@salutejs/plasma-new-hope/styled-components';
-import { ComboboxProps } from '@salutejs/plasma-new-hope/styled-components';
+import { ComboboxPrimitiveValue } from '@salutejs/plasma-new-hope/types/components/Combobox/ComboboxOld/Combobox.types';
+import { ComboboxOldProps as ComboboxProps } from '@salutejs/plasma-new-hope/styled-components';
 import { ComponentClass } from 'react';
 import { ComponentProps } from 'react';
 import { GridProps as ContainerProps } from '@salutejs/plasma-new-hope/styled-components';
 import { convertRoundnessMatrix } from '@salutejs/plasma-core';
 import { CounterProps } from '@salutejs/plasma-new-hope/styled-components';
 import { counterTokens } from '@salutejs/plasma-new-hope/styled-components';
-import { CustomComboboxProps } from '@salutejs/plasma-new-hope/types/components/Combobox/Combobox.types';
+import { CustomComboboxProps } from '@salutejs/plasma-new-hope/types/components/Combobox/ComboboxOld/Combobox.types';
 import { CustomPopoverProps } from '@salutejs/plasma-new-hope/types/components/Popover/Popover.types';
+import { CustomTabItemProps } from '@salutejs/plasma-new-hope/types/components/Tabs/ui/TabItem/TabItem.types';
+import { CustomTabsProps } from '@salutejs/plasma-new-hope/types/components/Tabs/ui/Tabs/Tabs.types';
 import { CustomToastProps } from '@salutejs/plasma-new-hope/types/components/Toast/Toast.types';
-import { DatePickerCalendarProps } from '@salutejs/plasma-new-hope/types/components/DatePicker/SingleDate/SingleDate.types';
-import { DatePickerCalendarProps as DatePickerCalendarProps_2 } from '@salutejs/plasma-new-hope/types/components/DatePicker/RangeDate/RangeDate.types';
+import { DateInfo } from '@salutejs/plasma-new-hope/types/components/Calendar/Calendar.types';
+import { DatePickerCalendarProps } from '@salutejs/plasma-new-hope/types/components/DatePicker/DatePickerBase.types';
 import { datePickerClasses } from '@salutejs/plasma-new-hope/styled-components';
 import { DatePickerdVariationProps } from '@salutejs/plasma-new-hope/types/components/DatePicker/DatePickerBase.types';
 import { DatePickerPlacement } from '@salutejs/plasma-new-hope/styled-components';
@@ -121,8 +129,7 @@ import { DropdownItem as DropdownItemType } from '@salutejs/plasma-hope';
 import { DropdownNodeType } from '@salutejs/plasma-hope';
 import { DropdownPopupProps } from '@salutejs/plasma-hope';
 import { DropdownProps } from '@salutejs/plasma-new-hope/styled-components';
-import { Editable } from '@salutejs/plasma-hope';
-import { EditableProps } from '@salutejs/plasma-hope';
+import { EditableProps } from '@salutejs/plasma-new-hope/types/components/Editable/Editable.types';
 import { ElasticGrid } from '@salutejs/plasma-hope';
 import { ElasticGridProps } from '@salutejs/plasma-hope';
 import { extractTextFrom } from '@salutejs/plasma-core';
@@ -143,14 +150,18 @@ import { ImgHTMLAttributes } from 'react';
 import { IndicatorProps } from '@salutejs/plasma-new-hope/styled-components';
 import { InputHTMLAttributes } from '@salutejs/plasma-core';
 import { InputHTMLAttributes as InputHTMLAttributes_2 } from '@salutejs/plasma-new-hope/types/types';
+import { InputHTMLAttributes as InputHTMLAttributes_3 } from 'react';
 import { JSXElementConstructor } from 'react';
+import { KeyboardEvent as KeyboardEvent_2 } from 'react';
 import { LineSkeletonProps } from '@salutejs/plasma-new-hope/styled-components';
 import { LinkCustomProps } from '@salutejs/plasma-new-hope/types/components/Link/Link';
 import { List } from '@salutejs/plasma-hope';
 import { ListItem } from '@salutejs/plasma-hope';
+import { MaskProps } from '@salutejs/plasma-new-hope/types/components/Mask/Mask.types';
 import { MaxLinesProps } from '@salutejs/plasma-core';
 import { mediaQuery } from '@salutejs/plasma-hope';
 import { MediaQueryFunction } from '@salutejs/plasma-hope';
+import { MergedDropdownNode } from '@salutejs/plasma-new-hope/types/components/Select/ui/Inner/ui/Item/Item.types';
 import { Modal } from '@salutejs/plasma-hope';
 import { modalClasses as modalBaseClasses } from '@salutejs/plasma-new-hope/styled-components';
 import { ModalProps as ModalBaseProps } from '@salutejs/plasma-new-hope/styled-components';
@@ -163,6 +174,7 @@ import { MouseEvent as MouseEvent_2 } from 'react';
 import { NotificationIconPlacement } from '@salutejs/plasma-new-hope/styled-components';
 import { NotificationLayout } from '@salutejs/plasma-new-hope/styled-components';
 import { NotificationProps } from '@salutejs/plasma-new-hope/styled-components';
+import { Orientation } from '@salutejs/plasma-new-hope/types/components/TextFieldGroup/TextFieldGroup.types';
 import { OutlinedProps } from '@salutejs/plasma-core';
 import { Overlay } from '@salutejs/plasma-new-hope/styled-components';
 import { OverlayProps } from '@salutejs/plasma-new-hope/styled-components';
@@ -185,13 +197,16 @@ import { PopupProps as PopupBaseProps } from '@salutejs/plasma-new-hope/styled-c
 import { PopupProvider as PopupBaseProvider } from '@salutejs/plasma-new-hope/styled-components';
 import { PopupInfo } from '@salutejs/plasma-new-hope/styled-components';
 import { PopupProps } from '@salutejs/plasma-hope';
+import { Portal } from '@salutejs/plasma-new-hope/styled-components';
 import { PortalProps } from '@salutejs/plasma-new-hope/styled-components';
 import { PreviewGallery } from '@salutejs/plasma-hope';
 import { PreviewGalleryItemProps } from '@salutejs/plasma-hope';
 import { PreviewGalleryProps } from '@salutejs/plasma-hope';
-import { Price } from '@salutejs/plasma-hope';
-import { PriceProps } from '@salutejs/plasma-hope';
+import { priceClasses } from '@salutejs/plasma-new-hope/styled-components';
+import { PriceProps } from '@salutejs/plasma-new-hope/types/components/Price/Price.types';
 import { ProgressProps } from '@salutejs/plasma-new-hope/styled-components';
+import { Property } from 'csstype';
+import { Props } from '@salutejs/plasma-new-hope/types/components/EmptyState/EmptyState.types';
 import { PropsType } from '@salutejs/plasma-new-hope/types/engines/types';
 import { RadioGroup } from '@salutejs/plasma-new-hope/styled-components';
 import { radiuses } from '@salutejs/plasma-core';
@@ -220,7 +235,8 @@ import { SegmentItemProps } from '@salutejs/plasma-new-hope/styled-components';
 import { SegmentProvider } from '@salutejs/plasma-new-hope/styled-components';
 import { SegmentProviderProps } from '@salutejs/plasma-new-hope/styled-components';
 import { SelectGroup } from '@salutejs/plasma-hope';
-import { SelectProps } from '@salutejs/plasma-hope';
+import { MergedSelectProps as SelectProps } from '@salutejs/plasma-new-hope/styled-components';
+import { SelectProps as SelectPropsHope } from '@salutejs/plasma-hope';
 import { selectText } from '@salutejs/plasma-hope';
 import { setRef } from '@salutejs/plasma-core';
 import { shadows } from '@salutejs/plasma-core';
@@ -249,6 +265,7 @@ import { StyledComponent } from 'styled-components';
 import { StyledPreviewGallery } from '@salutejs/plasma-hope';
 import { SubtitleProps } from '@salutejs/plasma-new-hope/styled-components';
 import { SwitchProps as SwitchProps_2 } from '@salutejs/plasma-new-hope/styled-components';
+import { SyntheticEvent } from 'react';
 import { syntheticFocus } from '@salutejs/plasma-core';
 import { TabItemProps } from '@salutejs/plasma-new-hope/styled-components';
 import { TabItemRefs } from '@salutejs/plasma-new-hope/styled-components';
@@ -258,9 +275,11 @@ import { TabsProps } from '@salutejs/plasma-new-hope/styled-components';
 import { TextareaHTMLAttributes } from '@salutejs/plasma-core';
 import type { TextAreaProps as TextAreaProps_2 } from '@salutejs/plasma-hope';
 import { TextareaResize } from '@salutejs/plasma-core';
+import { TextFieldGroupProps } from '@salutejs/plasma-new-hope/styled-components';
 import { TextFieldPrimitiveValue } from '@salutejs/plasma-new-hope/types/components/TextField/TextField.types';
 import { TextfieldPrimitiveValue } from '@salutejs/plasma-new-hope/types/components/Range/Range.types';
 import type { TextFieldProps as TextFieldProps_2 } from '@salutejs/plasma-hope';
+import { TextFieldPropsBase } from '@salutejs/plasma-new-hope/types/components/TextField/TextField.types';
 import { TextFieldView } from '@salutejs/plasma-hope';
 import { TextSkeletonBaseProps } from '@salutejs/plasma-new-hope/types/components/Skeleton/TextSkeleton/TextSkeleton.types';
 import { TextSkeletonProps } from '@salutejs/plasma-new-hope/styled-components';
@@ -274,6 +293,8 @@ import { toolbarTokens } from '@salutejs/plasma-new-hope/styled-components';
 import { TooltipProps } from '@salutejs/plasma-new-hope/styled-components';
 import { transformStyles } from '@salutejs/plasma-core';
 import { TypographyOldProps } from '@salutejs/plasma-new-hope/types/components/Typography/Old/TypographyOld';
+import { TypographyVariants } from '@salutejs/plasma-new-hope/types/components/Editable/Editable.types';
+import { UIEvent as UIEvent_2 } from 'react';
 import { Upload } from '@salutejs/plasma-hope';
 import { UploadAudio } from '@salutejs/plasma-hope';
 import { UploadAudioProps } from '@salutejs/plasma-hope';
@@ -304,6 +325,8 @@ import { WithSkeletonProps } from '@salutejs/plasma-new-hope/styled-components';
 export const Accordion: FunctionComponent<PropsType<    {
 view: {
 default: PolymorphicClassName;
+secondary: PolymorphicClassName;
+outlined: PolymorphicClassName;
 clear: PolymorphicClassName;
 };
 size: {
@@ -370,9 +393,257 @@ export { arrayItemSwapping }
 
 export { AsProps }
 
+// @public
+export const Attach: FunctionComponent<PropsType<    {
+view: {
+default: PolymorphicClassName;
+accent: PolymorphicClassName;
+secondary: PolymorphicClassName;
+clear: PolymorphicClassName;
+success: PolymorphicClassName;
+warning: PolymorphicClassName;
+critical: PolymorphicClassName;
+dark: PolymorphicClassName;
+black: PolymorphicClassName;
+white: PolymorphicClassName;
+};
+size: {
+l: PolymorphicClassName;
+m: PolymorphicClassName;
+s: PolymorphicClassName;
+xs: PolymorphicClassName;
+};
+}> & ((HTMLAttributes<HTMLDivElement> & Omit<ButtonHTMLAttributes<HTMLElement>, "value"> & Omit<AnchorHTMLAttributes<HTMLElement>, "type"> & AsProps_2<any> & {
+text?: string | undefined;
+contentLeft?: ReactNode;
+contentPlacing?: ("default" | "relaxed") | undefined;
+isLoading?: boolean | undefined;
+loader?: ReactNode;
+stretch?: boolean | undefined;
+stretching?: ("auto" | "fixed" | "filled") | undefined;
+square?: boolean | undefined;
+focused?: boolean | undefined;
+disabled?: boolean | undefined;
+pin?: "square-square" | "square-clear" | "clear-square" | "clear-clear" | "clear-circle" | "circle-clear" | "circle-circle" | undefined;
+view?: string | undefined;
+size?: string | undefined;
+outlined?: boolean | undefined;
+shiftLeft?: boolean | undefined;
+shiftRight?: boolean | undefined;
+blur?: "small" | "medium" | "large" | undefined;
+} & {
+value?: string | number | undefined;
+contentRight?: undefined;
+} & BaseAttachProps & {
+buttonType?: "button" | undefined;
+} & RefAttributes<HTMLDivElement>) | (HTMLAttributes<HTMLDivElement> & Omit<ButtonHTMLAttributes<HTMLElement>, "value"> & Omit<AnchorHTMLAttributes<HTMLElement>, "type"> & AsProps_2<any> & {
+text?: string | undefined;
+contentLeft?: ReactNode;
+contentPlacing?: ("default" | "relaxed") | undefined;
+isLoading?: boolean | undefined;
+loader?: ReactNode;
+stretch?: boolean | undefined;
+stretching?: ("auto" | "fixed" | "filled") | undefined;
+square?: boolean | undefined;
+focused?: boolean | undefined;
+disabled?: boolean | undefined;
+pin?: "square-square" | "square-clear" | "clear-square" | "clear-clear" | "clear-circle" | "circle-clear" | "circle-circle" | undefined;
+view?: string | undefined;
+size?: string | undefined;
+outlined?: boolean | undefined;
+shiftLeft?: boolean | undefined;
+shiftRight?: boolean | undefined;
+blur?: "small" | "medium" | "large" | undefined;
+} & {
+value?: string | number | undefined;
+contentRight?: undefined;
+} & BaseAttachProps & {
+buttonType?: "button" | undefined;
+} & {
+value?: undefined;
+contentRight?: ReactNode;
+} & RefAttributes<HTMLDivElement>) | (HTMLAttributes<HTMLDivElement> & Omit<ButtonHTMLAttributes<HTMLElement>, "value"> & Omit<AnchorHTMLAttributes<HTMLElement>, "type"> & AsProps_2<any> & {
+text?: string | undefined;
+contentLeft?: ReactNode;
+contentPlacing?: ("default" | "relaxed") | undefined;
+isLoading?: boolean | undefined;
+loader?: ReactNode;
+stretch?: boolean | undefined;
+stretching?: ("auto" | "fixed" | "filled") | undefined;
+square?: boolean | undefined;
+focused?: boolean | undefined;
+disabled?: boolean | undefined;
+pin?: "square-square" | "square-clear" | "clear-square" | "clear-clear" | "clear-circle" | "circle-clear" | "circle-circle" | undefined;
+view?: string | undefined;
+size?: string | undefined;
+outlined?: boolean | undefined;
+shiftLeft?: boolean | undefined;
+shiftRight?: boolean | undefined;
+blur?: "small" | "medium" | "large" | undefined;
+} & {
+value?: string | number | undefined;
+contentRight?: undefined;
+} & BaseAttachProps & {
+buttonType?: "iconButton" | undefined;
+icon?: ReactNode;
+} & RefAttributes<HTMLDivElement>) | (HTMLAttributes<HTMLDivElement> & Omit<ButtonHTMLAttributes<HTMLElement>, "value"> & Omit<AnchorHTMLAttributes<HTMLElement>, "type"> & AsProps_2<any> & {
+text?: string | undefined;
+contentLeft?: ReactNode;
+contentPlacing?: ("default" | "relaxed") | undefined;
+isLoading?: boolean | undefined;
+loader?: ReactNode;
+stretch?: boolean | undefined;
+stretching?: ("auto" | "fixed" | "filled") | undefined;
+square?: boolean | undefined;
+focused?: boolean | undefined;
+disabled?: boolean | undefined;
+pin?: "square-square" | "square-clear" | "clear-square" | "clear-clear" | "clear-circle" | "circle-clear" | "circle-circle" | undefined;
+view?: string | undefined;
+size?: string | undefined;
+outlined?: boolean | undefined;
+shiftLeft?: boolean | undefined;
+shiftRight?: boolean | undefined;
+blur?: "small" | "medium" | "large" | undefined;
+} & {
+value?: string | number | undefined;
+contentRight?: undefined;
+} & BaseAttachProps & {
+buttonType?: "iconButton" | undefined;
+icon?: ReactNode;
+} & {
+value?: undefined;
+contentRight?: ReactNode;
+} & RefAttributes<HTMLDivElement>) | (HTMLAttributes<HTMLDivElement> & Omit<ButtonHTMLAttributes<HTMLElement>, "value"> & Omit<AnchorHTMLAttributes<HTMLElement>, "type"> & AsProps_2<any> & {
+text?: string | undefined;
+contentLeft?: ReactNode;
+contentPlacing?: ("default" | "relaxed") | undefined;
+isLoading?: boolean | undefined;
+loader?: ReactNode;
+stretch?: boolean | undefined;
+stretching?: ("auto" | "fixed" | "filled") | undefined;
+square?: boolean | undefined;
+focused?: boolean | undefined;
+disabled?: boolean | undefined;
+pin?: "square-square" | "square-clear" | "clear-square" | "clear-clear" | "clear-circle" | "circle-clear" | "circle-circle" | undefined;
+view?: string | undefined;
+size?: string | undefined;
+outlined?: boolean | undefined;
+shiftLeft?: boolean | undefined;
+shiftRight?: boolean | undefined;
+blur?: "small" | "medium" | "large" | undefined;
+} & {
+value?: undefined;
+contentRight?: ReactNode;
+} & BaseAttachProps & {
+buttonType?: "button" | undefined;
+} & {
+value?: string | number | undefined;
+contentRight?: undefined;
+} & RefAttributes<HTMLDivElement>) | (HTMLAttributes<HTMLDivElement> & Omit<ButtonHTMLAttributes<HTMLElement>, "value"> & Omit<AnchorHTMLAttributes<HTMLElement>, "type"> & AsProps_2<any> & {
+text?: string | undefined;
+contentLeft?: ReactNode;
+contentPlacing?: ("default" | "relaxed") | undefined;
+isLoading?: boolean | undefined;
+loader?: ReactNode;
+stretch?: boolean | undefined;
+stretching?: ("auto" | "fixed" | "filled") | undefined;
+square?: boolean | undefined;
+focused?: boolean | undefined;
+disabled?: boolean | undefined;
+pin?: "square-square" | "square-clear" | "clear-square" | "clear-clear" | "clear-circle" | "circle-clear" | "circle-circle" | undefined;
+view?: string | undefined;
+size?: string | undefined;
+outlined?: boolean | undefined;
+shiftLeft?: boolean | undefined;
+shiftRight?: boolean | undefined;
+blur?: "small" | "medium" | "large" | undefined;
+} & {
+value?: undefined;
+contentRight?: ReactNode;
+} & BaseAttachProps & {
+buttonType?: "button" | undefined;
+} & RefAttributes<HTMLDivElement>) | (HTMLAttributes<HTMLDivElement> & Omit<ButtonHTMLAttributes<HTMLElement>, "value"> & Omit<AnchorHTMLAttributes<HTMLElement>, "type"> & AsProps_2<any> & {
+text?: string | undefined;
+contentLeft?: ReactNode;
+contentPlacing?: ("default" | "relaxed") | undefined;
+isLoading?: boolean | undefined;
+loader?: ReactNode;
+stretch?: boolean | undefined;
+stretching?: ("auto" | "fixed" | "filled") | undefined;
+square?: boolean | undefined;
+focused?: boolean | undefined;
+disabled?: boolean | undefined;
+pin?: "square-square" | "square-clear" | "clear-square" | "clear-clear" | "clear-circle" | "circle-clear" | "circle-circle" | undefined;
+view?: string | undefined;
+size?: string | undefined;
+outlined?: boolean | undefined;
+shiftLeft?: boolean | undefined;
+shiftRight?: boolean | undefined;
+blur?: "small" | "medium" | "large" | undefined;
+} & {
+value?: undefined;
+contentRight?: ReactNode;
+} & BaseAttachProps & {
+buttonType?: "iconButton" | undefined;
+icon?: ReactNode;
+} & {
+value?: string | number | undefined;
+contentRight?: undefined;
+} & RefAttributes<HTMLDivElement>) | (HTMLAttributes<HTMLDivElement> & Omit<ButtonHTMLAttributes<HTMLElement>, "value"> & Omit<AnchorHTMLAttributes<HTMLElement>, "type"> & AsProps_2<any> & {
+text?: string | undefined;
+contentLeft?: ReactNode;
+contentPlacing?: ("default" | "relaxed") | undefined;
+isLoading?: boolean | undefined;
+loader?: ReactNode;
+stretch?: boolean | undefined;
+stretching?: ("auto" | "fixed" | "filled") | undefined;
+square?: boolean | undefined;
+focused?: boolean | undefined;
+disabled?: boolean | undefined;
+pin?: "square-square" | "square-clear" | "clear-square" | "clear-clear" | "clear-circle" | "circle-clear" | "circle-circle" | undefined;
+view?: string | undefined;
+size?: string | undefined;
+outlined?: boolean | undefined;
+shiftLeft?: boolean | undefined;
+shiftRight?: boolean | undefined;
+blur?: "small" | "medium" | "large" | undefined;
+} & {
+value?: undefined;
+contentRight?: ReactNode;
+} & BaseAttachProps & {
+buttonType?: "iconButton" | undefined;
+icon?: ReactNode;
+} & RefAttributes<HTMLDivElement>))>;
+
 export { AudioPlayer }
 
 export { AudioPlayerProps }
+
+// @public (undocumented)
+export const Autocomplete: FunctionComponent<PropsType<    {
+view: {
+default: PolymorphicClassName;
+positive: PolymorphicClassName;
+warning: PolymorphicClassName;
+negative: PolymorphicClassName;
+};
+size: {
+l: PolymorphicClassName;
+m: PolymorphicClassName;
+s: PolymorphicClassName;
+xs: PolymorphicClassName;
+};
+labelPlacement: {
+inner: PolymorphicClassName;
+outer: PolymorphicClassName;
+};
+disabled: {
+true: PolymorphicClassName;
+};
+readOnly: {
+true: PolymorphicClassName;
+};
+}> & BaseProps & Omit<TextFieldPropsBase, "required" | "enumerationType" | "requiredPlacement" | "optional" | "chips" | "onChangeChips"> & Omit<InputHTMLAttributes_3<HTMLInputElement>, "size" | "required"> & RefAttributes<HTMLInputElement>>;
 
 // @public (undocumented)
 export const Avatar: FunctionComponent<PropsType<    {
@@ -431,17 +702,46 @@ true: PolymorphicClassName;
 transparent: {
 true: PolymorphicClassName;
 };
-}> & HTMLAttributes<HTMLDivElement> & {
+clear: {
+true: PolymorphicClassName;
+};
+}> & ((HTMLAttributes<HTMLDivElement> & {
 text?: string | undefined;
 contentLeft?: ReactNode;
 contentRight?: ReactNode;
-pilled?: boolean | undefined;
-transparent?: boolean | undefined;
 size?: string | undefined;
 view?: string | undefined;
 } & {
 children?: ReactNode;
-} & RefAttributes<HTMLDivElement>>;
+} & {
+clear?: true | undefined;
+pilled?: false | undefined;
+transparent?: false | undefined;
+} & RefAttributes<HTMLDivElement>) | (HTMLAttributes<HTMLDivElement> & {
+text?: string | undefined;
+contentLeft?: ReactNode;
+contentRight?: ReactNode;
+size?: string | undefined;
+view?: string | undefined;
+} & {
+children?: ReactNode;
+} & {
+pilled?: true | undefined;
+transparent?: boolean | undefined;
+clear?: false | undefined;
+} & RefAttributes<HTMLDivElement>) | (HTMLAttributes<HTMLDivElement> & {
+text?: string | undefined;
+contentLeft?: ReactNode;
+contentRight?: ReactNode;
+size?: string | undefined;
+view?: string | undefined;
+} & {
+children?: ReactNode;
+} & {
+pilled?: boolean | undefined;
+transparent?: true | undefined;
+clear?: false | undefined;
+} & RefAttributes<HTMLDivElement>))>;
 
 export { BadgeProps }
 
@@ -456,6 +756,7 @@ body1: PolymorphicClassName;
 };
 }> & {
 breakWord?: boolean | undefined;
+color?: string | undefined;
 } & SpacingProps_2 & BoldProps & HTMLAttributes<HTMLDivElement> & RefAttributes<HTMLDivElement>>;
 
 // @public (undocumented)
@@ -465,6 +766,7 @@ body2: PolymorphicClassName;
 };
 }> & {
 breakWord?: boolean | undefined;
+color?: string | undefined;
 } & SpacingProps_2 & BoldProps & HTMLAttributes<HTMLDivElement> & RefAttributes<HTMLDivElement>>;
 
 // @public (undocumented)
@@ -474,6 +776,7 @@ l: PolymorphicClassName;
 };
 }> & {
 breakWord?: boolean | undefined;
+color?: string | undefined;
 } & SpacingProps_2 & BoldProps & HTMLAttributes<HTMLDivElement> & RefAttributes<HTMLDivElement>>;
 
 // @public (undocumented)
@@ -483,6 +786,7 @@ m: PolymorphicClassName;
 };
 }> & {
 breakWord?: boolean | undefined;
+color?: string | undefined;
 } & SpacingProps_2 & BoldProps & HTMLAttributes<HTMLDivElement> & RefAttributes<HTMLDivElement>>;
 
 // @public (undocumented)
@@ -492,6 +796,7 @@ s: PolymorphicClassName;
 };
 }> & {
 breakWord?: boolean | undefined;
+color?: string | undefined;
 } & SpacingProps_2 & BoldProps & HTMLAttributes<HTMLDivElement> & RefAttributes<HTMLDivElement>>;
 
 // @public (undocumented)
@@ -501,6 +806,7 @@ xs: PolymorphicClassName;
 };
 }> & {
 breakWord?: boolean | undefined;
+color?: string | undefined;
 } & SpacingProps_2 & BoldProps & HTMLAttributes<HTMLDivElement> & RefAttributes<HTMLDivElement>>;
 
 // @public (undocumented)
@@ -510,7 +816,29 @@ xxs: PolymorphicClassName;
 };
 }> & {
 breakWord?: boolean | undefined;
+color?: string | undefined;
 } & SpacingProps_2 & BoldProps & HTMLAttributes<HTMLDivElement> & RefAttributes<HTMLDivElement>>;
+
+// @public
+export const Breadcrumbs: FunctionComponent<PropsType<    {
+view: {
+default: PolymorphicClassName;
+};
+size: {
+l: PolymorphicClassName;
+m: PolymorphicClassName;
+s: PolymorphicClassName;
+xs: PolymorphicClassName;
+};
+}> & HTMLAttributes<HTMLDivElement> & {
+view?: string | undefined;
+size?: string | undefined;
+separator?: ReactNode;
+items: BreadcrumbsItem[];
+showItems?: number | undefined;
+} & RefAttributes<HTMLDivElement>>;
+
+export { BreadcrumbsProps }
 
 export { Breakpoint }
 
@@ -676,16 +1004,12 @@ m: PolymorphicClassName;
 s: PolymorphicClassName;
 xs: PolymorphicClassName;
 };
-}> & Calendar_2 & {
-type?: "Days" | "Months" | "Years" | undefined;
-size?: string | undefined;
-view?: string | undefined;
-} & RefAttributes<HTMLDivElement>>;
+}> & Calendar_2 & CalendarConfigProps & RefAttributes<HTMLDivElement>>;
 
 export { CalendarBaseProps }
 
 // @public (undocumented)
-export const CalendarBaseRange: ({ value, disabledList, eventList, min, max, onChangeValue, onChangeStartOfRange, ...rest }: CalendarRange<CalendarBaseProps>) => ReactElement<CalendarBaseProps, string | JSXElementConstructor<any>>;
+export const CalendarBaseRange: ({ value, min, max, disabledList, eventList, eventMonthList, disabledMonthList, eventYearList, disabledYearList, onChangeValue, onChangeStartOfRange, ...rest }: CalendarRange<CalendarBaseProps>) => ReactElement<CalendarBaseProps, string | JSXElementConstructor<any>>;
 
 // @public (undocumented)
 export const CalendarDouble: FunctionComponent<PropsType<    {
@@ -698,15 +1022,12 @@ m: PolymorphicClassName;
 s: PolymorphicClassName;
 xs: PolymorphicClassName;
 };
-}> & HTMLAttributes<HTMLDivElement> & Calendar_2 & {
-size?: string | undefined;
-view?: string | undefined;
-} & RefAttributes<HTMLDivElement>>;
+}> & Calendar_2 & CalendarConfigProps & RefAttributes<HTMLDivElement>>;
 
 export { CalendarDoubleProps }
 
 // @public (undocumented)
-export const CalendarDoubleRange: ({ value, disabledList, eventList, min, max, onChangeValue, onChangeStartOfRange, ...rest }: CalendarRange<CalendarDoubleProps>) => ReactElement<CalendarDoubleProps, string | JSXElementConstructor<any>>;
+export const CalendarDoubleRange: ({ value, min, max, disabledList, eventList, eventMonthList, disabledMonthList, eventYearList, disabledYearList, onChangeValue, onChangeStartOfRange, ...rest }: CalendarRange<CalendarDoubleProps>) => ReactElement<CalendarDoubleProps, string | JSXElementConstructor<any>>;
 
 export { CalendarProps }
 
@@ -762,7 +1083,7 @@ xs: PolymorphicClassName;
 };
 }> & (({
 size?: string | undefined;
-view: string;
+view?: string | undefined;
 contentLeft?: ReactNode;
 contentRight?: ReactNode;
 alignContentLeft?: AlignProp | undefined;
@@ -777,7 +1098,7 @@ label?: string | undefined;
 children?: undefined;
 } & HTMLAttributes<HTMLDivElement> & RefAttributes<HTMLDivElement>) | ({
 size?: string | undefined;
-view: string;
+view?: string | undefined;
 contentLeft?: ReactNode;
 contentRight?: ReactNode;
 alignContentLeft?: AlignProp | undefined;
@@ -877,7 +1198,199 @@ export { ColProps }
 export { ColSizeProps }
 
 // @public (undocumented)
-export const Combobox: FunctionComponent<PropsType<    {
+export const Combobox: React_2.ForwardRefExoticComponent<(Omit<PropsType<    {
+view: {
+default: PolymorphicClassName;
+positive: PolymorphicClassName;
+warning: PolymorphicClassName;
+negative: PolymorphicClassName;
+};
+size: {
+l: PolymorphicClassName;
+m: PolymorphicClassName;
+s: PolymorphicClassName;
+xs: PolymorphicClassName;
+};
+labelPlacement: {
+inner: PolymorphicClassName;
+outer: PolymorphicClassName;
+};
+disabled: {
+true: PolymorphicClassName;
+};
+readOnly: {
+true: PolymorphicClassName;
+};
+}> & BasicProps & {
+    readOnly?: boolean | undefined;
+    disabled?: true | undefined;
+    alwaysOpened?: false | undefined;
+} & {
+    multiple?: false | undefined;
+    value?: string | undefined;
+    onChange?: ((value: string) => void) | undefined;
+    isTargetAmount?: false | undefined;
+} & Omit<React_2.ButtonHTMLAttributes<HTMLInputElement>, "onChange" | "value"> & React_2.RefAttributes<HTMLInputElement>, "ref"> | Omit<PropsType<    {
+view: {
+default: PolymorphicClassName;
+positive: PolymorphicClassName;
+warning: PolymorphicClassName;
+negative: PolymorphicClassName;
+};
+size: {
+l: PolymorphicClassName;
+m: PolymorphicClassName;
+s: PolymorphicClassName;
+xs: PolymorphicClassName;
+};
+labelPlacement: {
+inner: PolymorphicClassName;
+outer: PolymorphicClassName;
+};
+disabled: {
+true: PolymorphicClassName;
+};
+readOnly: {
+true: PolymorphicClassName;
+};
+}> & BasicProps & {
+    readOnly?: boolean | undefined;
+    disabled?: true | undefined;
+    alwaysOpened?: false | undefined;
+} & {
+    multiple: true;
+    value?: string[] | undefined;
+    onChange?: ((value: string[]) => void) | undefined;
+    isTargetAmount?: boolean | undefined;
+} & Omit<React_2.ButtonHTMLAttributes<HTMLInputElement>, "onChange" | "value"> & React_2.RefAttributes<HTMLInputElement>, "ref"> | Omit<PropsType<    {
+view: {
+default: PolymorphicClassName;
+positive: PolymorphicClassName;
+warning: PolymorphicClassName;
+negative: PolymorphicClassName;
+};
+size: {
+l: PolymorphicClassName;
+m: PolymorphicClassName;
+s: PolymorphicClassName;
+xs: PolymorphicClassName;
+};
+labelPlacement: {
+inner: PolymorphicClassName;
+outer: PolymorphicClassName;
+};
+disabled: {
+true: PolymorphicClassName;
+};
+readOnly: {
+true: PolymorphicClassName;
+};
+}> & BasicProps & {
+    readOnly?: true | undefined;
+    disabled?: boolean | undefined;
+    alwaysOpened?: false | undefined;
+} & {
+    multiple?: false | undefined;
+    value?: string | undefined;
+    onChange?: ((value: string) => void) | undefined;
+    isTargetAmount?: false | undefined;
+} & Omit<React_2.ButtonHTMLAttributes<HTMLInputElement>, "onChange" | "value"> & React_2.RefAttributes<HTMLInputElement>, "ref"> | Omit<PropsType<    {
+view: {
+default: PolymorphicClassName;
+positive: PolymorphicClassName;
+warning: PolymorphicClassName;
+negative: PolymorphicClassName;
+};
+size: {
+l: PolymorphicClassName;
+m: PolymorphicClassName;
+s: PolymorphicClassName;
+xs: PolymorphicClassName;
+};
+labelPlacement: {
+inner: PolymorphicClassName;
+outer: PolymorphicClassName;
+};
+disabled: {
+true: PolymorphicClassName;
+};
+readOnly: {
+true: PolymorphicClassName;
+};
+}> & BasicProps & {
+    readOnly?: true | undefined;
+    disabled?: boolean | undefined;
+    alwaysOpened?: false | undefined;
+} & {
+    multiple: true;
+    value?: string[] | undefined;
+    onChange?: ((value: string[]) => void) | undefined;
+    isTargetAmount?: boolean | undefined;
+} & Omit<React_2.ButtonHTMLAttributes<HTMLInputElement>, "onChange" | "value"> & React_2.RefAttributes<HTMLInputElement>, "ref"> | Omit<PropsType<    {
+view: {
+default: PolymorphicClassName;
+positive: PolymorphicClassName;
+warning: PolymorphicClassName;
+negative: PolymorphicClassName;
+};
+size: {
+l: PolymorphicClassName;
+m: PolymorphicClassName;
+s: PolymorphicClassName;
+xs: PolymorphicClassName;
+};
+labelPlacement: {
+inner: PolymorphicClassName;
+outer: PolymorphicClassName;
+};
+disabled: {
+true: PolymorphicClassName;
+};
+readOnly: {
+true: PolymorphicClassName;
+};
+}> & BasicProps & {
+    readOnly?: false | undefined;
+    disabled?: false | undefined;
+    alwaysOpened?: true | undefined;
+} & {
+    multiple?: false | undefined;
+    value?: string | undefined;
+    onChange?: ((value: string) => void) | undefined;
+    isTargetAmount?: false | undefined;
+} & Omit<React_2.ButtonHTMLAttributes<HTMLInputElement>, "onChange" | "value"> & React_2.RefAttributes<HTMLInputElement>, "ref"> | Omit<PropsType<    {
+view: {
+default: PolymorphicClassName;
+positive: PolymorphicClassName;
+warning: PolymorphicClassName;
+negative: PolymorphicClassName;
+};
+size: {
+l: PolymorphicClassName;
+m: PolymorphicClassName;
+s: PolymorphicClassName;
+xs: PolymorphicClassName;
+};
+labelPlacement: {
+inner: PolymorphicClassName;
+outer: PolymorphicClassName;
+};
+disabled: {
+true: PolymorphicClassName;
+};
+readOnly: {
+true: PolymorphicClassName;
+};
+}> & BasicProps & {
+    readOnly?: false | undefined;
+    disabled?: false | undefined;
+    alwaysOpened?: true | undefined;
+} & {
+    multiple: true;
+    value?: string[] | undefined;
+    onChange?: ((value: string[]) => void) | undefined;
+    isTargetAmount?: boolean | undefined;
+} & Omit<React_2.ButtonHTMLAttributes<HTMLInputElement>, "onChange" | "value"> & React_2.RefAttributes<HTMLInputElement>, "ref"> | Omit<PropsType<    {
 size: {
 xs: PolymorphicClassName;
 s: PolymorphicClassName;
@@ -887,15 +1400,29 @@ l: PolymorphicClassName;
 view: {
 default: PolymorphicClassName;
 };
-}> & ((Omit<InputHTMLAttributes<HTMLInputElement>, "onChange" | "size" | "value" | "type" | "target" | "checked" | "minLength" | "maxLength"> & CustomComboboxProps & {
-valueType?: "single" | undefined;
-value?: ComboboxPrimitiveValue | undefined;
-onChangeValue?: ((value?: ComboboxPrimitiveValue | undefined) => void) | undefined;
-} & RefAttributes<HTMLInputElement>) | (Omit<InputHTMLAttributes<HTMLInputElement>, "onChange" | "size" | "value" | "type" | "target" | "checked" | "minLength" | "maxLength"> & CustomComboboxProps & {
-valueType: "multiple";
-value?: ComboboxPrimitiveValue[] | undefined;
-onChangeValue?: ((value?: ComboboxPrimitiveValue[] | undefined) => void) | undefined;
-} & RefAttributes<HTMLInputElement>))>;
+}> & Omit<InputHTMLAttributes<HTMLInputElement>, "onChange" | "size" | "value" | "type" | "target" | "checked" | "minLength" | "maxLength"> & CustomComboboxProps & {
+    valueType?: "single" | undefined;
+    value?: ComboboxPrimitiveValue | undefined;
+    onChangeValue?: ((value?: ComboboxPrimitiveValue | undefined) => void) | undefined;
+} & React_2.RefAttributes<HTMLInputElement> & {
+    items?: undefined;
+}, "ref"> | Omit<PropsType<    {
+size: {
+xs: PolymorphicClassName;
+s: PolymorphicClassName;
+m: PolymorphicClassName;
+l: PolymorphicClassName;
+};
+view: {
+default: PolymorphicClassName;
+};
+}> & Omit<InputHTMLAttributes<HTMLInputElement>, "onChange" | "size" | "value" | "type" | "target" | "checked" | "minLength" | "maxLength"> & CustomComboboxProps & {
+    valueType: "multiple";
+    value?: ComboboxPrimitiveValue[] | undefined;
+    onChangeValue?: ((value?: ComboboxPrimitiveValue[] | undefined) => void) | undefined;
+} & React_2.RefAttributes<HTMLInputElement> & {
+    items?: undefined;
+}, "ref">) & React_2.RefAttributes<HTMLInputElement>>;
 
 // @public (undocumented)
 export const ComboboxDivider: FunctionComponent<PropsType<Variants> & HTMLAttributes<HTMLDivElement> & {
@@ -1035,8 +1562,8 @@ true: PolymorphicClassName;
 }> & DatePickerdVariationProps & {
 defaultFirstDate?: Date | undefined;
 defaultSecondDate?: Date | undefined;
-onCommitFirstDate?: ((value: string | Date, error?: boolean | undefined, success?: boolean | undefined) => void) | undefined;
-onCommitSecondDate?: ((value: string | Date, error?: boolean | undefined, success?: boolean | undefined) => void) | undefined;
+onCommitFirstDate?: ((value: string | Date, error?: boolean | undefined, success?: boolean | undefined, dateInfo?: DateInfo | undefined) => void) | undefined;
+onCommitSecondDate?: ((value: string | Date, error?: boolean | undefined, success?: boolean | undefined, dateInfo?: DateInfo | undefined) => void) | undefined;
 } & {
 label?: string | undefined;
 view?: string | undefined;
@@ -1068,7 +1595,7 @@ onFocusFirstTextfield?: ((event: ChangeEvent<HTMLInputElement>) => void) | undef
 onFocusSecondTextfield?: ((event: ChangeEvent<HTMLInputElement>) => void) | undefined;
 onBlurFirstTextfield?: ((event: ChangeEvent<HTMLInputElement>) => void) | undefined;
 onBlurSecondTextfield?: ((event: ChangeEvent<HTMLInputElement>) => void) | undefined;
-} & DatePickerCalendarProps_2 & Omit<DatePickerPopoverProps, "placement"> & {
+} & DatePickerCalendarProps & Omit<DatePickerPopoverProps, "placement"> & {
 placement?: DatePickerRangePlacement | DatePickerRangePlacement[] | undefined;
 isDoubleCalendar?: boolean | undefined;
 } & HTMLAttributes<HTMLDivElement> & RefAttributes<RangeInputRefs>>;
@@ -1117,7 +1644,7 @@ none: PolymorphicClassName;
 default: PolymorphicClassName;
 };
 }> & PopupBaseProps & PanelProps & {
-placement?: "top" | "bottom" | "right" | "left" | undefined;
+placement?: "top" | "right" | "bottom" | "left" | undefined;
 asModal?: boolean | undefined;
 withBlur?: boolean | undefined;
 closeOnEsc?: boolean | undefined;
@@ -1195,6 +1722,7 @@ l: PolymorphicClassName;
 };
 }> & {
 breakWord?: boolean | undefined;
+color?: string | undefined;
 } & SpacingProps_2 & BoldProps & HTMLAttributes<HTMLDivElement> & RefAttributes<HTMLDivElement>>;
 
 // @public (undocumented)
@@ -1204,6 +1732,7 @@ m: PolymorphicClassName;
 };
 }> & {
 breakWord?: boolean | undefined;
+color?: string | undefined;
 } & SpacingProps_2 & BoldProps & HTMLAttributes<HTMLDivElement> & RefAttributes<HTMLDivElement>>;
 
 // @public (undocumented)
@@ -1213,15 +1742,32 @@ s: PolymorphicClassName;
 };
 }> & {
 breakWord?: boolean | undefined;
+color?: string | undefined;
 } & SpacingProps_2 & BoldProps & HTMLAttributes<HTMLDivElement> & RefAttributes<HTMLDivElement>>;
 
-export { Editable }
-
-export { EditableProps }
+// @public (undocumented)
+export const Editable: FunctionComponent<PropsType<    {
+view: {
+default: PolymorphicClassName;
+};
+size: {
+m: PolymorphicClassName;
+};
+}> & EditableProps<TypographyVariants> & RefAttributes<HTMLInputElement>>;
 
 export { ElasticGrid }
 
 export { ElasticGridProps }
+
+// @public (undocumented)
+export const EmptyState: FunctionComponent<PropsType<    {
+size: {
+l: PolymorphicClassName;
+m: PolymorphicClassName;
+s: PolymorphicClassName;
+xs: PolymorphicClassName;
+};
+}> & Props & RefAttributes<HTMLDivElement>>;
 
 export { extractTextFrom }
 
@@ -1260,6 +1806,7 @@ h1: PolymorphicClassName;
 };
 }> & {
 breakWord?: boolean | undefined;
+color?: string | undefined;
 } & SpacingProps_2 & BoldProps & HTMLAttributes<HTMLDivElement> & RefAttributes<HTMLDivElement>>;
 
 // @public (undocumented)
@@ -1269,6 +1816,7 @@ h2: PolymorphicClassName;
 };
 }> & {
 breakWord?: boolean | undefined;
+color?: string | undefined;
 } & SpacingProps_2 & BoldProps & HTMLAttributes<HTMLDivElement> & RefAttributes<HTMLDivElement>>;
 
 // @public (undocumented)
@@ -1278,6 +1826,7 @@ h3: PolymorphicClassName;
 };
 }> & {
 breakWord?: boolean | undefined;
+color?: string | undefined;
 } & SpacingProps_2 & BoldProps & HTMLAttributes<HTMLDivElement> & RefAttributes<HTMLDivElement>>;
 
 // @public (undocumented)
@@ -1287,6 +1836,7 @@ h4: PolymorphicClassName;
 };
 }> & {
 breakWord?: boolean | undefined;
+color?: string | undefined;
 } & SpacingProps_2 & BoldProps & HTMLAttributes<HTMLDivElement> & RefAttributes<HTMLDivElement>>;
 
 // @public (undocumented)
@@ -1296,6 +1846,7 @@ h5: PolymorphicClassName;
 };
 }> & {
 breakWord?: boolean | undefined;
+color?: string | undefined;
 } & SpacingProps_2 & BoldProps & HTMLAttributes<HTMLDivElement> & RefAttributes<HTMLDivElement>>;
 
 // @public (undocumented)
@@ -1515,6 +2066,197 @@ export { List }
 
 export { ListItem }
 
+// @public (undocumented)
+export const Mask: ForwardRefExoticComponent<(Omit<PropsType<    {
+view: {
+default: PolymorphicClassName;
+positive: PolymorphicClassName;
+warning: PolymorphicClassName;
+negative: PolymorphicClassName;
+};
+size: {
+l: PolymorphicClassName;
+m: PolymorphicClassName;
+s: PolymorphicClassName;
+xs: PolymorphicClassName;
+};
+labelPlacement: {
+inner: PolymorphicClassName;
+outer: PolymorphicClassName;
+};
+disabled: {
+true: PolymorphicClassName;
+};
+readOnly: {
+true: PolymorphicClassName;
+};
+}> & {
+size?: string | undefined;
+view?: string | undefined;
+readOnly?: boolean | undefined;
+disabled?: boolean | undefined;
+} & {
+label?: string | undefined;
+labelPlacement?: "outer" | "inner" | undefined;
+leftHelper?: string | undefined;
+contentLeft?: ReactElement<any, string | JSXElementConstructor<any>> | undefined;
+contentRight?: ReactElement<any, string | JSXElementConstructor<any>> | undefined;
+textBefore?: string | undefined;
+textAfter?: string | undefined;
+onSearch?: ((value: string, event?: KeyboardEvent_2<HTMLInputElement> | undefined) => void) | undefined;
+} & {
+requiredPlacement?: "right" | "left" | undefined;
+} & {
+required: true;
+optional?: false | undefined;
+} & {
+chips?: undefined;
+onChangeChips?: undefined;
+enumerationType?: "plain" | undefined;
+onSearch?: ((value: string, event?: KeyboardEvent_2<HTMLInputElement> | undefined) => void) | undefined;
+} & Omit<InputHTMLAttributes_2<HTMLInputElement>, "size" | "required"> & RefAttributes<HTMLInputElement> & MaskProps, "ref"> | Omit<PropsType<    {
+view: {
+default: PolymorphicClassName;
+positive: PolymorphicClassName;
+warning: PolymorphicClassName;
+negative: PolymorphicClassName;
+};
+size: {
+l: PolymorphicClassName;
+m: PolymorphicClassName;
+s: PolymorphicClassName;
+xs: PolymorphicClassName;
+};
+labelPlacement: {
+inner: PolymorphicClassName;
+outer: PolymorphicClassName;
+};
+disabled: {
+true: PolymorphicClassName;
+};
+readOnly: {
+true: PolymorphicClassName;
+};
+}> & {
+size?: string | undefined;
+view?: string | undefined;
+readOnly?: boolean | undefined;
+disabled?: boolean | undefined;
+} & {
+label?: string | undefined;
+labelPlacement?: "outer" | "inner" | undefined;
+leftHelper?: string | undefined;
+contentLeft?: ReactElement<any, string | JSXElementConstructor<any>> | undefined;
+contentRight?: ReactElement<any, string | JSXElementConstructor<any>> | undefined;
+textBefore?: string | undefined;
+textAfter?: string | undefined;
+onSearch?: ((value: string, event?: KeyboardEvent_2<HTMLInputElement> | undefined) => void) | undefined;
+} & {
+requiredPlacement?: "right" | "left" | undefined;
+} & {
+required: true;
+optional?: false | undefined;
+} & {
+enumerationType: "chip";
+onSearch?: undefined;
+chips?: TextFieldPrimitiveValue[] | undefined;
+onChangeChips?: ((value: TextFieldPrimitiveValue[]) => void) | undefined;
+} & Omit<InputHTMLAttributes_2<HTMLInputElement>, "size" | "required"> & RefAttributes<HTMLInputElement> & MaskProps, "ref"> | Omit<PropsType<    {
+view: {
+default: PolymorphicClassName;
+positive: PolymorphicClassName;
+warning: PolymorphicClassName;
+negative: PolymorphicClassName;
+};
+size: {
+l: PolymorphicClassName;
+m: PolymorphicClassName;
+s: PolymorphicClassName;
+xs: PolymorphicClassName;
+};
+labelPlacement: {
+inner: PolymorphicClassName;
+outer: PolymorphicClassName;
+};
+disabled: {
+true: PolymorphicClassName;
+};
+readOnly: {
+true: PolymorphicClassName;
+};
+}> & {
+size?: string | undefined;
+view?: string | undefined;
+readOnly?: boolean | undefined;
+disabled?: boolean | undefined;
+} & {
+label?: string | undefined;
+labelPlacement?: "outer" | "inner" | undefined;
+leftHelper?: string | undefined;
+contentLeft?: ReactElement<any, string | JSXElementConstructor<any>> | undefined;
+contentRight?: ReactElement<any, string | JSXElementConstructor<any>> | undefined;
+textBefore?: string | undefined;
+textAfter?: string | undefined;
+onSearch?: ((value: string, event?: KeyboardEvent_2<HTMLInputElement> | undefined) => void) | undefined;
+} & {
+requiredPlacement?: "right" | "left" | undefined;
+} & {
+optional?: true | undefined;
+required?: false | undefined;
+} & {
+chips?: undefined;
+onChangeChips?: undefined;
+enumerationType?: "plain" | undefined;
+onSearch?: ((value: string, event?: KeyboardEvent_2<HTMLInputElement> | undefined) => void) | undefined;
+} & Omit<InputHTMLAttributes_2<HTMLInputElement>, "size" | "required"> & RefAttributes<HTMLInputElement> & MaskProps, "ref"> | Omit<PropsType<    {
+view: {
+default: PolymorphicClassName;
+positive: PolymorphicClassName;
+warning: PolymorphicClassName;
+negative: PolymorphicClassName;
+};
+size: {
+l: PolymorphicClassName;
+m: PolymorphicClassName;
+s: PolymorphicClassName;
+xs: PolymorphicClassName;
+};
+labelPlacement: {
+inner: PolymorphicClassName;
+outer: PolymorphicClassName;
+};
+disabled: {
+true: PolymorphicClassName;
+};
+readOnly: {
+true: PolymorphicClassName;
+};
+}> & {
+size?: string | undefined;
+view?: string | undefined;
+readOnly?: boolean | undefined;
+disabled?: boolean | undefined;
+} & {
+label?: string | undefined;
+labelPlacement?: "outer" | "inner" | undefined;
+leftHelper?: string | undefined;
+contentLeft?: ReactElement<any, string | JSXElementConstructor<any>> | undefined;
+contentRight?: ReactElement<any, string | JSXElementConstructor<any>> | undefined;
+textBefore?: string | undefined;
+textAfter?: string | undefined;
+onSearch?: ((value: string, event?: KeyboardEvent_2<HTMLInputElement> | undefined) => void) | undefined;
+} & {
+requiredPlacement?: "right" | "left" | undefined;
+} & {
+optional?: true | undefined;
+required?: false | undefined;
+} & {
+enumerationType: "chip";
+onSearch?: undefined;
+chips?: TextFieldPrimitiveValue[] | undefined;
+onChangeChips?: ((value: TextFieldPrimitiveValue[]) => void) | undefined;
+} & Omit<InputHTMLAttributes_2<HTMLInputElement>, "size" | "required"> & RefAttributes<HTMLInputElement> & MaskProps, "ref">) & RefAttributes<HTMLInputElement>>;
+
 export { MaxLinesProps }
 
 export { mediaQuery }
@@ -1593,16 +2335,16 @@ export { padZeroNumber }
 // @public
 export const Pagination: FunctionComponent<PropsType<    {
 view: {
+default: PolymorphicClassName;
 secondary: PolymorphicClassName;
 clear: PolymorphicClassName;
-default: PolymorphicClassName;
 primary: PolymorphicClassName;
 };
 viewCurrentPage: {
 default: PolymorphicClassName;
-primary: PolymorphicClassName;
 secondary: PolymorphicClassName;
 clear: PolymorphicClassName;
+primary: PolymorphicClassName;
 };
 size: {
 l: PolymorphicClassName;
@@ -1672,8 +2414,7 @@ export { PopupInfo }
 
 export { PopupProps }
 
-// @public (undocumented)
-export const Portal: FunctionComponent<PropsType<Variants> & PortalProps & RefAttributes<HTMLDivElement>>;
+export { Portal }
 
 export { PortalProps }
 
@@ -1683,9 +2424,12 @@ export { PreviewGalleryItemProps }
 
 export { PreviewGalleryProps }
 
-export { Price }
+// @public
+export const Price: FunctionComponent<PropsType<    {
+view: {};
+}> & PriceProps & RefAttributes<HTMLSpanElement>>;
 
-export { PriceProps }
+export { priceClasses }
 
 // @public (undocumented)
 export const Progress: FunctionComponent<PropsType<    {
@@ -1962,12 +2706,190 @@ export { SegmentProvider }
 
 export { SegmentProviderProps }
 
-// @public
-export const Select: React_2.ForwardRefExoticComponent<SelectProps<any> & React_2.RefAttributes<HTMLButtonElement>>;
+// @public (undocumented)
+export const Select: FunctionComponent<PropsType<    {
+size: {
+xs: PolymorphicClassName;
+s: PolymorphicClassName;
+m: PolymorphicClassName;
+l: PolymorphicClassName;
+};
+view: {
+default: PolymorphicClassName;
+positive: PolymorphicClassName;
+warning: PolymorphicClassName;
+negative: PolymorphicClassName;
+accent: PolymorphicClassName;
+secondary: PolymorphicClassName;
+clear: PolymorphicClassName;
+dark: PolymorphicClassName;
+black: PolymorphicClassName;
+white: PolymorphicClassName;
+};
+chipView: {
+default: PolymorphicClassName;
+secondary: PolymorphicClassName;
+accent: PolymorphicClassName;
+};
+}> & (({
+target?: "textfield-like" | undefined;
+view?: "default" | "positive" | "warning" | "negative" | undefined;
+contentLeft?: ReactNode;
+labelPlacement?: "outer" | "inner" | undefined;
+placeholder?: string | undefined;
+helperText?: string | undefined;
+} & {
+multiselect?: false | undefined;
+separator?: undefined;
+} & {
+value: any;
+onChange?: ((value: any) => void) | undefined;
+listOverflow?: Property.Overflow | undefined;
+listHeight?: Property.Height<string | number> | undefined;
+status?: "warning" | "success" | "error" | undefined;
+placeholder?: string | undefined;
+helperText?: string | undefined;
+disabled?: boolean | undefined;
+items?: MergedDropdownNode[] | undefined;
+onItemSelect?: ((e: MergedDropdownNode, event: SyntheticEvent<Element, Event>) => void) | undefined;
+hasItems?: boolean | undefined;
+children?: undefined;
+isOpen?: boolean | undefined;
+isTargetAmount?: boolean | undefined;
+renderTarget?: ((item: MergedDropdownNode | MergedDropdownNode[]) => ReactNode) | undefined;
+placement?: ("auto" | ("top" | "right" | "bottom" | "left")) | ("top" | "right" | "bottom" | "left")[] | undefined;
+label?: string | undefined;
+onScrollBottom?: ((e: UIEvent_2<HTMLUListElement, UIEvent>) => void) | undefined;
+variant?: "normal" | "tight" | undefined;
+listWidth?: Property.Width<string | number> | undefined;
+portal?: string | RefObject<HTMLElement> | undefined;
+renderValue?: ((item: MergedDropdownNode) => string) | undefined;
+renderItem?: ((item: MergedDropdownNode) => ReactNode) | undefined;
+closeAfterSelect?: boolean | undefined;
+size?: string | undefined;
+view?: string | undefined;
+chipView?: string | undefined;
+} & Omit<ButtonHTMLAttributes<HTMLButtonElement>, "onChange" | "nonce" | "onResize" | "onResizeCapture" | "value"> & RefAttributes<HTMLButtonElement>) | ({
+target?: "textfield-like" | undefined;
+view?: "default" | "positive" | "warning" | "negative" | undefined;
+contentLeft?: ReactNode;
+labelPlacement?: "outer" | "inner" | undefined;
+placeholder?: string | undefined;
+helperText?: string | undefined;
+} & {
+multiselect?: true | undefined;
+separator?: string | undefined;
+} & {
+value: any;
+onChange?: ((value: any) => void) | undefined;
+listOverflow?: Property.Overflow | undefined;
+listHeight?: Property.Height<string | number> | undefined;
+status?: "warning" | "success" | "error" | undefined;
+placeholder?: string | undefined;
+helperText?: string | undefined;
+disabled?: boolean | undefined;
+items?: MergedDropdownNode[] | undefined;
+onItemSelect?: ((e: MergedDropdownNode, event: SyntheticEvent<Element, Event>) => void) | undefined;
+hasItems?: boolean | undefined;
+children?: undefined;
+isOpen?: boolean | undefined;
+isTargetAmount?: boolean | undefined;
+renderTarget?: ((item: MergedDropdownNode | MergedDropdownNode[]) => ReactNode) | undefined;
+placement?: ("auto" | ("top" | "right" | "bottom" | "left")) | ("top" | "right" | "bottom" | "left")[] | undefined;
+label?: string | undefined;
+onScrollBottom?: ((e: UIEvent_2<HTMLUListElement, UIEvent>) => void) | undefined;
+variant?: "normal" | "tight" | undefined;
+listWidth?: Property.Width<string | number> | undefined;
+portal?: string | RefObject<HTMLElement> | undefined;
+renderValue?: ((item: MergedDropdownNode) => string) | undefined;
+renderItem?: ((item: MergedDropdownNode) => ReactNode) | undefined;
+closeAfterSelect?: boolean | undefined;
+size?: string | undefined;
+view?: string | undefined;
+chipView?: string | undefined;
+} & Omit<ButtonHTMLAttributes<HTMLButtonElement>, "onChange" | "nonce" | "onResize" | "onResizeCapture" | "value"> & RefAttributes<HTMLButtonElement>) | ({
+target?: "button-like" | undefined;
+view?: "default" | "accent" | "secondary" | "positive" | "warning" | "negative" | "black" | "white" | "dark" | "clear" | undefined;
+contentLeft?: undefined;
+labelPlacement?: undefined;
+placeholder?: undefined;
+helperText?: undefined;
+} & {
+multiselect?: false | undefined;
+separator?: undefined;
+} & {
+value: any;
+onChange?: ((value: any) => void) | undefined;
+listOverflow?: Property.Overflow | undefined;
+listHeight?: Property.Height<string | number> | undefined;
+status?: "warning" | "success" | "error" | undefined;
+placeholder?: string | undefined;
+helperText?: string | undefined;
+disabled?: boolean | undefined;
+items?: MergedDropdownNode[] | undefined;
+onItemSelect?: ((e: MergedDropdownNode, event: SyntheticEvent<Element, Event>) => void) | undefined;
+hasItems?: boolean | undefined;
+children?: undefined;
+isOpen?: boolean | undefined;
+isTargetAmount?: boolean | undefined;
+renderTarget?: ((item: MergedDropdownNode | MergedDropdownNode[]) => ReactNode) | undefined;
+placement?: ("auto" | ("top" | "right" | "bottom" | "left")) | ("top" | "right" | "bottom" | "left")[] | undefined;
+label?: string | undefined;
+onScrollBottom?: ((e: UIEvent_2<HTMLUListElement, UIEvent>) => void) | undefined;
+variant?: "normal" | "tight" | undefined;
+listWidth?: Property.Width<string | number> | undefined;
+portal?: string | RefObject<HTMLElement> | undefined;
+renderValue?: ((item: MergedDropdownNode) => string) | undefined;
+renderItem?: ((item: MergedDropdownNode) => ReactNode) | undefined;
+closeAfterSelect?: boolean | undefined;
+size?: string | undefined;
+view?: string | undefined;
+chipView?: string | undefined;
+} & Omit<ButtonHTMLAttributes<HTMLButtonElement>, "onChange" | "nonce" | "onResize" | "onResizeCapture" | "value"> & RefAttributes<HTMLButtonElement>) | ({
+target?: "button-like" | undefined;
+view?: "default" | "accent" | "secondary" | "positive" | "warning" | "negative" | "black" | "white" | "dark" | "clear" | undefined;
+contentLeft?: undefined;
+labelPlacement?: undefined;
+placeholder?: undefined;
+helperText?: undefined;
+} & {
+multiselect?: true | undefined;
+separator?: string | undefined;
+} & {
+value: any;
+onChange?: ((value: any) => void) | undefined;
+listOverflow?: Property.Overflow | undefined;
+listHeight?: Property.Height<string | number> | undefined;
+status?: "warning" | "success" | "error" | undefined;
+placeholder?: string | undefined;
+helperText?: string | undefined;
+disabled?: boolean | undefined;
+items?: MergedDropdownNode[] | undefined;
+onItemSelect?: ((e: MergedDropdownNode, event: SyntheticEvent<Element, Event>) => void) | undefined;
+hasItems?: boolean | undefined;
+children?: undefined;
+isOpen?: boolean | undefined;
+isTargetAmount?: boolean | undefined;
+renderTarget?: ((item: MergedDropdownNode | MergedDropdownNode[]) => ReactNode) | undefined;
+placement?: ("auto" | ("top" | "right" | "bottom" | "left")) | ("top" | "right" | "bottom" | "left")[] | undefined;
+label?: string | undefined;
+onScrollBottom?: ((e: UIEvent_2<HTMLUListElement, UIEvent>) => void) | undefined;
+variant?: "normal" | "tight" | undefined;
+listWidth?: Property.Width<string | number> | undefined;
+portal?: string | RefObject<HTMLElement> | undefined;
+renderValue?: ((item: MergedDropdownNode) => string) | undefined;
+renderItem?: ((item: MergedDropdownNode) => ReactNode) | undefined;
+closeAfterSelect?: boolean | undefined;
+size?: string | undefined;
+view?: string | undefined;
+chipView?: string | undefined;
+} & Omit<ButtonHTMLAttributes<HTMLButtonElement>, "onChange" | "nonce" | "onResize" | "onResizeCapture" | "value"> & RefAttributes<HTMLButtonElement>))>;
 
 export { SelectGroup }
 
 export { SelectProps }
+
+export { SelectPropsHope }
 
 export { selectText }
 
@@ -2071,41 +2993,18 @@ export type SwitchProps = ComponentProps<typeof SwitchComponent>;
 export { syntheticFocus }
 
 // @public
-export const TabItem: ForwardRefExoticComponent<AsProps<any> & ButtonHTMLAttributes<HTMLButtonElement> & {
-    isActive?: boolean | undefined;
-    selected?: boolean | undefined;
-    disabled?: boolean | undefined;
-    pilled?: boolean | undefined;
-    animated?: boolean | undefined;
-    contentLeft?: ReactNode;
-    contentRight?: ReactNode;
-    onIndexChange?: ((index: number) => void) | undefined;
-    itemIndex?: number | undefined;
-    size?: string | undefined;
-    view?: string | undefined;
-} & RefAttributes<HTMLDivElement>>;
+export const TabItem: ForwardRefExoticComponent<ButtonHTMLAttributes<HTMLButtonElement> & AsProps_2<any> & CustomTabItemProps & RefAttributes<HTMLDivElement>>;
 
 export { TabItemProps }
 
 export { TabItemRefs }
 
 // @public
-export const Tabs: ForwardRefExoticComponent<AsProps_2<any> & HTMLAttributes<HTMLDivElement> & {
-    disabled?: boolean | undefined;
-    stretch?: boolean | undefined;
-    pilled?: boolean | undefined;
-    size?: string | undefined;
-    view?: string | undefined;
-    outsideScroll?: boolean | {
-        left?: string | undefined;
-        right?: string | undefined;
-    } | undefined;
-    index?: number | undefined;
-} & RefAttributes<HTMLDivElement>>;
+export const Tabs: ForwardRefExoticComponent<HTMLAttributes<HTMLDivElement> & AsProps_2<any> & CustomTabsProps & RefAttributes<HTMLDivElement>>;
 
 export { TabsContext }
 
-// @public @deprecated (undocumented)
+// @public
 export const TabsController: ForwardRefExoticComponent<TabsControllerProps & RefAttributes<HTMLDivElement>>;
 
 export { TabsControllerProps }
@@ -2117,82 +3016,68 @@ export const TextArea: ForwardRefExoticComponent<TextAreaProps & RefAttributes<H
 
 export { TextareaHTMLAttributes }
 
+// Warning: (ae-forgotten-export) The symbol "RequiredProps" needs to be exported by the entry point index.d.ts
+//
 // @public (undocumented)
-export interface TextAreaProps extends TextAreaProps_2 {
-    // @deprecated (undocumented)
+export type TextAreaProps = TextAreaProps_2 & {
     resize?: 'none' | 'both' | 'horizontal' | 'vertical';
-}
+} & RequiredProps;
 
 export { TextareaResize }
 
 // @public
-export const TextField: React_2.ForwardRefExoticComponent<TextFieldProps_2 & Pick<PropsType<    {
-view: {
-default: PolymorphicClassName;
-positive: PolymorphicClassName;
-warning: PolymorphicClassName;
-negative: PolymorphicClassName;
-};
+export const TextField: React_2.ForwardRefExoticComponent<TextFieldProps & React_2.RefAttributes<HTMLInputElement>>;
+
+// @public
+export const TextFieldGroup: FunctionComponent<PropsType<    {
 size: {
 l: PolymorphicClassName;
 m: PolymorphicClassName;
 s: PolymorphicClassName;
 xs: PolymorphicClassName;
 };
-labelPlacement: {
-inner: PolymorphicClassName;
-outer: PolymorphicClassName;
+orientation: {
+horizontal: PolymorphicClassName;
+vertical: PolymorphicClassName;
 };
-disabled: {
-true: PolymorphicClassName;
+gap: {
+none: PolymorphicClassName;
+dense: PolymorphicClassName;
+wide: PolymorphicClassName;
 };
-readOnly: {
-true: PolymorphicClassName;
+shape: {
+segmented: PolymorphicClassName;
+default: PolymorphicClassName;
 };
-}> & (({
-    size?: string | undefined;
-    view?: string | undefined;
-    readOnly?: boolean | undefined;
-    disabled?: boolean | undefined;
+stretching: {
+auto: PolymorphicClassName;
+filled: PolymorphicClassName;
+};
+}> & ((HTMLAttributes<HTMLDivElement> & {
+orientation?: Orientation | undefined;
+stretching?: ("auto" | "filled") | undefined;
+size?: string | undefined;
+isCommonTextFieldStyles?: boolean | undefined;
 } & {
-    label?: string | undefined;
-    labelPlacement?: "inner" | "outer" | undefined;
-    leftHelper?: string | undefined;
-    contentLeft?: React_2.ReactElement<any, string | React_2.JSXElementConstructor<any>> | undefined;
-    contentRight?: React_2.ReactElement<any, string | React_2.JSXElementConstructor<any>> | undefined;
-    textBefore?: string | undefined;
-    textAfter?: string | undefined;
-    onSearch?: ((value: string, event?: React_2.KeyboardEvent<HTMLInputElement> | undefined) => void) | undefined;
+gap?: "none" | "dense" | undefined;
+shape?: "segmented" | undefined;
+} & RefAttributes<HTMLDivElement>) | (HTMLAttributes<HTMLDivElement> & {
+orientation?: Orientation | undefined;
+stretching?: ("auto" | "filled") | undefined;
+size?: string | undefined;
+isCommonTextFieldStyles?: boolean | undefined;
 } & {
-    chips?: undefined;
-    onChangeChips?: undefined;
-    enumerationType?: "plain" | undefined;
-    onSearch?: ((value: string, event?: React_2.KeyboardEvent<HTMLInputElement> | undefined) => void) | undefined;
-} & Omit<React_2.InputHTMLAttributes<HTMLInputElement>, "size"> & React_2.RefAttributes<HTMLInputElement>) | ({
-    size?: string | undefined;
-    view?: string | undefined;
-    readOnly?: boolean | undefined;
-    disabled?: boolean | undefined;
-} & {
-    label?: string | undefined;
-    labelPlacement?: "inner" | "outer" | undefined;
-    leftHelper?: string | undefined;
-    contentLeft?: React_2.ReactElement<any, string | React_2.JSXElementConstructor<any>> | undefined;
-    contentRight?: React_2.ReactElement<any, string | React_2.JSXElementConstructor<any>> | undefined;
-    textBefore?: string | undefined;
-    textAfter?: string | undefined;
-    onSearch?: ((value: string, event?: React_2.KeyboardEvent<HTMLInputElement> | undefined) => void) | undefined;
-} & {
-    enumerationType: "chip";
-    onSearch?: undefined;
-    chips?: TextFieldPrimitiveValue[] | undefined;
-    onChangeChips?: ((value: TextFieldPrimitiveValue[]) => void) | undefined;
-} & Omit<React_2.InputHTMLAttributes<HTMLInputElement>, "size"> & React_2.RefAttributes<HTMLInputElement>)), "enumerationType" | "chips" | "onChangeChips"> & React_2.RefAttributes<HTMLInputElement>>;
+gap?: "dense" | "wide" | undefined;
+shape?: "default" | undefined;
+} & RefAttributes<HTMLDivElement>))>;
+
+export { TextFieldGroupProps }
 
 // Warning: (ae-forgotten-export) The symbol "newHopeTextFieldProps" needs to be exported by the entry point index.d.ts
+// Warning: (ae-forgotten-export) The symbol "RequiredProps_2" needs to be exported by the entry point index.d.ts
 //
 // @public (undocumented)
-export type TextFieldProps = TextFieldProps_2 & Pick<newHopeTextFieldProps, 'enumerationType' | 'chips' | 'onChangeChips'>;
+export type TextFieldProps = (TextFieldProps_2 & Pick<newHopeTextFieldProps, 'enumerationType' | 'chips' | 'onChangeChips'>) & RequiredProps_2;
 
 export { TextFieldView }
 
@@ -2203,6 +3088,7 @@ l: PolymorphicClassName;
 };
 }> & {
 breakWord?: boolean | undefined;
+color?: string | undefined;
 } & SpacingProps_2 & BoldProps & HTMLAttributes<HTMLDivElement> & RefAttributes<HTMLDivElement>>;
 
 // @public (undocumented)
@@ -2212,6 +3098,7 @@ m: PolymorphicClassName;
 };
 }> & {
 breakWord?: boolean | undefined;
+color?: string | undefined;
 } & SpacingProps_2 & BoldProps & HTMLAttributes<HTMLDivElement> & RefAttributes<HTMLDivElement>>;
 
 // @public (undocumented)
@@ -2221,6 +3108,7 @@ s: PolymorphicClassName;
 };
 }> & {
 breakWord?: boolean | undefined;
+color?: string | undefined;
 } & SpacingProps_2 & BoldProps & HTMLAttributes<HTMLDivElement> & RefAttributes<HTMLDivElement>>;
 
 // @public
@@ -2276,6 +3164,7 @@ xs: PolymorphicClassName;
 };
 }> & {
 breakWord?: boolean | undefined;
+color?: string | undefined;
 } & SpacingProps_2 & BoldProps & HTMLAttributes<HTMLDivElement> & RefAttributes<HTMLDivElement>>;
 
 export { TimingFunction }

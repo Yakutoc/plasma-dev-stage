@@ -128,13 +128,13 @@ export const Token = ({ section, subsection, name, data }: TokenProps) => {
 
     const canDelete = defaultData && !defaultData['dark'][section]?.[subsection][name];
 
-    if (name.endsWith('Hover') || name.endsWith('Active')) {
+    if (name.endsWith('Hover') || name.endsWith('Active') || name.endsWith('Brightness')) {
         return null;
     }
 
     return (
         <StyledToken enabled={enabled}>
-            <Tooltip placement="top-start" isOpen={Boolean(comment) && visible} hasArrow text={comment}>
+            <Tooltip placement="top-start" opened={Boolean(comment) && visible} hasArrow text={comment}>
                 <TokenName
                     disable={enabled === false}
                     onClick={onTokenEditClick}

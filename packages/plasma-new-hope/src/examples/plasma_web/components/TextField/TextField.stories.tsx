@@ -4,6 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { IconPlaceholder } from '@salutejs/plasma-sb-utils';
 
 import { WithTheme } from '../../../_helpers';
+import { IconChevronLeft } from '../../../../components/_Icon';
 
 import { TextField } from './TextField';
 
@@ -22,6 +23,24 @@ const meta: Meta<typeof TextField> = {
     component: TextField,
     decorators: [WithTheme],
     argTypes: {
+        requiredPlacement: {
+            options: ['left', 'right'],
+            control: {
+                type: 'select',
+            },
+        },
+        required: {
+            control: {
+                type: 'boolean',
+            },
+            if: { arg: 'optional', truthy: false },
+        },
+        optional: {
+            control: {
+                type: 'boolean',
+            },
+            if: { arg: 'required', truthy: false },
+        },
         view: {
             options: views,
             control: {
@@ -80,21 +99,36 @@ const StoryDemo = ({ enableContentLeft, enableContentRight, view, ...rest }: Sto
     const iconSize = rest.size === 'xs' ? 'xs' : 's';
 
     return (
-        <TextField
-            {...rest}
-            enumerationType="plain"
-            value={text}
-            contentLeft={enableContentLeft ? <IconPlaceholder size={iconSize} /> : undefined}
-            contentRight={enableContentRight ? <IconPlaceholder size={iconSize} /> : undefined}
-            view={view}
-            onChange={(e) => {
-                setText(e.target.value);
-                onChange(e.target.value);
-            }}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            onSearch={onSearch}
-        />
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+            <TextField
+                {...rest}
+                enumerationType="plain"
+                value={text}
+                contentLeft={enableContentLeft ? <IconPlaceholder size={iconSize} /> : undefined}
+                contentRight={enableContentRight ? <IconPlaceholder size={iconSize} /> : undefined}
+                view={view}
+                onChange={(e) => {
+                    setText(e.target.value);
+                    onChange(e.target.value);
+                }}
+                onFocus={onFocus}
+                onBlur={onBlur}
+                onSearch={onSearch}
+            />
+
+            <TextField
+                {...rest}
+                label="Uncontrolled TextField"
+                defaultValue="Дефолтное значение"
+                enumerationType="plain"
+                contentLeft={enableContentLeft ? <IconPlaceholder size={iconSize} /> : undefined}
+                contentRight={enableContentRight ? <IconPlaceholder size={iconSize} /> : undefined}
+                view={view}
+                onFocus={onFocus}
+                onBlur={onBlur}
+                onSearch={onSearch}
+            />
+        </div>
     );
 };
 
@@ -109,6 +143,9 @@ export const Default: StoryObj<StoryPropsDefault> = {
         leftHelper: 'Подсказка к полю',
         disabled: false,
         readOnly: false,
+        required: false,
+        requiredPlacement: 'right',
+        optional: false,
         enableContentLeft: true,
         enableContentRight: true,
     },
@@ -132,6 +169,7 @@ type StoryPropsChips = Omit<
     | 'maxLength'
     | 'minLength'
     | 'required'
+    | 'optional'
     | 'enumerationType'
 > & {
     enableContentLeft: boolean;
@@ -148,7 +186,7 @@ const StoryChips = ({ enableContentLeft, enableContentRight, view, ...rest }: St
             {...rest}
             enumerationType="chip"
             value={text}
-            contentLeft={enableContentLeft ? <IconPlaceholder size={iconSize} /> : undefined}
+            contentLeft={enableContentLeft ? <IconChevronLeft color="inherit" size={iconSize} /> : undefined}
             contentRight={enableContentRight ? <IconPlaceholder size={iconSize} /> : undefined}
             view={view}
             onChange={(e) => {

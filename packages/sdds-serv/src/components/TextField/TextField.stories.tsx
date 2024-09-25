@@ -21,6 +21,24 @@ const meta: Meta<typeof TextField> = {
     component: TextField,
     decorators: [InSpacingDecorator],
     argTypes: {
+        requiredPlacement: {
+            options: ['left', 'right'],
+            control: {
+                type: 'select',
+            },
+        },
+        required: {
+            control: {
+                type: 'boolean',
+            },
+            if: { arg: 'optional', truthy: false },
+        },
+        optional: {
+            control: {
+                type: 'boolean',
+            },
+            if: { arg: 'required', truthy: false },
+        },
         view: {
             options: views,
             control: {
@@ -99,20 +117,38 @@ const StoryDemo = ({ enableContentLeft, enableContentRight, view, ...rest }: Sto
     const [text, setText] = useState('Значение поля');
 
     return (
-        <TextField
-            {...rest}
-            value={text}
-            contentLeft={enableContentLeft ? <BellIcon size={rest.size} /> : undefined}
-            contentRight={enableContentRight ? <BellIcon size={rest.size} /> : undefined}
-            view={view}
-            onChange={(e) => {
-                setText(e.target.value);
-                onChange(e.target.value);
-            }}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            onSearch={onSearch}
-        />
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+            <TextField
+                {...rest}
+                value={text}
+                contentLeft={enableContentLeft ? <BellIcon size={rest.size} /> : undefined}
+                contentRight={enableContentRight ? <BellIcon size={rest.size} /> : undefined}
+                view={view}
+                onChange={(e) => {
+                    setText(e.target.value);
+                    onChange(e.target.value);
+                }}
+                onFocus={onFocus}
+                onBlur={onBlur}
+                onSearch={onSearch}
+            />
+
+            <TextField
+                {...rest}
+                label="Uncontrolled TextField"
+                defaultValue="Дефолтное значение"
+                contentLeft={enableContentLeft ? <BellIcon size={rest.size} /> : undefined}
+                contentRight={enableContentRight ? <BellIcon size={rest.size} /> : undefined}
+                view={view}
+                onChange={(e) => {
+                    setText(e.target.value);
+                    onChange(e.target.value);
+                }}
+                onFocus={onFocus}
+                onBlur={onBlur}
+                onSearch={onSearch}
+            />
+        </div>
     );
 };
 
@@ -129,6 +165,9 @@ export const Default: StoryObj<StoryPropsDefault> = {
         readOnly: false,
         enableContentLeft: true,
         enableContentRight: true,
+        required: false,
+        requiredPlacement: 'right',
+        optional: false,
     },
     render: (args) => <StoryDemo {...args} />,
 };
