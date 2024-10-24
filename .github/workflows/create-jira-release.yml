@@ -18,11 +18,8 @@ jobs:
                 show-progress: false
 
             - name: Это данные нужно получить из workflow "Create release PR and generate changelog"
-              id: tasks
               run: |
-                  echo ${{ github.event.workflow_run }}
-                  echo ${{ github.event.workflow_run.outputs }}
-                  echo ${{ github.event.workflow_run.outputs.pull_requests }}
+                  echo ${{ toJson(github.event.workflow_run) }}
 
             -   name: Извлечение ID задачи из заголовков PR
                 id: extract_ids
@@ -30,7 +27,9 @@ jobs:
                 with:
                     result-encoding: string
                     script: |
-                        const prNumbers = `{{ github.event.workflow_run.outputs.pull_requests }}`.split(',').map(num => num.trim());
+                        const prNumbers = `{{ github.event.workflow_run.outputs.pull_requests }}`
+                            .split(',')
+                            .map(num => num.trim());
 
                         const promises = prNumbers.map(async (prNumber) => {
                             const { title } = await github.rest.pulls.get({
