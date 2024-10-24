@@ -39,8 +39,8 @@ jobs:
 
                         const promises = prNumbers.map((prNumber) =>
                             github.rest.pulls.get({
-                                owner: context.repo.owner,
-                                repo: context.repo.repo,
+                                owner: 'Yakutoc',
+                                repo: 'plasma-dev-stage',
                                 pull_number: prNumber
                              })
                         );
