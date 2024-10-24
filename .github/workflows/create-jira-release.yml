@@ -1,7 +1,6 @@
 name: Create release LF
 
 on:
-    workflow_dispatch:
     workflow_run:
         workflows:
             - "Create release pull request"
@@ -21,6 +20,8 @@ jobs:
             - name: Это данные нужно получить из workflow "Create release PR and generate changelog"
               id: tasks
               run: |
+                  echo ${{ github.event.workflow_run }}
+                  echo ${{ github.event.workflow_run.outputs }}
                   echo ${{ github.event.workflow_run.outputs.pull_requests }}
 
             -   name: Извлечение ID задачи из заголовков PR
@@ -31,7 +32,7 @@ jobs:
                     script: |
                         const prNumbers = `{{ github.event.workflow_run.outputs.pull_requests }}`.split(',').map(num => num.trim());
 
-                        const promises = prNumbers.map(async (prNumber) =>
+                        const promises = prNumbers.map(async (prNumber) => {
                             const { title } = await github.rest.pulls.get({
                                 owner: 'Yakutoc',
                                 repo: 'plasma-dev-stage',
@@ -43,7 +44,7 @@ jobs:
                             const match = title.match(/\[(PLASMA+-\d+)\]/);
 
                             return match ? match[1] : null;
-                        );
+                        });
 
                         const results = await Promise.all(promises);
 
