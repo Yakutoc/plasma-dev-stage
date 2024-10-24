@@ -1,0 +1,28 @@
+name: Create release LF
+
+on:
+    workflow_dispatch:
+
+jobs:
+    notify:
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Checkout repository
+                uses: actions/checkout@v4
+
+            -   name: Send release message
+                uses: mattermost/action-mattermost-notify@master
+                with:
+                    MATTERMOST_WEBHOOK_URL: ${{ secrets.WEBHOOKS_RELEASE_LF_MM }}
+                    TEXT: |-
+                      {
+                        "name": "plasma",
+                        "version": "1.2.3",
+                        "applicationType": "web",
+                        "hotfix": false,
+                        "authorMmUser": "alex_czech",
+                        "configurationElement": "${{ secrets.CE }}",
+                        "distributionLink": "https://github.com/salute-developers/plasma/pull/1487",
+                        "tasks": ["PLASMA-0000", "PLASMA-0001"],
+                        "jiraProject": "PLASMA
+                      }
