@@ -27,22 +27,10 @@ jobs:
                             .split(',')
                             .map(num => num.trim());
 
-                        const promises = prNumbers.map(async (prNumber) => {
-                            const { title } = await github.rest.pulls.get({
-                                owner: 'Yakutoc',
-                                repo: 'plasma-dev-stage',
-                                pull_number: prNumber
-                             });
-
-                            console.log(title);
-
-                            const match = title.match(/\[(PLASMA+-\d+)\]/);
-
-                            return match ? match[1] : null;
+                        const { title } = await github.rest.pulls.get({
+                            owner: 'Yakutoc',
+                            repo: 'plasma-dev-stage',
+                            pull_number: prNumber
                         });
 
-                        const results = await Promise.all(promises);
-
-                        const taskIDs = results.filter(Boolean);
-
-                        console.log(taskIDs);
+                        console.log(title);
