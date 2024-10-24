@@ -1,14 +1,10 @@
 name: Create release LF
 
 on:
-    workflow_run:
-        workflows:
-            - "Create release pull request"
-        types:
-            - completed
+    repository_dispatch:
+        types: [ release-LF ]
 jobs:
     build:
-        if: ${{ github.event.workflow_run.conclusion == 'success' }}
         runs-on: ubuntu-latest
         steps:
             # как выбрать в рамках спринта (между 2 мя датами)
@@ -19,7 +15,7 @@ jobs:
 
             - name: Это данные нужно получить из workflow "Create release PR and generate changelog"
               run: |
-                  echo ${{ toJson(github.event.workflow_run) }}
+                  echo ${{ github.event.client_payload.pull_requests }}
 
             -   name: Извлечение ID задачи из заголовков PR
                 id: extract_ids
@@ -27,7 +23,7 @@ jobs:
                 with:
                     result-encoding: string
                     script: |
-                        const prNumbers = `{{ github.event.workflow_run.outputs.pull_requests }}`
+                        const prNumbers = `{{ github.event.client_payload.pull_requests }}`
                             .split(',')
                             .map(num => num.trim());
 

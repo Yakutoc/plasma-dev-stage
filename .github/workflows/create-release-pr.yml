@@ -14,8 +14,6 @@ jobs:
     runs-on: ubuntu-22.04
     env:
       GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-    outputs:
-        pull_requests: ${{ steps.state.outputs.pull_requests }}
 
     steps:
       - name: Checkout
@@ -35,3 +33,13 @@ jobs:
           fromTag: ${{ env.FROM_TAG }}
           toTag: 'dev'
           configuration: "./.github/changelog-builder-config.json"
+
+      - name: Dispatch custom event to android
+        run: |
+            curl -L \
+              -X POST \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer ${{ secrets.GH_TOKEN }}" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              https://api.github.com/repos/Yakutoc/plasma-dev-stage/dispatches \
+              -d "{\"event_type\":\"release-LF\",\"client_payload\":{\"pull_requests\":\"${{ steps.state.outputs.pull_requests }}\"}}"
