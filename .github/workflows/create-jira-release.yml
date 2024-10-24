@@ -1,11 +1,15 @@
 name: Create release LF
 
 on:
-    # запускать по workflow_call:
     workflow_dispatch:
-
+    workflow_run:
+        workflows:
+            - "Create release pull request"
+        types:
+            - completed
 jobs:
-    notify:
+    build:
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
         runs-on: ubuntu-latest
         steps:
             # как выбрать в рамках спринта (между 2 мя датами)
@@ -13,21 +17,11 @@ jobs:
               uses: actions/checkout@v4
               with:
                 show-progress: false
-                fetch-depth: 0
-
-            - name: Build Changelog
-              id: github_release
-              uses: mikepenz/release-changelog-builder-action@v4.1.0
-              with:
-                  fromTag: "88dd3b82f0c5499d01bbce9a98bbe64546eddb40"
-                  toTag: 'dev'
-                  configuration: "./.github/changelog-builder-config.json"
 
             - name: Это данные нужно получить из workflow "Create release PR and generate changelog"
               id: tasks
               run: |
-                  echo ${{ steps.github_release.outputs.pull_requests }}
-
+                  echo ${{ github.event.workflow_run.outputs.pull_requests }}
 
             -   name: Извлечение ID задачи из заголовков PR
                 id: extract_ids
@@ -35,22 +29,24 @@ jobs:
                 with:
                     result-encoding: string
                     script: |
-                        const prNumbers = `{{ steps.github_release.outputs.pull_requests }}`.split(',').map(num => num.trim());
+                        const prNumbers = `{{ github.event.workflow_run.outputs.pull_requests }}`.split(',').map(num => num.trim());
 
-                        const promises = prNumbers.map((prNumber) =>
-                            github.rest.pulls.get({
+                        const promises = prNumbers.map(async (prNumber) =>
+                            const { title } = await github.rest.pulls.get({
                                 owner: 'Yakutoc',
                                 repo: 'plasma-dev-stage',
                                 pull_number: prNumber
-                             })
+                             });
+
+                            console.log(title);
+
+                            const match = title.match(/\[(PLASMA+-\d+)\]/);
+
+                            return match ? match[1] : null;
                         );
 
                         const results = await Promise.all(promises);
 
-                        const taskIDs = results.map(({ data: pullRequest }) => {
-                            const match = pullRequest.title.match(/\[(PLASMA+-\d+)\]/);
-                            return match ? match[1] : null;
-                        }).filter(Boolean);
+                        const taskIDs = results.filter(Boolean);
 
                         console.log(taskIDs);
-
