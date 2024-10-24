@@ -1,12 +1,14 @@
 name: Create release LF
 
 on:
+    # запускать по workflow_call:
     workflow_dispatch:
 
 jobs:
     notify:
         runs-on: ubuntu-latest
         steps:
+            # как выбрать в рамках спринта (между 2 мя датами)
             - name: Checkout repository
               uses: actions/checkout@v4
               with:
@@ -21,7 +23,34 @@ jobs:
                   toTag: 'dev'
                   configuration: "./.github/changelog-builder-config.json"
 
-            - name: Extract task ID
+            - name: Это данные нужно получить из workflow "Create release PR and generate changelog"
               id: tasks
               run: |
                   echo ${{ steps.github_release.outputs.pull_requests }}
+
+
+            -   name: Извлечение ID задачи из заголовков PR
+                id: extract_ids
+                uses: actions/github-script@v7
+                with:
+                    result-encoding: string
+                    script: |
+                        const prNumbers = `{{ steps.github_release.outputs.pull_requests }}`.split(',').map(num => num.trim());
+
+                        const promises = prNumbers.map((prNumber) =>
+                            github.rest.pulls.get({
+                                owner: context.repo.owner,
+                                repo: context.repo.repo,
+                                pull_number: prNumber
+                             })
+                        );
+
+                        const results = await Promise.all(promises);
+
+                        const taskIDs = results.map(({ data: pullRequest }) => {
+                            const match = pullRequest.title.match(/\[(PLASMA+-\d+)\]/);
+                            return match ? match[1] : null;
+                        }).filter(Boolean);
+
+                        console.log(taskIDs);
+
