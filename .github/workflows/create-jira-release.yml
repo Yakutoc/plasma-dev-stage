@@ -23,10 +23,10 @@ jobs:
                             .split(',')
                             .map(num => num.trim());
 
-                        const data = await github.rest.pulls.get({
+                        const { data:{ title } } = await github.rest.pulls.get({
                             owner: 'Yakutoc',
                             repo: 'plasma-dev-stage',
                             pull_number: '31'
                         });
 
-                        console.log(data);
+                        console.log(title);
