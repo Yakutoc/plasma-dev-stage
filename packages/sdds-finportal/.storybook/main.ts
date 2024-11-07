@@ -39,7 +39,7 @@ const config: StorybookConfig = {
                 sourcemap: false,
             },
             define: {
-                'process.env.IS_DRAFT': JSON.stringify(process.env.IS_DRAFT || 'false'),
+                'import.meta.env.IS_DRAFT': process.env.IS_DRAFT || false,
             },
         });
     },
