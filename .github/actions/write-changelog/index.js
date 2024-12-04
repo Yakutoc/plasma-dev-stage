@@ -35,7 +35,7 @@ async function run() {
         //     pull_number: number,
         // });
 
-        const tree = unified().use(remarkParse).parse(pr.data.body);
+        const tree = unified().use(remarkParse).parse(rawData);
 
         const data = [];
 
