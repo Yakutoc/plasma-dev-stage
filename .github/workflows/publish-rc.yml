@@ -7,7 +7,6 @@ on:
 
 jobs:
   publish:
-    if: false
     name: Publish RC version
     uses: ./.github/workflows/publish-common.yml
     with:
