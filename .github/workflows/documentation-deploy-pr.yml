@@ -120,7 +120,7 @@ jobs:
         runs-on: ubuntu-22.04
         env:
             PR_NAME: pr-${{ github.event.number }}
-            PREFIX: "/pr/pr-${{ github.event.number }}"
+            PREFIX: pr/pr-${{ github.event.number }}
             HAS_DRAFT_COMPONENTS: false
         strategy:
             fail-fast: false
