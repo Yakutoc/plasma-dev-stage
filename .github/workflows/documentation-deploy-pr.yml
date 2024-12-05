@@ -35,7 +35,7 @@ jobs:
         runs-on: ubuntu-22.04
         env:
             PR_NAME: pr-${{ github.event.number }}
-            PREFIX: pr/pr-${{ github.event.number }}
+            PREFIX: /pr/pr-${{ github.event.number }}
         steps:
             -   uses: actions/checkout@v4
                 with:
