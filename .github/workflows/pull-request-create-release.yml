@@ -63,3 +63,52 @@ jobs:
         run: |
           changelog='${{ steps.changelog.outputs.changelog }}'
           gh pr create --base master --head ${{ github.ref_name }} --title "Release by ${{ env.DATE }}" --body "$changelog"
+
+      - name: Processing pull request by title
+        id: jira_tasks
+        uses: actions/github-script@v7
+        env:
+            PULL_REQUESTS_IDS: ${{ steps.github_release.outputs.pull_requests }}
+        with:
+            script: |
+                const prIds = process.env.PULL_REQUESTS_IDS.split(',').map(id => parseInt(id));
+                const prs = [];
+
+                for (const prId of prIds) {
+                  try {
+                    const { data: pr } = await github.rest.pulls.get({
+                      owner: 'Yakutoc',
+                      repo: 'plasma-dev-stage',
+                      pull_number: prId
+                    });
+
+                    prs.push({
+                      title: pr.title,
+                    });
+
+                  } catch (error) {
+                    console.error(`Error fetching PR #${prId}:`, error);
+                  }
+                }
+
+                console.log('Found pull requests:', prs);
+
+                return prs;
+
+      - name: Send MM
+        if: false
+        uses: mattermost/action-mattermost-notify@master
+        with:
+            MATTERMOST_WEBHOOK_URL: ${{ secrets.WEBHOOKS_RELEASE_LF_MM }}
+            TEXT: |-
+                {
+                  "name": "plasma",
+                  "version": "1.2.3",
+                  "applicationType": "web",
+                  "hotfix": false,
+                  "authorMmUser": "alex_czech",
+                  "configurationElement": "${{ secrets.CE }}",
+                  "distributionLink": "https://github.com/salute-developers/plasma/pull/1487",
+                  "tasks": ["PLASMA-0000", "PLASMA-0001"],
+                  "jiraProject": "PLASMA"
+                }
