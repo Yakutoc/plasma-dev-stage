@@ -661,7 +661,17 @@ true: PolymorphicClassName;
 readOnly: {
 true: PolymorphicClassName;
 };
-}> & BaseProps & Omit<TextFieldPropsBase, "required" | "enumerationType" | "chips" | "onChangeChips" | "requiredPlacement" | "optional"> & Omit<InputHTMLAttributes_3<HTMLInputElement>, "size" | "required"> & RefAttributes<HTMLInputElement>>;
+}> & ((BaseProps & {
+requiredPlacement?: "right" | "left" | undefined;
+} & {
+required: true;
+optional?: false | undefined;
+} & Omit<TextFieldPropsBase, "required" | "requiredPlacement" | "optional" | "enumerationType" | "chips" | "onChangeChips"> & Omit<InputHTMLAttributes_3<HTMLInputElement>, "size" | "required"> & RefAttributes<HTMLInputElement>) | (BaseProps & {
+requiredPlacement?: "right" | "left" | undefined;
+} & {
+optional?: true | undefined;
+required?: false | undefined;
+} & Omit<TextFieldPropsBase, "required" | "requiredPlacement" | "optional" | "enumerationType" | "chips" | "onChangeChips"> & Omit<InputHTMLAttributes_3<HTMLInputElement>, "size" | "required"> & RefAttributes<HTMLInputElement>))>;
 
 // @public (undocumented)
 export const Avatar: FunctionComponent<PropsType<    {
@@ -1396,6 +1406,7 @@ name?: string | undefined;
 label?: string | undefined;
 view?: string | undefined;
 disabled?: boolean | undefined;
+autoComplete?: string | undefined;
 readOnly?: boolean | undefined;
 size?: string | undefined;
 contentLeft?: ReactNode;
@@ -3081,6 +3092,9 @@ layout: {
 horizontal: PolymorphicClassName;
 vertical: PolymorphicClassName;
 };
+closeIconType: {
+default: PolymorphicClassName;
+};
 size: {
 xs: PolymorphicClassName;
 xxs: PolymorphicClassName;
@@ -3310,6 +3324,7 @@ secondTextfieldContentLeft?: ReactElement<any, string | JSXElementConstructor<an
 secondTextfieldContentRight?: ReactElement<any, string | JSXElementConstructor<any>> | undefined;
 firstTextfieldTextAfter?: string | undefined;
 secondTextfieldTextAfter?: string | undefined;
+autoComplete?: string | undefined;
 view?: string | undefined;
 size?: string | undefined;
 readOnly?: boolean | undefined;
@@ -3346,6 +3361,7 @@ secondTextfieldContentLeft?: ReactElement<any, string | JSXElementConstructor<an
 secondTextfieldContentRight?: ReactElement<any, string | JSXElementConstructor<any>> | undefined;
 firstTextfieldTextAfter?: string | undefined;
 secondTextfieldTextAfter?: string | undefined;
+autoComplete?: string | undefined;
 view?: string | undefined;
 size?: string | undefined;
 readOnly?: boolean | undefined;
@@ -3382,6 +3398,7 @@ secondTextfieldContentLeft?: ReactElement<any, string | JSXElementConstructor<an
 secondTextfieldContentRight?: ReactElement<any, string | JSXElementConstructor<any>> | undefined;
 firstTextfieldTextAfter?: string | undefined;
 secondTextfieldTextAfter?: string | undefined;
+autoComplete?: string | undefined;
 view?: string | undefined;
 size?: string | undefined;
 readOnly?: boolean | undefined;
@@ -4822,6 +4839,9 @@ light: PolymorphicClassName;
 };
 size: {
 m: PolymorphicClassName;
+};
+closeIconType: {
+default: PolymorphicClassName;
 };
 pilled: {
 true: PolymorphicClassName;

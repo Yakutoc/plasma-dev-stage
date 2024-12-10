@@ -35,7 +35,7 @@ jobs:
         runs-on: ubuntu-22.04
         env:
             PR_NAME: pr-${{ github.event.number }}
-            PREFIX: pr/pr-${{ github.event.number }}
+            PREFIX: /pr/pr-${{ github.event.number }}
         steps:
             -   uses: actions/checkout@v4
                 with:
@@ -77,7 +77,7 @@ jobs:
                         result.push('plasma-themes');
                         result.push('core-themes');
                       }
-                    
+
                       console.log('Result =>', result);
 
                       return `@salutejs/{${result.join(',')}}`;
@@ -120,7 +120,8 @@ jobs:
         runs-on: ubuntu-22.04
         env:
             PR_NAME: pr-${{ github.event.number }}
-            PREFIX: pr/pr-${{ github.event.number }}
+            PREFIX: /pr/pr-${{ github.event.number }}
+            HAS_DRAFT_COMPONENTS: false
         strategy:
             fail-fast: false
             matrix:
@@ -169,6 +170,16 @@ jobs:
                     npm run storybook:build --prefix="./packages/${{ matrix.package }}"
                     cp -R ./packages/${{ matrix.package }}/build-sb ./s3_build/${PR_NAME}/${{ env.SHORT_NAME }}-storybook
 
+            -   name: Build draft components storybook - "${{ matrix.package }}"
+                run: |
+                    if grep -q '"storybook:draft"' "./packages/${{ matrix.package }}/package.json"; then
+                     npm run storybook:build:draft --prefix="./packages/${{ matrix.package }}"
+                     cp -R ./packages/${{ matrix.package }}/build-sb-draft ./s3_build/${PR_NAME}/${{ env.SHORT_NAME }}-draft-storybook
+                     echo "HAS_DRAFT_COMPONENTS=true" >> $GITHUB_ENV
+                    else
+                     echo "Package not have draft components"
+                    fi
+
             -   name: Install s3cmd
                 run: pip3 install s3cmd
 
@@ -187,6 +198,22 @@ jobs:
                     sync
                     ./s3_build/${PR_NAME}/${{ env.SHORT_NAME }}/
                     s3://${{ secrets.AWS_S3_BUCKET_2 }}/pr/${PR_NAME}/${{ env.SHORT_NAME }}/
+
+            -   name: s3 upload storybook for draft components
+                if: ${{ env.HAS_DRAFT_COMPONENTS == 'true' }}
+                run: >
+                    s3cmd
+                    --access_key ${{ secrets.AWS_ACCESS_KEY_ID }}
+                    --secret_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                    --host ${{ secrets.AWS_ENDPOINT }}
+                    --host-bucket ${{ secrets.AWS_ENDPOINT }}
+                    --bucket-location ${{ secrets.AWS_REGION }}
+                    --signature-v2
+                    --delete-removed
+                    --no-mime-magic
+                    sync
+                    ./s3_build/${PR_NAME}/${{ env.SHORT_NAME }}-draft-storybook/
+                    s3://${{ secrets.AWS_S3_BUCKET_2 }}/pr/${PR_NAME}/${{ env.SHORT_NAME }}-draft-storybook/
 
             -   name: s3 upload storybook
                 run: >
