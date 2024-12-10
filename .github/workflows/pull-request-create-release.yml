@@ -77,7 +77,7 @@ jobs:
                 for (const prId of prIds) {
                   try {
                     const { data: pr } = await github.rest.pulls.get({
-                      owner: 'Yakutoc',1
+                      owner: 'Yakutoc',
                       repo: 'plasma-dev-stage',
                       pull_number: prId
                     });
