@@ -72,28 +72,30 @@ jobs:
         with:
             script: |
                 const prIds = process.env.PULL_REQUESTS_IDS.split(',').map(id => parseInt(id));
-                const prs = [];
+                const ids = [];
 
                 for (const prId of prIds) {
                   try {
                     const { data: pr } = await github.rest.pulls.get({
-                      owner: 'Yakutoc',
+                      owner: 'Yakutoc',1
                       repo: 'plasma-dev-stage',
                       pull_number: prId
                     });
 
-                    prs.push({
-                      title: pr.title,
-                    });
+                    const jiraIdMatch = pr.title.toLocaleLowerCase().match(/plasma-\d+/);
+                    const id = jiraIdMatch ? jiraIdMatch[0] : null;
 
+                    if (id) {
+                      ids.push({ id });
+                    }
                   } catch (error) {
                     console.error(`Error fetching PR #${prId}:`, error);
                   }
                 }
 
-                console.log('Found pull requests:', prs);
+                console.log('Found pull requests:', ids);
 
-                return prs;
+                return ids;
 
       - name: Send MM
         if: false
@@ -109,6 +111,6 @@ jobs:
                   "authorMmUser": "alex_czech",
                   "configurationElement": "${{ secrets.CE }}",
                   "distributionLink": "https://github.com/salute-developers/plasma/pull/1487",
-                  "tasks": ["PLASMA-0000", "PLASMA-0001"],
+                  "tasks": ${{ steps.jira_tasks.outputs.result }},
                   "jiraProject": "PLASMA"
                 }
