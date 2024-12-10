@@ -1,3 +1,124 @@
+# 0.168.0-dev.0 (10 декабря 2024)
+
+## Функциональные изменения в компонентах
+
+### Switch Outline
+
+* добавлен отдельный `config` для вариации `outline`
+* добавлена соответствующая поддержка во все библиотеки
+
+core: Switch outline design (https://github.com/salute-developers/plasma/pull/1560)
+
+### Switch
+
+* исправлены токены целью добавления возможности реализации нового дизайна
+
+plasma-new-hope: fix Switch design (https://github.com/salute-developers/plasma/pull/1569)
+
+### Dropdown
+
+* добавлено новое свойство `renderItem`;
+
+feat(plasma-*, sdds-*): Add renderItem prop in Dropdown. Fix issues with Select and Combobox. (https://github.com/salute-developers/plasma/pull/1562)
+
+### Select
+
+* улучшено поведение свойства `renderItem` при работе с вложенными списками;
+* исправлен баг, приводящий к неправильной работе чипов в режиме multiple при renderValue;
+
+feat(plasma-*, sdds-*): Add renderItem prop in Dropdown. Fix issues with Select and Combobox. (https://github.com/salute-developers/plasma/pull/1562)
+
+### Combobox
+
+* улучшено поведение свойства `renderItem` при работе с вложенными списками;
+* исправлен баг, приводящий к неправильной работе чипов в режиме multiple при renderValue;
+
+feat(plasma-*, sdds-*): Add renderItem prop in Dropdown. Fix issues with Select and Combobox. (https://github.com/salute-developers/plasma/pull/1562)
+
+### Badge
+
+* добавлен surfaceClear токен для варианта clear
+
+* добавлены padding для варианта clear
+
+* реализован вариант только с иконкой
+
+* добавлена возможность передать пользовательский цвет для текста и фона
+
+feat(plasma-*,sdds-*): Icon only badge (https://github.com/salute-developers/plasma/pull/1546)
+
+* добавлены св-ва required, requiredPlacement и optional;
+
+![](https://github.com/user-attachments/assets/42fcb1fe-6a37-434b-843f-d285b4e6f279)
+
+feat(plasma-*, sdds-*): Add required functionality in Select (https://github.com/salute-developers/plasma/pull/1561)
+
+### TextField, Select
+
+* добавлен новый проп `chipType`, который позволяет менять внешний вид для чипа в режиме multiselect;
+
+![plasma-b2c Select -- prop chipType snap](https://github.com/user-attachments/assets/66c5cb36-bd40-444f-bace-1fb8dec2f130)
+
+feat(plasma-*, sdds-*): Add chipType prop in TextField & Select (https://github.com/salute-developers/plasma/pull/1577)
+
+### Dropzone
+
+* добавлен новый компонент
+
+<img width="515" src="https://github.com/user-attachments/assets/30f2131c-f1d1-48ba-b8e5-57f56c65b97d" />
+
+feat(plasma-new-hope): Dropzone (https://github.com/salute-developers/plasma/pull/1534)
+
+### TextField
+
+* добавлено свойство keepPlaceholder для одновременного отображения label и placeholder
+
+![image](https://github.com/user-attachments/assets/d3c1ad74-c214-4ddd-96fa-3467871e3a4c)
+
+feat: add keepPlaceholder prop to TextField (https://github.com/salute-developers/plasma/pull/1556)
+
+### TextArea
+
+* добавлено свойство для выноса левого helper за пределы TextArea
+
+feat: add leftHelperPlacement prop to TextArea (https://github.com/salute-developers/plasma/pull/1579)
+
+* упростили типы связанный со свойством `required`
+
+- упростили типы связанный со свойством `required`
+
+fix: "RequiredProps" unions in TextField & TextArea (https://github.com/salute-developers/plasma/pull/1593)
+
+## Изменения в библиотеки
+
+### Textarea
+
+* изменен `view negative` в соответствии с макетом
+
+fix(sdds-cs): edit view negative in textarea sdds-cs (https://github.com/salute-developers/plasma/pull/1567)
+
+* изменен `view accent` в соответствии с макетом
+
+fix(sdds-cs): edit view negative in textarea sdds-cs (https://github.com/salute-developers/plasma/pull/1568)
+
+### Segment
+
+* изменен конфиг компонента в соответсвии с макетам
+
+fix(sdds-cs): Segment config edit (https://github.com/salute-developers/plasma/pull/1573)
+
+### Сalendar
+
+* изменен конфиг компонента в соответсвии с макетам
+
+fix(sdds-cs): edit tokens calendar for sdds cs (https://github.com/salute-developers/plasma/pull/1566)
+
+* исправлены токены в соответствие с макетом
+* убран `control` для свойства `size` в `storybook`
+
+sdds-cs: fix Switch design (https://github.com/salute-developers/plasma/pull/1569)
+
+
 # 0.168.0-dev.0 (4 декабря 2024)
 
 ## Изменения в библиотеки
