@@ -4,21 +4,22 @@ import remarkStringify from 'remark-stringify';
 import { visit } from 'unist-util-visit';
 
 import * as core from '@actions/core';
-import * as github from '@actions/github';
 
 import { writeChangelog } from './utils.js';
-import { swapSectionPlace } from './swapSectionPlace.js';
 import { processingHeadingByPackages } from './processingHeadingByPackages.js';
 import { rewriteHeadingValue } from './rewriteHeadingValue.js';
 import { groupByHeadings } from './groupHeadingsByDeep.js';
 
 import * as META from '../../meta-prod.js';
 
-const whiteList = [...Object.keys(META.default), 'plasma-icons'];
+// INFO: List of packages/libs as "plasma-web" or "sdds-serv"
+const packages = Object.keys(META.default);
+
+// INFO: допустимые заголовки 2 уровня
+const whiteList = [...packages, 'plasma-icons', 'core'];
 
 async function run() {
     try {
-        // const token = core.getInput('token');
         const rawData = core.getInput('data');
 
         if (!rawData) {
@@ -27,37 +28,40 @@ async function run() {
             return;
         }
 
-        // const octokit = new github.getOctokit(token);
-
-        // const pr = await octokit.rest.pulls.get({
-        //     owner: 'Yakutoc',
-        //     repo: 'plasma-dev-stage',
-        //     pull_number: number,
-        // });
-
         const tree = unified().use(remarkParse).parse(rawData);
 
-        const data = [];
+        const headings = new Set();
 
-        visit(tree, (node, index, parent) => {
-            if (node.type === 'heading' && node.depth === 2) {
-                data.push(node.children[0].value);
+        // TODO: Переписать на метод map утилитарного пакета unist-util-*
+        // INFO: Собираем массив пакетов в которых есть изменения
+        visit(tree, 'heading', (node) => {
+            const { depth } = node;
+            const heading = node?.children[0]?.value.toLowerCase() || '';
+
+            if (!heading || depth !== 2 || headings.has(heading)) {
+                return;
             }
+
+            if (heading === 'core') {
+                packages.forEach((pkg) => {
+                    headings.add(pkg);
+                });
+
+                return;
+            }
+
+            headings.add(heading);
         });
 
-        // TODO: Куда добавляем изменения про токены?
-        const packages = Array.from(new Set(data))
-            .map((item) => item.toLowerCase())
-            .filter((item) => whiteList.includes(item));
-
-        for (const pkg of packages) {
-            let blackList = [...packages.filter((item) => pkg !== item), 'tokens'];
+        // INFO: В коллекции будут или все пакеты так как были изменения в core,
+        // INFO: или только те библиотеки в которых были изменения
+        for (const pkg of Array.from(headings)) {
+            const blackList = [...packages.filter((item) => pkg !== item), 'tokens', 'bugs'];
 
             const isPlasmaIcons = pkg === 'plasma-icons';
 
             const changelogMD = unified()
                 .use(remarkParse)
-                .use(() => swapSectionPlace(pkg))
                 .use(() => processingHeadingByPackages(isPlasmaIcons ? [...blackList, 'core'] : blackList))
                 .use(() => groupByHeadings)
                 .use(() => rewriteHeadingValue(pkg))
