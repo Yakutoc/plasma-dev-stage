@@ -104,12 +104,12 @@ jobs:
             TEXT: |-
                 {
                   "name": "plasma",
-                  "version": "",
+                  "version": "${{ env.DATE }}",
                   "applicationType": "web",
                   "hotfix": false,
                   "authorMmUser": "alex_czech",
                   "configurationElement": "${{ secrets.CE }}",
-                  "distributionLink": "https://github.com/salute-developers/plasma/pull/1487",
+                  "distributionLink": "",
                   "tasks": ${{ steps.jira_tasks.outputs.result }},
                   "jiraProject": "PLASMA"
                 }
