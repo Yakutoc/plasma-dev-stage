@@ -98,7 +98,6 @@ jobs:
                 return ids;
 
       - name: Send MM
-        if: false
         uses: mattermost/action-mattermost-notify@master
         with:
             MATTERMOST_WEBHOOK_URL: ${{ secrets.WEBHOOKS_RELEASE_LF_MM }}
