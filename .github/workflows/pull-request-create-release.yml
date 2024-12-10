@@ -86,7 +86,7 @@ jobs:
                     const id = jiraIdMatch ? jiraIdMatch[0] : null;
 
                     if (id) {
-                      ids.push({ id });
+                      ids.push(id);
                     }
                   } catch (error) {
                     console.error(`Error fetching PR #${prId}:`, error);
@@ -104,7 +104,7 @@ jobs:
             TEXT: |-
                 {
                   "name": "plasma",
-                  "version": "1.2.3",
+                  "version": "",
                   "applicationType": "web",
                   "hotfix": false,
                   "authorMmUser": "alex_czech",
