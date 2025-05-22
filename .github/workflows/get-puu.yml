@@ -31,7 +31,7 @@ jobs:
 
                       const prRegex = /\[PR\]\(https:\/\/github\.com\/[^\/]+\/[^\/]+\/pull\/(\d+)\)/g;
 
-                      const matches = Array.from(str.matchAll(prRegex));
+                      const matches = Array.from(data.matchAll(prRegex));
 
                       const ids = matches.map(match => parseInt(match[1], 10));
 
