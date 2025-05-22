@@ -15,6 +15,19 @@ jobs:
         env:
             GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  repository: salute-developers/plasma
+                  ref: master
+                  show-progress: false
+                  fetch-depth: 20
+
+            - name: Get independent versions
+              run: |
+                  echo "SHA=git log --all --format="%H %P %s" | grep "${{ inputs.sha }}" | grep "Bump independent versions \[skip ci\]" | awk '{print $1}'" >> $GITHUB_ENV
+
+            ## Заменить харды owner repo на переменные контекста
             - name: Get pull requests id's
               id: ids
               uses: actions/github-script@v7
@@ -39,7 +52,9 @@ jobs:
             - name: ECHO
               run: |
                   echo ${{ steps.ids.outputs.result }}
+                  echo ${{ env.SHA }}
 
+            ## Заменить харды owner repo на переменные контекста
             - name: add comments
               uses: actions/github-script@v7
               with:
@@ -48,6 +63,7 @@ jobs:
 
                       const commentBody = `
                       This PR is included in version:
+
                             - @salutejs/plasma-giga@0.306.0
                             - @salutejs/plasma-new-hope@0.323.0
                       `;
