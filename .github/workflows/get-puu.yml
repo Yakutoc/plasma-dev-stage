@@ -105,5 +105,5 @@ jobs:
                             owner: 'Yakutoc',
                             repo: 'plasma-dev-stage',
                             issue_number: 49,
-                            body: `${{ steps.comment.outputs.result }}`
+                            body: "`${{ steps.comment.outputs.result }}`"
                       });
