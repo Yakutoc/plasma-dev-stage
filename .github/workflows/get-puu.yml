@@ -62,8 +62,8 @@ jobs:
                     const comment = `
                       This PR is included in version:
 
-                      \`\`\`
-                      ${DATA.join('\n')}
+                      \`\`\`md
+                    ${DATA.join('\n')}
                       \`\`\`
                     `
 
@@ -103,11 +103,9 @@ jobs:
                   script: |
                       const prNumber = parseInt(${{ steps.ids.outputs.result }}, 10);
 
-                      const comment = `${{ steps.comment.outputs.result }}`;
-
                       await github.rest.issues.createComment({
                             owner: 'Yakutoc',
                             repo: 'plasma-dev-stage',
                             issue_number: 49,
-                            body: comment
+                            body: `${{ steps.comment.outputs.result }}`
                       });
