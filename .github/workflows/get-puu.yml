@@ -30,7 +30,7 @@ jobs:
 
             - name: Get commit message
               run: |
-                COMMIT_MESSAGE=$(git show -s --format=%B "${{ github.COMMIT_WITH_VERSION }}")
+                COMMIT_MESSAGE=$(git show -s --format=%B "${{ env.COMMIT_WITH_VERSION }}")
                 echo "COMMIT_MESSAGE<<EOF" >> $GITHUB_ENV
                 echo "$COMMIT_MESSAGE" >> $GITHUB_ENV
                 echo "EOF" >> $GITHUB_ENV
