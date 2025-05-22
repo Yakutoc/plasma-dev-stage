@@ -41,10 +41,31 @@ jobs:
               env:
                   DATA: "${{ env.COMMIT_MESSAGE }}"
               with:
+                  result-encoding: string
                   script: |
-                      console.log(process.env.DATA);
+                    console.log(process.env.DATA);
 
-            ## Заменить харды owner repo на переменные контекста
+                    if (!process.env.DATA || !process.env.DATA.length) {
+                      console.log('Empty DATA')
+                    }
+
+                    const DATA = process.env.DATA
+                        .replace(/.*Bump independent versions.*\n?/g, '')
+                        .replace(/.*docs.*\n?/g, '')
+                        .replace(/^\s*[\r\n]/gm, '')
+                        .trim()
+                        .split('\n')
+                        .map(line => line.trim());
+
+                    const comment = `
+                      This PR is included in version:
+
+                      ${DATA}
+                    `
+
+                    return comment;
+
+             ## Заменить харды owner repo на переменные контекста
             - name: Get pull requests id's
               id: ids
               uses: actions/github-script@v7
@@ -70,7 +91,6 @@ jobs:
               run: |
                   echo ${{ steps.ids.outputs.result }}
                   echo ${{ env.SHA }}
-                  echo "${{ env.COMMIT_MESSAGE }}"
 
             ## Заменить харды owner repo на переменные контекста
             - name: add comments
@@ -79,16 +99,9 @@ jobs:
                   script: |
                       const prNumber = parseInt(${{ steps.ids.outputs.result }}, 10);
 
-                      const commentBody = `
-                      This PR is included in version:
-
-                            - @salutejs/plasma-giga@0.306.0
-                            - @salutejs/plasma-new-hope@0.323.0
-                      `;
-
                       await github.rest.issues.createComment({
                             owner: 'Yakutoc',
                             repo: 'plasma-dev-stage',
                             issue_number: 49,
-                            body: commentBody
+                            body: `${{ steps.comment.outputs.result }}`
                       });
