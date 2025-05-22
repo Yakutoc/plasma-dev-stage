@@ -62,9 +62,7 @@ jobs:
                     const comment = `
                       This PR is included in version:
 
-                      \`\`\`md
-                    ${DATA.join('\n')}
-                      \`\`\`
+                      ${DATA.join('\n')}
                     `
 
                     return comment;
