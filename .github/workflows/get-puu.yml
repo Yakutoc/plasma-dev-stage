@@ -25,12 +25,12 @@ jobs:
 
             - name: Get independent versions
               run: |
-                  SHA=$(git log --all --format="%H %P %s" | grep "${{ inputs.sha }}" | grep "Bump independent versions \[skip ci\]" | awk '{print $1}')
-                  echo "SHA=$SHA" >> $GITHUB_ENV
+                  COMMIT_WITH_VERSION=$(git log --all --format="%H %P %s" | grep "${{ inputs.sha }}" | grep "Bump independent versions \[skip ci\]" | awk '{print $1}')
+                  echo "COMMIT_WITH_VERSION=$COMMIT_WITH_VERSION" >> $GITHUB_ENV
 
             - name: Get commit message
               run: |
-                COMMIT_MESSAGE=$(git show -s --format=%B "${{ github.SHA }}")
+                COMMIT_MESSAGE=$(git show -s --format=%B "${{ github.COMMIT_WITH_VERSION }}")
                 echo "COMMIT_MESSAGE<<EOF" >> $GITHUB_ENV
                 echo "$COMMIT_MESSAGE" >> $GITHUB_ENV
                 echo "EOF" >> $GITHUB_ENV
