@@ -63,7 +63,7 @@ jobs:
                       This PR is included in version:
 
                       \`\`\`
-                      ${DATA.join(\n)}
+                      ${DATA.join('\n')}
                       \`\`\`
                     `
 
