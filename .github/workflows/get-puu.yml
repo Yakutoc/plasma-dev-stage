@@ -52,6 +52,8 @@ jobs:
                     const DATA = process.env.DATA
                         .replace(/.*Bump independent versions.*\n?/g, '')
                         .replace(/.*docs.*\n?/g, '')
+                        .replace(/.*website.*\n?/g, '')
+                        .replace(/.*sdds-clfd-auto.*\n?/g, '')
                         .replace(/^\s*[\r\n]/gm, '')
                         .trim()
                         .split('\n')
@@ -60,7 +62,9 @@ jobs:
                     const comment = `
                       This PR is included in version:
 
-                      ${DATA}
+                      \`\`\`
+                      ${DATA.join(\n)}
+                      \`\`\`
                     `
 
                     return comment;
@@ -99,9 +103,11 @@ jobs:
                   script: |
                       const prNumber = parseInt(${{ steps.ids.outputs.result }}, 10);
 
+                      const comment = `${{ steps.comment.outputs.result }}`;
+
                       await github.rest.issues.createComment({
                             owner: 'Yakutoc',
                             repo: 'plasma-dev-stage',
                             issue_number: 49,
-                            body: `${{ steps.comment.outputs.result }}`
+                            body: comment
                       });
