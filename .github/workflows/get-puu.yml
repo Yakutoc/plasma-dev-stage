@@ -30,10 +30,10 @@ jobs:
 
             - name: Get commit message
               run: |
-                  COMMIT_MESSAGE=$(git show -s --format=%B "${{ env.SHA }}")
-                  echo "COMMIT_MESSAGE<<EOF" >> $GITHUB_ENV
-                  echo "$COMMIT_MESSAGE" >> $GITHUB_ENV
-                  echo "EOF" >> $GITHUB_ENV
+                COMMIT_BODY=$(git show -s --format=%b "${{ inputs.SHA }}")
+                echo "COMMIT_BODY<<EOF" >> $GITHUB_ENV
+                echo "$COMMIT_BODY" >> $GITHUB_ENV
+                echo "EOF" >> $GITHUB_ENV
 
             ## Заменить харды owner repo на переменные контекста
             - name: Get pull requests id's
@@ -61,7 +61,7 @@ jobs:
               run: |
                   echo ${{ steps.ids.outputs.result }}
                   echo ${{ env.SHA }}
-                  echo ${{ env.COMMIT_MESSAGE }}
+                  echo "${{ env.COMMIT_MESSAGE }}"
 
             ## Заменить харды owner repo на переменные контекста
             - name: add comments
