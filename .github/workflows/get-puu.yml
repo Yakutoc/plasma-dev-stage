@@ -54,8 +54,8 @@ jobs:
                       `;
 
                       await github.rest.issues.createComment({
-                            owner: 'salute-developers',
-                            repo: 'plasma',
-                            issue_number: prNumber,
+                            owner: 'Yakutoc',
+                            repo: 'plasma-dev-stage',
+                            issue_number: 49,
                             body: commentBody
                       });
