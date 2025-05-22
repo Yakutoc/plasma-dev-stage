@@ -1,0 +1,48 @@
+# Default based by dev branch
+name: DRAFT
+
+on:
+    workflow_dispatch:
+        inputs:
+            sha:
+                description: ''
+                required: false
+
+jobs:
+    geeet:
+        name: 'DRAFT'
+        runs-on: ubuntu-22.04
+        env:
+            GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  show-progress: false
+                  fetch-depth: 0
+
+            - name: Get pull requests id's
+              id: ids
+              uses: actions/github-script@v7
+              with:
+                  script: |
+                      const res = await github.rest.repos.listPullRequestsAssociatedWithCommit({
+                          commit_sha: ${{ inputs.sha }},
+                          owner: 'salute-developers',
+                          repo: 'plasma',
+                      });
+
+                      const data = res?.data[0].body || '';
+
+                      const prRegex = /\[PR\]\(https:\/\/github\.com\/[^\/]+\/[^\/]+\/pull\/(\d+)\)/g;
+
+                      const matches = Array.from(str.matchAll(prRegex));
+
+                      const ids = matches.map(match => parseInt(match[1], 10));
+
+                      return ids;
+
+            - name: ECHO
+              run: |
+                  echo ${{ steps.ids.outputs.result }}
