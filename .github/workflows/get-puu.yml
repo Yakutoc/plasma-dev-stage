@@ -16,6 +16,12 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
         steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  show-progress: false
+                  fetch-depth: 0
+
             - name: Get pull requests id's
               id: ids
               uses: actions/github-script@v7
@@ -35,8 +41,27 @@ jobs:
 
                       const ids = matches.map(match => parseInt(match[1], 10));
 
-                      return ids;
+                      return ids[0];
 
             - name: ECHO
               run: |
                   echo ${{ steps.ids.outputs.result }}
+
+            - name: add comments
+              uses: actions/github-script@v7
+              with:
+                  script: |
+                      const prNumber = parseInt(${{ steps.ids.outputs.result }}, 10);
+
+                      const commentBody = `
+                      This PR is included in version:
+                            - @salutejs/plasma-giga@0.306.0
+                            - @salutejs/plasma-new-hope@0.323.0
+                      `;
+
+                      await github.rest.issues.createComment({
+                            owner: 'salute-developers',
+                            repo: 'plasma',
+                            issue_number: prNumber,
+                            body: commentBody
+                      });
