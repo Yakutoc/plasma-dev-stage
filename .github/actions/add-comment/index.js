@@ -7,8 +7,6 @@ async function run() {
         const sha = core.getInput('sha');
         const message = core.getInput('message');
 
-        const octokit = new github.getOctokit(token);
-
         if (!message || !message.length) {
             core.setFailed('Commit message empty');
         }
@@ -20,6 +18,9 @@ async function run() {
         if (!sha || !sha.length) {
             core.setFailed('Commit sha empty');
         }
+
+        const octokit = new github.getOctokit(token);
+        const { owner, repo } = github.context.repo;
 
         const data = message
             .replace(/.*Bump independent versions.*\n?/g, '') // убираем заголовок commit message
@@ -57,10 +58,9 @@ async function run() {
         const pullRequestListID = [49, 53];
 
         for (const id of pullRequestListID) {
-            // TODO: Брать информацию из контекста для owner, repo
             await octokit.rest.issues.createComment({
-                owner: 'Yakutoc',
-                repo: 'plasma-dev-stage',
+                owner,
+                repo,
                 issue_number: id,
                 body: comment,
             });
