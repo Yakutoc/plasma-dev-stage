@@ -90,6 +90,6 @@ jobs:
                             owner: context.repo.owner,
                             repo: context.repo.repo,
                             issue_number: id,
-                            body: comment,
+                            body: ${{ steps.comment.outputs.result }},
                         });
                       }
