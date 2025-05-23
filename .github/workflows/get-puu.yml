@@ -86,9 +86,6 @@ jobs:
               uses: actions/github-script@v7
               with:
                   script: |
-                      const list = JSON.parse(${{steps.ids.outputs.result}});
-                      const prNumber = list.map((item) => parseInt(item, 10));
-
                       for (const id of [49,53]) {
                         await octokit.rest.issues.createComment({
                             owner: context.repo.owner,
