@@ -1,0 +1,17 @@
+name: Add comment into pull request
+
+description: 'Создаем и добавляем комментарий в pull request с версией пакетов после релиза'
+
+inputs:
+    token:
+        description: The GitHub token used to create an authenticated client.
+        required: true
+    sha:
+        description: Release commit sha
+        required: true
+    message:
+        description: Comment message
+        required: true
+runs:
+    using: 'node20'
+    main: 'index.js'
