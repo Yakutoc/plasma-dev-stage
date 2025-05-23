@@ -40,6 +40,9 @@ jobs:
               run: |
                   echo "${{ env.COMMIT_MESSAGE }}"
 
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
             - name: Install dependencies
               run: |
                 cd .github/actions/add-comment
