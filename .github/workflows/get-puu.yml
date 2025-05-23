@@ -85,7 +85,9 @@ jobs:
               uses: actions/github-script@v7
               with:
                   script: |
-                      for (const id of [49,53]) {
+                      const listID = ${{ steps.ids.outputs.result }};
+
+                      for (const id of listID) {
                         await github.rest.issues.createComment({
                             owner: context.repo.owner,
                             repo: context.repo.repo,
