@@ -38,8 +38,7 @@ jobs:
 
             - name: ECHO
               run: |
-                  echo ${{ steps.ids.outputs.result }}
-                  echo ${{ env.COMMIT_MESSAGE }}
+                  echo "${{ env.COMMIT_MESSAGE }}"
 
             - name: Install dependencies
               run: |
