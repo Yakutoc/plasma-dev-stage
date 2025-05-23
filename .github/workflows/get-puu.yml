@@ -81,13 +81,12 @@ jobs:
 
                       return ids;
 
-            ## Заменить харды owner repo на переменные контекста
             - name: add comments
               uses: actions/github-script@v7
               with:
                   script: |
                       for (const id of [49,53]) {
-                        await octokit.rest.issues.createComment({
+                        await github.rest.issues.createComment({
                             owner: context.repo.owner,
                             repo: context.repo.repo,
                             issue_number: id,
