@@ -20,37 +20,80 @@ jobs:
                   repository: salute-developers/plasma
                   ref: master
                   show-progress: false
-                  fetch-depth: 10
+                  fetch-depth: 20
 
-            - name: Setup Node.js
-              uses: actions/setup-node@v4
-              with:
-                  node-version: '20'
-                  cache: npm
-
-            - name: Get commit message
+            - name: Extract commit message
               run: |
-                  COMMIT_SHA=$(git log --all --format="%H %P %s" | grep "${{ inputs.sha }}" | grep "Bump independent versions \[skip ci\]" | awk '{print $1}')
-                  COMMIT_MESSAGE=$(git show -s --format=%B "$COMMIT_SHA")
+                  COMMIT_WITH_VERSION=$(git log --all --format="%H %P %s" | grep "${{ inputs.sha }}" | grep "Bump independent versions \[skip ci\]" | awk '{print $1}')
+                  COMMIT_MESSAGE=$(git show -s --format=%B "$COMMIT_WITH_VERSION")
                   echo "COMMIT_MESSAGE<<EOF" >> $GITHUB_ENV
                   echo "$COMMIT_MESSAGE" >> $GITHUB_ENV
                   echo "EOF" >> $GITHUB_ENV
 
-            - name: ECHO
-              run: |
-                  echo "${{ env.COMMIT_MESSAGE }}"
-
-            - name: Checkout repository
-              uses: actions/checkout@v4
-
-            - name: Install dependencies
-              run: |
-                cd .github/actions/add-comment
-                npm ci
-
-            - name: Add comment with list version
-              uses: ./.github/actions/add-comment
+            - name: Create comment with version
+              id: comment
+              uses: actions/github-script@v7
+              env:
+                  DATA: "${{ env.COMMIT_MESSAGE }}"
               with:
-                  token: ${{ secrets.GH_TOKEN }}
-                  message: ${{ env.COMMIT_MESSAGE }}
-                  sha: ${{ inputs.sha }}
+                  result-encoding: string
+                  script: |
+                    if (!process.env.DATA || !process.env.DATA.length) {
+                      console.log('Empty DATA')
+                    }
+
+                    const DATA = process.env.DATA
+                        .replace(/.*Bump independent versions.*\n?/g, '')
+                        .replace(/.*docs.*\n?/g, '')
+                        .replace(/.*website.*\n?/g, '')
+                        .replace(/.*sdds-clfd-auto.*\n?/g, '')
+                        .replace(/^\s*[\r\n]/gm, '')
+                        .trim()
+                        .split('\n')
+                        .map(line => line.trim());
+
+                    const comment = `
+                      This PR is included in version:
+
+                      ${DATA.join('\n')}
+                    `
+
+                    return comment;
+
+            - name: Get pull requests id's
+              id: ids
+              uses: actions/github-script@v7
+              with:
+                  script: |
+                      const res = await github.rest.repos.listPullRequestsAssociatedWithCommit({
+                          commit_sha: `${{ inputs.sha }}`,
+                          owner: 'salute-developers',
+                          repo: 'plasma',
+                      });
+
+                      const data = res?.data[0].body || '';
+
+                      const prRegex = /\[PR\]\(https:\/\/github\.com\/[^\/]+\/[^\/]+\/pull\/(\d+)\)/g;
+
+                      const matches = Array.from(data.matchAll(prRegex));
+
+                      const ids = matches.map(match => parseInt(match[1], 10));
+
+                      return ids;
+
+            ## Заменить харды owner repo на переменные контекста
+            - name: add comments
+              uses: actions/github-script@v7
+              with:
+                  script: |
+                      const list = JSON.parse(${{steps.ids.outputs.result}});
+                      const prNumber = list.map((item) => parseInt(item, 10));
+
+                      for (const id of [49,53]) {
+                        await octokit.rest.issues.createComment({
+                            owner: context.repo.owner,
+                            repo: context.repo.repo,
+                            issue_number: id,
+                            body: comment,
+                        });
+                      }
