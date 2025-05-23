@@ -1,4 +1,3 @@
-# Default based by dev branch
 name: DRAFT
 
 on:
@@ -21,89 +20,35 @@ jobs:
                   repository: salute-developers/plasma
                   ref: master
                   show-progress: false
-                  fetch-depth: 20
+                  fetch-depth: 10
 
-            - name: Get independent versions
-              run: |
-                  COMMIT_WITH_VERSION=$(git log --all --format="%H %P %s" | grep "${{ inputs.sha }}" | grep "Bump independent versions \[skip ci\]" | awk '{print $1}')
-                  echo "COMMIT_WITH_VERSION=$COMMIT_WITH_VERSION" >> $GITHUB_ENV
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '20'
+                  cache: npm
 
             - name: Get commit message
               run: |
-                COMMIT_MESSAGE=$(git show -s --format=%B "${{ env.COMMIT_WITH_VERSION }}")
-                echo "COMMIT_MESSAGE<<EOF" >> $GITHUB_ENV
-                echo "$COMMIT_MESSAGE" >> $GITHUB_ENV
-                echo "EOF" >> $GITHUB_ENV
-
-            - name: Create comment with version
-              id: comment
-              uses: actions/github-script@v7
-              env:
-                  DATA: "${{ env.COMMIT_MESSAGE }}"
-              with:
-                  result-encoding: string
-                  script: |
-                    console.log(process.env.DATA);
-
-                    if (!process.env.DATA || !process.env.DATA.length) {
-                      console.log('Empty DATA')
-                    }
-
-                    const DATA = process.env.DATA
-                        .replace(/.*Bump independent versions.*\n?/g, '')
-                        .replace(/.*docs.*\n?/g, '')
-                        .replace(/.*website.*\n?/g, '')
-                        .replace(/.*sdds-clfd-auto.*\n?/g, '')
-                        .replace(/^\s*[\r\n]/gm, '')
-                        .trim()
-                        .split('\n')
-                        .map(line => line.trim());
-
-                    const comment = `
-                      This PR is included in version:
-
-                      ${DATA.join('\n')}
-                    `
-
-                    return comment;
-
-             ## Заменить харды owner repo на переменные контекста
-            - name: Get pull requests id's
-              id: ids
-              uses: actions/github-script@v7
-              with:
-                  script: |
-                      const res = await github.rest.repos.listPullRequestsAssociatedWithCommit({
-                          commit_sha: `${{ inputs.sha }}`,
-                          owner: 'salute-developers',
-                          repo: 'plasma',
-                      });
-
-                      const data = res?.data[0].body || '';
-
-                      const prRegex = /\[PR\]\(https:\/\/github\.com\/[^\/]+\/[^\/]+\/pull\/(\d+)\)/g;
-
-                      const matches = Array.from(data.matchAll(prRegex));
-
-                      const ids = matches.map(match => parseInt(match[1], 10));
-
-                      return ids[0];
+                  COMMIT_SHA=$(git log --all --format="%H %P %s" | grep "${{ inputs.sha }}" | grep "Bump independent versions \[skip ci\]" | awk '{print $1}')
+                  COMMIT_MESSAGE=$(git show -s --format=%B "$COMMIT_SHA")
+                  echo "COMMIT_MESSAGE<<EOF" >> $GITHUB_ENV
+                  echo "$COMMIT_MESSAGE" >> $GITHUB_ENV
+                  echo "EOF" >> $GITHUB_ENV
 
             - name: ECHO
               run: |
                   echo ${{ steps.ids.outputs.result }}
-                  echo ${{ env.SHA }}
+                  echo ${{ env.COMMIT_MESSAGE }}
 
-            ## Заменить харды owner repo на переменные контекста
-            - name: add comments
-              uses: actions/github-script@v7
+            - name: Install dependencies
+              run: |
+                cd .github/actions/add-comment
+                npm ci
+
+            - name: Add comment with list version
+              uses: ./.github/actions/add-comment
               with:
-                  script: |
-                      const prNumber = parseInt(${{ steps.ids.outputs.result }}, 10);
-
-                      await github.rest.issues.createComment({
-                            owner: 'Yakutoc',
-                            repo: 'plasma-dev-stage',
-                            issue_number: 49,
-                            body: `${{ steps.comment.outputs.result }}`
-                      });
+                  token: ${{ secrets.GH_TOKEN }}
+                  message: ${{ env.COMMIT_MESSAGE }}
+                  sha: ${{ inputs.sha }}
